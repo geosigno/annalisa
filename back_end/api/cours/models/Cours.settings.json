@@ -1,0 +1,47 @@
+{
+  "connection": "default",
+  "collectionName": "cours",
+  "info": {
+    "name": "cours",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": ""
+  },
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "contenu": {
+      "type": "richtext"
+    },
+    "exercices": {
+      "collection": "exercice",
+      "via": "cours",
+      "dominant": true
+    },
+    "niveau": {
+      "model": "niveaux",
+      "via": "cours"
+    },
+    "categories": {
+      "collection": "categories",
+      "via": "cours"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "connection": "default",
+  "collectionName": "niveaux",
+  "info": {
+    "name": "niveaux",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": ""
+  },
+  "attributes": {
+    "nom": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "cours": {
+      "collection": "cours",
+      "via": "niveau"
+    }
+  }
+}

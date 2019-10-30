@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/niveaux",
+      "handler": "Niveaux.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/niveaux/count",
+      "handler": "Niveaux.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/niveaux/:id",
+      "handler": "Niveaux.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/niveaux",
+      "handler": "Niveaux.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/niveaux/:id",
+      "handler": "Niveaux.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/niveaux/:id",
+      "handler": "Niveaux.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
