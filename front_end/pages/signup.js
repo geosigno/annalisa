@@ -1,8 +1,7 @@
 import React from 'react';
+import Auth from '../components/auth';
+import SignUpForm from '../components/form/signup-form';
 
-import { TextField } from '@material-ui/core';
-
-import Auth from './../components/auth';
 const auth = new Auth();
 
 class SignUp extends React.Component {
@@ -11,7 +10,8 @@ class SignUp extends React.Component {
         this.state = {
             username: '',
             email: '',
-            password: ''
+            password: '',
+            loading: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +19,7 @@ class SignUp extends React.Component {
 
     handleChange(e) {
         const key = e.target.id;
-        const value = e.target.value;
+        const { value } = e.target;
 
         this.setState((prevState) => {
             return {
@@ -32,20 +32,17 @@ class SignUp extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
+        this.setState({
+            loading: true
+        });
+
         const data = this.state;
 
         auth.register(data);
     }
 
     render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <TextField id="username" label="nom" onChange={this.handleChange} />
-                <TextField id="email" label="email" onChange={this.handleChange} />
-                <TextField id="password" type="password" label="password" onChange={this.handleChange} />
-                <button type="submit">s'enregistrer</button>
-            </form>
-        );
+        return <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} loading={this.state.loading} />;
     }
 }
 export default SignUp;

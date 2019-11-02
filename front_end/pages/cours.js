@@ -1,34 +1,24 @@
 import React from 'react';
 import { withRouter } from 'next/router';
+import Router from 'next/router';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
-import ReactMarkdown from 'react-markdown';
+import Auth from './../components/auth';
+
+const auth = new Auth();
+
+import CoursMain from './../components/cours/coursMain';
 
 const Cours = ({ data: { loading, error, cour } }) => {
     if (loading) return 'Loading...';
 
-    if (error) return `Error! ${error.message}`;
+    if (error) {
+        Router.push('/signin');
+    }
 
     if (cour) {
-        const title = cour.nom;
-        const dateCreated = cour.created_at;
-        const srcImage = cour.image ? cour.image.url : null;
-        const contenu = cour.contenu;
-
-        return (
-            <article>
-                <header>
-                    {title && <h1>{title}</h1>}
-
-                    {dateCreated && <p>Posted on: {dateCreated}</p>}
-
-                    {srcImage && <img src={`http://localhost:1337${srcImage}`} />}
-                </header>
-
-                {contenu && <ReactMarkdown source={contenu} />}
-            </article>
-        );
+        return <CoursMain cours={cour} />;
     }
 };
 
@@ -52,6 +42,9 @@ export default compose(
         options: (props) => ({
             variables: {
                 id: props.router.query.id
+            },
+            context: {
+                headers: auth.getBearer()
             }
         }),
         props: ({ data }) => ({ data })

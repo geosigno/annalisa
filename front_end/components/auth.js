@@ -7,6 +7,8 @@ class Auth {
     constructor() {
         this.registerURL = 'http://localhost:1337/auth/local/register';
         this.loginURL = 'http://localhost:1337/auth/local';
+        this.forgotPaswordURL = 'http://localhost:1337/auth/forgot-password';
+        this.resetPasswordURL = 'http://localhost:1337/auth/reset-password';
     }
 
     register(data) {
@@ -28,6 +30,7 @@ class Auth {
             })
             .catch((error) => {
                 // Handle error.
+                return false;
                 console.log('An error occurred:', error);
             });
     }
@@ -55,6 +58,32 @@ class Auth {
             });
     }
 
+    forgotPassword(data) {
+        axios
+            .post(this.forgetPaswwordURL, data)
+            .then((response) => {
+                // Handle success.
+                Router.push('/forgot-password-confirmation');
+            })
+            .catch((error) => {
+                // Handle error.
+                console.log('An error occurred:', error);
+            });
+    }
+
+    resetPassword(data) {
+        axios
+            .post(this.resetPasswordURL, data)
+            .then((response) => {
+                // Handle success.
+                Router.push('/reset-password-confirmation');
+            })
+            .catch((error) => {
+                // Handle error.
+                console.log('An error occurred:', error);
+            });
+    }
+
     setToken(username, token) {
         Cookies.set('username', username);
         Cookies.set('jwt', token);
@@ -69,7 +98,7 @@ class Auth {
         Cookies.remove('jwt');
     }
 
-    getUserDataFromCookie(req) {
+    getCookieFromServer(req) {
         if (!req.headers.cookie || '') {
             return undefined;
         }
@@ -87,6 +116,18 @@ class Auth {
         }
 
         return jwtDecode(jwt), username;
+    }
+
+    getCookieFromLocal() {
+        return Cookies.get('username');
+    }
+
+    getBearer() {
+        const jwt = Cookies.get('jwt');
+
+        if (!jwt) return;
+
+        return { Authorization: `Bearer ${jwt}` };
     }
 }
 

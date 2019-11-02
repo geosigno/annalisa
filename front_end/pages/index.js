@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Nav from '../components/nav';
-import CoursList from '../components/coursList';
+import CoursList from '../components/cours/coursList';
 
 const Home = () => (
     <div>
@@ -10,13 +9,7 @@ const Home = () => (
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <Nav />
-
         <CoursList />
-
-        <header>
-            <h1>Annalisa french lessons</h1>
-        </header>
 
         <style jsx>
             {`
