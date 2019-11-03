@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import dateToFormat from '../../helpers/date';
 
 class CoursThumbnail extends React.Component {
     constructor(props) {
@@ -17,7 +18,7 @@ class CoursThumbnail extends React.Component {
                     </Link>
                     <p>
                         posté le
-                        {created_at}
+                        {dateToFormat(created_at)}
                     </p>
                 </header>
                 <section>

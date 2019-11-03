@@ -3,28 +3,43 @@ import Link from 'next/link';
 
 const links = [
     { key: 1, href: '/', label: "page d'accueil" },
-    { key: 2, href: '/signin', label: 'se connecter' },
-    { key: 3, href: '/signup', label: "s'enregistrer" }
+    { key: 2, href: '/cours', label: 'cours' },
+    { key: 3, href: '/signin', label: 'se connecter' },
+    { key: 4, href: '/signup', label: "s'enregistrer" }
 ];
 
 const Nav = () => (
     <nav>
         <ul>
-            <li>
-                {links.map(({ key, href, label }) => (
+            {links.map(({ key, href, label, child }) => {
+                if (child) {
+                    const childList = child.map(({ key, href, label }) => (
+                        <li>
+                            <Link key={key} href={href}>
+                                <a>{label}</a>
+                            </Link>
+                        </li>
+                    ));
+
+                    return (
+                        <li>
+                            <Link key={key} href={href}>
+                                <a>{label}</a>
+                            </Link>
+                            <ul>{childList}</ul>
+                        </li>
+                    );
+                }
+                return (
                     <Link key={key} href={href}>
                         <a>{label}</a>
                     </Link>
-                ))}
-            </li>
+                );
+            })}
         </ul>
 
         <style jsx>
             {`
-                :global(body) {
-                    margin: 0;
-                    font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
-                }
                 nav {
                     text-align: center;
                 }

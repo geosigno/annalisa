@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `Niveaux` model.
+ * Lifecycle callbacks for the `Niveau` model.
  */
 
 module.exports = {

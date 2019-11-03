@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/31/2019 3:18:13 PM"
+    "x-generation-date": "11/03/2019 6:38:48 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -47,16 +47,16 @@
     "/categories": {
       "get": {
         "deprecated": false,
-        "description": "Find all the categories's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Categories"
+                    "$ref": "#/components/schemas/Categorie"
                   }
                 }
               }
@@ -95,7 +95,7 @@
         },
         "summary": "",
         "tags": [
-          "Categories"
+          "Categorie"
         ],
         "parameters": [
           {
@@ -232,14 +232,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new categories record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Categories"
+                  "$ref": "#/components/schemas/Categorie"
                 }
               }
             }
@@ -277,7 +277,7 @@
         },
         "summary": "",
         "tags": [
-          "Categories"
+          "Categorie"
         ],
         "requestBody": {
           "description": "",
@@ -285,7 +285,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCategories"
+                "$ref": "#/components/schemas/NewCategorie"
               }
             }
           }
@@ -295,10 +295,10 @@
     "/categories/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of categories documents",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -344,7 +344,7 @@
         },
         "summary": "",
         "tags": [
-          "Categories"
+          "Categorie"
         ],
         "parameters": []
       }
@@ -352,14 +352,14 @@
     "/categories/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one categories record",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Categories"
+                  "$ref": "#/components/schemas/Categorie"
                 }
               }
             }
@@ -397,7 +397,7 @@
         },
         "summary": "",
         "tags": [
-          "Categories"
+          "Categorie"
         ],
         "parameters": [
           {
@@ -414,14 +414,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single categories record",
+        "description": "Update a record",
         "responses": {
           "200": {
-            "description": "Retrieve categories document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Categories"
+                  "$ref": "#/components/schemas/Categorie"
                 }
               }
             }
@@ -459,7 +459,7 @@
         },
         "summary": "",
         "tags": [
-          "Categories"
+          "Categorie"
         ],
         "requestBody": {
           "description": "",
@@ -467,7 +467,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCategories"
+                "$ref": "#/components/schemas/NewCategorie"
               }
             }
           }
@@ -487,10 +487,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single categories record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single categories based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -533,7 +533,7 @@
         },
         "summary": "",
         "tags": [
-          "Categories"
+          "Categorie"
         ],
         "parameters": [
           {
@@ -1559,19 +1559,19 @@
         ]
       }
     },
-    "/niveaux": {
+    "/niveaus": {
       "get": {
         "deprecated": false,
-        "description": "Find all the niveaux's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Niveaux"
+                    "$ref": "#/components/schemas/Niveau"
                   }
                 }
               }
@@ -1610,7 +1610,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": [
           {
@@ -1747,14 +1747,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new niveaux record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Niveaux"
+                  "$ref": "#/components/schemas/Niveau"
                 }
               }
             }
@@ -1792,7 +1792,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "requestBody": {
           "description": "",
@@ -1800,20 +1800,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewNiveaux"
+                "$ref": "#/components/schemas/NewNiveau"
               }
             }
           }
         }
       }
     },
-    "/niveaux/count": {
+    "/niveaus/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of niveaux documents",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -1859,22 +1859,22 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": []
       }
     },
-    "/niveaux/{id}": {
+    "/niveaus/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one niveaux record",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Niveaux"
+                  "$ref": "#/components/schemas/Niveau"
                 }
               }
             }
@@ -1912,7 +1912,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": [
           {
@@ -1929,14 +1929,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single niveaux record",
+        "description": "Update a record",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Niveaux"
+                  "$ref": "#/components/schemas/Niveau"
                 }
               }
             }
@@ -1974,7 +1974,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "requestBody": {
           "description": "",
@@ -1982,7 +1982,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewNiveaux"
+                "$ref": "#/components/schemas/NewNiveau"
               }
             }
           }
@@ -2002,10 +2002,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single niveaux record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single niveaux based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -2048,7 +2048,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": [
           {
@@ -4133,7 +4133,7 @@
   },
   "components": {
     "schemas": {
-      "Categories": {
+      "Categorie": {
         "required": [
           "id",
           "nom"
@@ -4148,7 +4148,7 @@
           "description": {
             "type": "string"
           },
-          "Image": {
+          "image": {
             "required": [
               "id",
               "name",
@@ -4237,7 +4237,7 @@
           }
         }
       },
-      "NewCategories": {
+      "NewCategorie": {
         "required": [
           "nom"
         ],
@@ -4364,6 +4364,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "image": {
+                "type": "string"
               }
             }
           },
@@ -4384,7 +4387,7 @@
                 "description": {
                   "type": "string"
                 },
-                "Image": {
+                "image": {
                   "type": "string"
                 },
                 "cours": {
@@ -4502,7 +4505,7 @@
           }
         }
       },
-      "Niveaux": {
+      "Niveau": {
         "required": [
           "id"
         ],
@@ -4556,10 +4559,56 @@
                 }
               }
             }
+          },
+          "image": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              }
+            }
           }
         }
       },
-      "NewNiveaux": {
+      "NewNiveau": {
         "properties": {
           "nom": {
             "type": "string"
@@ -4874,7 +4923,7 @@
   },
   "tags": [
     {
-      "name": "Categories"
+      "name": "Categorie"
     },
     {
       "name": "Cours"
@@ -4883,7 +4932,7 @@
       "name": "Exercice"
     },
     {
-      "name": "Niveaux"
+      "name": "Niveau"
     },
     {
       "name": "Email - Email"

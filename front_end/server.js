@@ -16,6 +16,20 @@ app.prepare()
 			app.render(req, res, actualPage, queryParams)
 		})
 
+		server.get('/niveau/:id', (req, res) => {
+			const actualPage = '/niveau'
+			const queryParams = { id: req.params.id }
+			console.dir("req.params.id = " + JSON.stringify(req.params.id))
+			app.render(req, res, actualPage, queryParams)
+		})
+
+		server.get('/categorie/:id', (req, res) => {
+			const actualPage = '/categorie'
+			const queryParams = { id: req.params.id }
+			console.dir("req.params.id = " + JSON.stringify(req.params.id))
+			app.render(req, res, actualPage, queryParams)
+		})
+
 		server.get('*', (req, res) => {
 			return handle(req, res)
 		})

@@ -6,13 +6,15 @@ import { compose } from 'recompose';
 import Auth from '../components/auth';
 import Loader from '../helpers/loader';
 
-import { GET_COURS_BY_ID } from '../components/cours/_query';
+import CoursThumbnail from '../components/cours/CoursThumbnail';
 
-import CoursMain from '../components/cours/coursMain';
+import { GET_ALL_COURS_BY_NIVEAU_ID } from '../components/niveau/_query';
+
+console.log(GET_ALL_COURS_BY_NIVEAU_ID);
 
 const auth = new Auth();
 
-const Cours = ({ data: { loading, error, cour } }) => {
+const Niveau = ({ data: { loading, error, niveau } }) => {
     if (loading) {
         return <Loader />;
     }
@@ -21,14 +23,15 @@ const Cours = ({ data: { loading, error, cour } }) => {
         Router.push('/signin');
     }
 
-    if (cour) {
-        return <CoursMain cours={cour} />;
+    if (niveau.cours && niveau.cours.length) {
+        const list = niveau.cours.map((item) => <CoursThumbnail cours={item} />);
+        return list;
     }
 };
 
 export default compose(
     withRouter,
-    graphql(GET_COURS_BY_ID, {
+    graphql(GET_ALL_COURS_BY_NIVEAU_ID, {
         options: (props) => ({
             variables: {
                 id: props.router.query.id
@@ -39,4 +42,4 @@ export default compose(
         }),
         props: ({ data }) => ({ data })
     })
-)(Cours);
+)(Niveau);

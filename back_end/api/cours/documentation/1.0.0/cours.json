@@ -616,6 +616,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "image": {
+                "type": "string"
               }
             }
           },
@@ -636,7 +639,7 @@
                 "description": {
                   "type": "string"
                 },
-                "Image": {
+                "image": {
                   "type": "string"
                 },
                 "cours": {

@@ -36,11 +36,11 @@
       "dominant": true
     },
     "niveau": {
-      "model": "niveaux",
+      "model": "niveau",
       "via": "cours"
     },
     "categories": {
-      "collection": "categories",
+      "collection": "categorie",
       "via": "cours"
     }
   }

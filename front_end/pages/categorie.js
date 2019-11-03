@@ -1,18 +1,17 @@
 import React from 'react';
 import Router, { withRouter } from 'next/router';
-
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
 import Auth from '../components/auth';
 import Loader from '../helpers/loader';
 
-import { GET_COURS_BY_ID } from '../components/cours/_query';
+import { GET_ALL_COURS_BY_CAGTEGORIE_ID } from '../components/categorie/_query';
 
-import CoursMain from '../components/cours/coursMain';
+import CoursThumbnail from '../components/cours/CoursThumbnail';
 
 const auth = new Auth();
 
-const Cours = ({ data: { loading, error, cour } }) => {
+const Category = ({ data: { loading, error, categorie } }) => {
     if (loading) {
         return <Loader />;
     }
@@ -21,14 +20,15 @@ const Cours = ({ data: { loading, error, cour } }) => {
         Router.push('/signin');
     }
 
-    if (cour) {
-        return <CoursMain cours={cour} />;
+    if (categorie.cours && categorie.cours.length) {
+        const list = categorie.cours.map((item) => <CoursThumbnail cours={item} />);
+        return list;
     }
 };
 
 export default compose(
     withRouter,
-    graphql(GET_COURS_BY_ID, {
+    graphql(GET_ALL_COURS_BY_CAGTEGORIE_ID, {
         options: (props) => ({
             variables: {
                 id: props.router.query.id
@@ -39,4 +39,4 @@ export default compose(
         }),
         props: ({ data }) => ({ data })
     })
-)(Cours);
+)(Category);

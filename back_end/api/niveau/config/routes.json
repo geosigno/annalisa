@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/categories",
-      "handler": "Categories.find",
+      "path": "/niveaus",
+      "handler": "Niveau.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/categories/count",
-      "handler": "Categories.count",
+      "path": "/niveaus/count",
+      "handler": "Niveau.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/categories/:id",
-      "handler": "Categories.findOne",
+      "path": "/niveaus/:id",
+      "handler": "Niveau.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/categories",
-      "handler": "Categories.create",
+      "path": "/niveaus",
+      "handler": "Niveau.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/categories/:id",
-      "handler": "Categories.update",
+      "path": "/niveaus/:id",
+      "handler": "Niveau.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/categories/:id",
-      "handler": "Categories.delete",
+      "path": "/niveaus/:id",
+      "handler": "Niveau.delete",
       "config": {
         "policies": []
       }

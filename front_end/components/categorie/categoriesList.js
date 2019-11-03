@@ -1,14 +1,17 @@
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
 import { Grid } from '@material-ui/core';
+
 import Auth from '../auth';
 import Loader from '../../helpers/loader';
-import CoursThumbnail from './coursThumbnail';
-import GET_ALL_COURS from './_query';
+
+import CategorieThumbnail from './CategorieThumbnail';
+
+import GET_ALL_CATEGORIES from './_query';
 
 const auth = new Auth();
 
-const CoursList = ({ data: { loading, error, cours } }) => {
+const CategoriesList = ({ data: { loading, error, categories } }) => {
     if (loading) {
         return <Loader size="small" />;
     }
@@ -17,12 +20,12 @@ const CoursList = ({ data: { loading, error, cours } }) => {
         Router.push('/signin');
     }
 
-    if (cours && cours.length) {
+    if (categories && categories.length) {
         return (
             <Grid container direction="row" justify="flex-start" spacing={8}>
-                {cours.map((item) => (
+                {categories.map((item) => (
                     <Grid key={item.id} item xs={12} sm={3}>
-                        <CoursThumbnail cours={item} />
+                        <CategorieThumbnail categories={item} />
                     </Grid>
                 ))}
             </Grid>
@@ -30,11 +33,11 @@ const CoursList = ({ data: { loading, error, cours } }) => {
     }
 };
 
-export default graphql(GET_ALL_COURS, {
+export default graphql(GET_ALL_CATEGORIES, {
     options: {
         context: {
             headers: auth.getBearer()
         }
     },
     props: ({ data }) => ({ data })
-})(CoursList);
+})(CategoriesList);

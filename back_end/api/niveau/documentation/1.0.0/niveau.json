@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/niveaux": {
+    "/niveaus": {
       "get": {
         "deprecated": false,
-        "description": "Find all the niveaux's records",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Niveaux"
+                    "$ref": "#/components/schemas/Niveau"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": [
           {
@@ -188,14 +188,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new niveaux record",
+        "description": "Create a new record",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Niveaux"
+                  "$ref": "#/components/schemas/Niveau"
                 }
               }
             }
@@ -233,7 +233,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "requestBody": {
           "description": "",
@@ -241,20 +241,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewNiveaux"
+                "$ref": "#/components/schemas/NewNiveau"
               }
             }
           }
         }
       }
     },
-    "/niveaux/count": {
+    "/niveaus/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of niveaux documents",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
@@ -300,22 +300,22 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": []
       }
     },
-    "/niveaux/{id}": {
+    "/niveaus/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one niveaux record",
+        "description": "",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Niveaux"
+                  "$ref": "#/components/schemas/Niveau"
                 }
               }
             }
@@ -353,7 +353,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": [
           {
@@ -370,14 +370,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single niveaux record",
+        "description": "Update a record",
         "responses": {
           "200": {
-            "description": "Retrieve niveaux document(s)",
+            "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Niveaux"
+                  "$ref": "#/components/schemas/Niveau"
                 }
               }
             }
@@ -415,7 +415,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "requestBody": {
           "description": "",
@@ -423,7 +423,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewNiveaux"
+                "$ref": "#/components/schemas/NewNiveau"
               }
             }
           }
@@ -443,10 +443,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single niveaux record",
+        "description": "Delete a record",
         "responses": {
           "200": {
-            "description": "deletes a single niveaux based on the ID supplied",
+            "description": "deletes a single record based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -489,7 +489,7 @@
         },
         "summary": "",
         "tags": [
-          "Niveaux"
+          "Niveau"
         ],
         "parameters": [
           {
@@ -508,7 +508,7 @@
   },
   "components": {
     "schemas": {
-      "Niveaux": {
+      "Niveau": {
         "required": [
           "id"
         ],
@@ -562,10 +562,56 @@
                 }
               }
             }
+          },
+          "image": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "sha256": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              }
+            }
           }
         }
       },
-      "NewNiveaux": {
+      "NewNiveau": {
         "properties": {
           "nom": {
             "type": "string"
@@ -585,7 +631,7 @@
   },
   "tags": [
     {
-      "name": "Niveaux"
+      "name": "Niveau"
     }
   ]
 }

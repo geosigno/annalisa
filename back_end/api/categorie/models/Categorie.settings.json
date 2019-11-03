@@ -1,8 +1,8 @@
 {
   "connection": "default",
-  "collectionName": "niveaux",
+  "collectionName": "categories",
   "info": {
-    "name": "niveaux",
+    "name": "categorie",
     "description": ""
   },
   "options": {
@@ -15,14 +15,22 @@
   },
   "attributes": {
     "nom": {
+      "unique": true,
+      "required": true,
       "type": "string"
     },
     "description": {
       "type": "string"
     },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
     "cours": {
       "collection": "cours",
-      "via": "niveau"
+      "via": "categories",
+      "dominant": true
     }
   }
 }

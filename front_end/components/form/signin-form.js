@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, CircularProgress } from '@material-ui/core';
 
 import './form.scss';
 import { formStyle } from './signup-form';
@@ -20,6 +20,7 @@ export default function SignInForm(props) {
                             <TextField id="password" type="password" label="password" onChange={props.handleChange} className={classes.input} />
                         </div>
                         <Button className={classes.btnPrimary} type="submit">
+                            {props.loading && <CircularProgress size={24} className={classes.loader} />}
                             se connecter
                         </Button>
                         <p className="form__info">
