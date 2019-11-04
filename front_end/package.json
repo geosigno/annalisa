@@ -6,12 +6,13 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "lint": "npx eslint components/ --ext .js --fix",
+    "lint": "npx eslint pages/ components/ helpers/ --ext .js --fix",
     "format": "prettier --write '{pages,components,helpers,styles}/**/*.{js,scss}'"
   },
   "dependencies": {
     "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^4.5.1",
+    "@next/bundle-analyzer": "^9.1.2",
     "@zeit/next-sass": "^1.0.1",
     "apollo-boost": "^0.4.4",
     "apollo-client": "^2.6.4",
@@ -36,7 +37,8 @@
     "react-markdown": "^4.2.2",
     "react-normalize": "^0.4.3",
     "recompose": "^0.30.0",
-    "typeface-roboto": "0.0.75"
+    "typeface-roboto": "0.0.75",
+    "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
     "eslint": "^6.6.0",

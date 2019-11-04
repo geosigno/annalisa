@@ -1,3 +1,4 @@
+import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
 import { Grid, CircularProgress } from '@material-ui/core';
@@ -31,6 +32,8 @@ const NiveauxList = ({ data: { loading, error, niveaus } }) => {
             </Grid>
         );
     }
+
+    return false;
 };
 
 export default graphql(GET_ALL_NIVEAUX, {

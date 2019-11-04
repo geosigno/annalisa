@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const GET_ALL_COURS = gql`
+const GET_ALL_COURS = gql`
     {
         cours {
             id

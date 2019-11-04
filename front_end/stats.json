@@ -1,3 +1,30 @@
-Installing 'webpack-cli' (running 'yarn add -D webpack-cli')...
-yarn add v1.17.3
-[1/4] Resolving packages...
+{
+  "errors": [
+    "Entry module not found: Error: Can't resolve './src' in '/Users/gsignora/Desktop/projects/annalisa-lessons/front_end'\nresolve './src' in '/Users/gsignora/Desktop/projects/annalisa-lessons/front_end'\n  using description file: /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/package.json (relative path: .)\n    Field 'browser' doesn't contain a valid alias configuration\n    using description file: /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/package.json (relative path: ./src)\n      no extension\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/src doesn't exist\n      .wasm\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/src.wasm doesn't exist\n      .mjs\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/src.mjs doesn't exist\n      .js\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/src.js doesn't exist\n      .json\n        Field 'browser' doesn't contain a valid alias configuration\n        /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/src.json doesn't exist\n      as directory\n        /Users/gsignora/Desktop/projects/annalisa-lessons/front_end/src doesn't exist"
+  ],
+  "warnings": [
+    "configuration\nThe 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.\nYou can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/"
+  ],
+  "version": "4.39.0",
+  "hash": "d2a70d0cef96a4f165cd",
+  "time": 51,
+  "builtAt": 1572804738697,
+  "publicPath": "",
+  "outputPath": "/Users/gsignora/Desktop/projects/annalisa-lessons/front_end/dist",
+  "assetsByChunkName": {},
+  "assets": [],
+  "filteredAssets": 0,
+  "entrypoints": {},
+  "namedChunkGroups": {},
+  "chunks": [],
+  "modules": [],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 1,
+      "debug": false
+    }
+  },
+  "children": []
+}

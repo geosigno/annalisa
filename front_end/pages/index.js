@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import CoursList from '../components/cours/coursList';
-import NiveauxList from '../components/niveau/NiveauxList';
-import CategoriesList from '../components/categorie/CategoriesList';
+import CoursList from "../components/cours/coursList";
+import NiveauxList from "../components/niveau/NiveauxList";
+import CategoriesList from "../components/categorie/CategoriesList";
 
 const Home = () => (
     <div>

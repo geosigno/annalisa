@@ -24,6 +24,8 @@ const Cours = ({ data: { loading, error, cour } }) => {
     if (cour) {
         return <CoursMain cours={cour} />;
     }
+
+    return false;
 };
 
 export default compose(

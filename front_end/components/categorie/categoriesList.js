@@ -1,3 +1,4 @@
+import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
 import { Grid } from '@material-ui/core';
@@ -31,6 +32,8 @@ const CategoriesList = ({ data: { loading, error, categories } }) => {
             </Grid>
         );
     }
+
+    return false;
 };
 
 export default graphql(GET_ALL_CATEGORIES, {

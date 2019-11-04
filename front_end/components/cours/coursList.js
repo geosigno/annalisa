@@ -1,3 +1,4 @@
+import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
 import { Grid } from '@material-ui/core';
@@ -28,6 +29,8 @@ const CoursList = ({ data: { loading, error, cours } }) => {
             </Grid>
         );
     }
+
+    return false;
 };
 
 export default graphql(GET_ALL_COURS, {

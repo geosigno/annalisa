@@ -30,8 +30,8 @@ class Auth {
             })
             .catch((error) => {
                 // Handle error.
-                return false;
                 console.log('An error occurred:', error);
+                return false;
             });
     }
 

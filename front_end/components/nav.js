@@ -11,25 +11,7 @@ const links = [
 const Nav = () => (
     <nav>
         <ul>
-            {links.map(({ key, href, label, child }) => {
-                if (child) {
-                    const childList = child.map(({ key, href, label }) => (
-                        <li>
-                            <Link key={key} href={href}>
-                                <a>{label}</a>
-                            </Link>
-                        </li>
-                    ));
-
-                    return (
-                        <li>
-                            <Link key={key} href={href}>
-                                <a>{label}</a>
-                            </Link>
-                            <ul>{childList}</ul>
-                        </li>
-                    );
-                }
+            {links.map(({ key, href, label }) => {
                 return (
                     <Link key={key} href={href}>
                         <a>{label}</a>

@@ -12,16 +12,16 @@ class MyApp extends App {
         Fonts();
     }
 
-    static async getInitialProps({ Component, router, ctx }) {
-        let pageProps = {};
-        if (Component.getInitialProps) {
-            pageProps = await Component.getInitialProps(ctx);
-        }
-        return { pageProps };
-    }
+    // static async getInitialProps({ Component, router, ctx }) {
+    //     let pageProps = {};
+    //     if (Component.getInitialProps) {
+    //         pageProps = await Component.getInitialProps(ctx);
+    //     }
+    //     return { pageProps };
+    // }
 
     render() {
-        const { Component, pageProps, isAuthenticated, ctx } = this.props;
+        const { Component, pageProps } = this.props;
         return (
             <div>
                 <Normalize />

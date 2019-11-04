@@ -3,14 +3,12 @@ import Router, { withRouter } from 'next/router';
 
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
-import Auth from '../components/auth';
-import Loader from '../helpers/loader';
+import Auth from "../components/auth";
+import Loader from "../helpers/loader";
 
-import CoursThumbnail from '../components/cours/CoursThumbnail';
+import CoursThumbnail from "../components/cours/CoursThumbnail";
 
 import { GET_ALL_COURS_BY_NIVEAU_ID } from '../components/niveau/_query';
-
-console.log(GET_ALL_COURS_BY_NIVEAU_ID);
 
 const auth = new Auth();
 
@@ -27,6 +25,8 @@ const Niveau = ({ data: { loading, error, niveau } }) => {
         const list = niveau.cours.map((item) => <CoursThumbnail cours={item} />);
         return list;
     }
+
+    return false;
 };
 
 export default compose(

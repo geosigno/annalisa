@@ -1,10 +1,11 @@
+import React from 'react';
 import { CircularProgress } from '@material-ui/core';
 
 const Loader = (props) => {
     const { size } = props;
 
-    let loaderSize = 128,
-        loaderHeight = '100vh';
+    let loaderSize = 128;
+    let loaderHeight = '100vh';
 
     if (size === 'small') {
         loaderSize = 64;

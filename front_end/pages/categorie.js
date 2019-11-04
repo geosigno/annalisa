@@ -7,7 +7,7 @@ import Loader from '../helpers/loader';
 
 import { GET_ALL_COURS_BY_CAGTEGORIE_ID } from '../components/categorie/_query';
 
-import CoursThumbnail from '../components/cours/CoursThumbnail';
+import CoursThumbnail from '../components/cours/coursThumbnail';
 
 const auth = new Auth();
 
@@ -24,6 +24,8 @@ const Category = ({ data: { loading, error, categorie } }) => {
         const list = categorie.cours.map((item) => <CoursThumbnail cours={item} />);
         return list;
     }
+
+    return false;
 };
 
 export default compose(

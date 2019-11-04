@@ -6,25 +6,26 @@ import { TextField, Button, CircularProgress } from '@material-ui/core';
 import './form.scss';
 import { formStyle } from './signup-form';
 
-export default function SignInForm(props) {
+const SignInForm = (props) => {
+    const { handleSubmit, handleChange, loading } = props;
     const classes = formStyle();
     return (
         <div>
             <div className="fullPage">
                 <div className="fullPage__container">
-                    <form className="form" onSubmit={props.handleSubmit}>
+                    <form className="form" onSubmit={handleSubmit}>
                         <h2 className="form__title">Content de vous revoir!</h2>
                         <div className="form__container">
                             {/* <a href='http://localhost:1337/connect/facebook/'>Connect with Facebook</a> */}
-                            <TextField id="identifier" label="identifier" onChange={props.handleChange} className={classes.input} />
-                            <TextField id="password" type="password" label="password" onChange={props.handleChange} className={classes.input} />
+                            <TextField id="identifier" label="identifier" onChange={handleChange} className={classes.input} />
+                            <TextField id="password" type="password" label="password" onChange={handleChange} className={classes.input} />
                         </div>
                         <Button className={classes.btnPrimary} type="submit">
-                            {props.loading && <CircularProgress size={24} className={classes.loader} />}
+                            {loading && <CircularProgress size={24} className={classes.loader} />}
                             se connecter
                         </Button>
                         <p className="form__info">
-                            Vous n'avez pas encore de compte?
+                            Vous n&apos;avez pas encore de compte?
                             <Link href="/signup">
                                 <a>Enregistrez vous</a>
                             </Link>
@@ -34,4 +35,6 @@ export default function SignInForm(props) {
             </div>
         </div>
     );
-}
+};
+
+export default SignInForm;
