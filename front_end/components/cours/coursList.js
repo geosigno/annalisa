@@ -3,8 +3,8 @@ import { graphql } from 'react-apollo';
 import Router from 'next/router';
 import { Grid } from '@material-ui/core';
 import Auth from '../auth';
-import Loader from '../../helpers/loader';
-import CoursThumbnail from './coursThumbnail';
+import Loader from '../Loader';
+import CoursThumbnail from './CoursThumbnail';
 import GET_ALL_COURS from './_query';
 
 const auth = new Auth();

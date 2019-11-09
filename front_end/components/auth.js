@@ -2,6 +2,7 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
+import nextCookie from 'next-cookies';
 
 class Auth {
     constructor() {
@@ -39,7 +40,7 @@ class Auth {
         axios
             .post(this.loginURL, data)
             .then((response) => {
-                const username = response.data.user;
+                const username = response.data.user.username;
                 const token = response.data.jwt;
 
                 Cookies.set('username', username);
@@ -98,29 +99,61 @@ class Auth {
         Cookies.remove('jwt');
     }
 
-    getCookieFromServer(req) {
-        if (!req.headers.cookie || '') {
-            return undefined;
-        }
+    getUserFromServerCookie = (ctx) => {
+        // if (!req.headers.cookie || "") {
+        //   return undefined;
+        // }
 
-        let username = req.headers.cookie.split(';').find((user) => user.trim().startsWith('username='));
+        // let username = req.headers.cookie
+        //   .split(";")
+        //   .find(user => user.trim().startsWith("username="));
+        // if (username) {
+        //   username = username.split("=")[1];
+        // }
 
-        if (username) {
-            username = username.split('=')[1];
-        }
+        // const jwtCookie = req.headers.cookie
+        //   .split(";")
+        //   .find(c => c.trim().startsWith("jwt="));
+        // if (!jwtCookie) {
+        //   return undefined;
+        // }
 
-        let jwt = req.headers.cookie.split(';').find((c) => c.trim().startsWith('jwt='));
+        console.log('server ', ctx.req.headers.cookie);
 
-        if (jwt) {
-            jwt = jwtCookie.split('=')[1];
-        }
+        const { jwt, username } = nextCookie(ctx);
 
-        return jwtDecode(jwt), username;
-    }
+        // const jwt = jwtCookie.split("=")[1];
+        return username;
+    };
 
-    getCookieFromLocal() {
+    getUserFromLocalCookie = () => {
+        console.log('browser: ', Cookies.get('username'));
         return Cookies.get('username');
-    }
+    };
+
+    // getCookieFromServer(req) {
+    //     if (!req.headers.cookie || '') {
+    //         return undefined;
+    //     }
+
+    //     let username = req.headers.cookie.split(';').find((user) => user.trim().startsWith('username='));
+
+    //     if (username) {
+    //         username = username.split('=')[1];
+    //     }
+
+    //     let jwt = req.headers.cookie.split(';').find((c) => c.trim().startsWith('jwt='));
+
+    //     if (jwt) {
+    //         jwt = jwtCookie.split('=')[1];
+    //     }
+
+    //     return jwtDecode(jwt), username;
+    // }
+
+    // getCookieFromLocal() {
+    //     return Cookies.get('username');
+    // }
 
     getBearer() {
         const jwt = Cookies.get('jwt');

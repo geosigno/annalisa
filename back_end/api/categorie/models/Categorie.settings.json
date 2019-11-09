@@ -29,8 +29,8 @@
     },
     "cours": {
       "collection": "cours",
-      "via": "categories",
-      "dominant": true
+      "dominant": true,
+      "via": "categories"
     }
   }
 }

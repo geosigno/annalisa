@@ -51,6 +51,9 @@ const SignInForm = (props) => {
                             </Link>
                         </p>
                     </form>
+                    <Link href="/">
+                        <a className="form__back">Retourner à la page d'accueil</a>
+                    </Link>
                 </div>
             </div>
         </div>

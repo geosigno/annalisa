@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { Grid } from '@material-ui/core';
 
 import Auth from '../auth';
-import Loader from '../../helpers/loader';
+import Loader from '../Loader';
 
 import CategorieThumbnail from './CategorieThumbnail';
 

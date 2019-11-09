@@ -1,22 +1,32 @@
 import React from 'react';
 import Head from 'next/head';
-import CoursList from "../components/cours/coursList";
-import NiveauxList from "../components/niveau/NiveauxList";
-import CategoriesList from "../components/categorie/CategoriesList";
+import defaultPage from '../hoc/defaultPage';
+import CoursList from '../components/cours/coursList';
+import NiveauxList from '../components/niveau/NiveauxList';
+import CategoriesList from '../components/categorie/CategoriesList';
 
-const Home = () => (
-    <div>
-        <Head>
-            <title>Home</title>
-            <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <h2>Accédez aux derniers cours</h2>
-        <CoursList />
-        <h2>Cherchez un niveau particulier</h2>
-        <NiveauxList />
-        <h2>Choisissez une catégorie</h2>
-        <CategoriesList />
-    </div>
-);
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-export default Home;
+    render() {
+        const { isAuthenticated } = this.props;
+        return (
+            <div>
+                <Head>
+                    <title>Home</title>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
+                <h2>Accédez aux derniers cours</h2>
+                <CoursList />
+                <h2>Cherchez un niveau particulier</h2>
+                <NiveauxList />
+                <h2>Choisissez une catégorie</h2>
+                <CategoriesList />
+            </div>
+        );
+    }
+}
+
+export default defaultPage(Home);

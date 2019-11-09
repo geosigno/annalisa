@@ -3,9 +3,11 @@ import Link from 'next/link';
 import dateToFormat from '../../helpers/date';
 
 const CoursThumbnail = (props) => {
-    const { cours: { id, nom, description, created_at }} = props;
+    const {
+        cours: { id, nom, description, created_at }
+    } = props;
     return (
-        <article key={id}>
+        <article>
             <header>
                 <Link href={`/cours?id=${id}`} as={`/cours/${id}`}>
                     <a>

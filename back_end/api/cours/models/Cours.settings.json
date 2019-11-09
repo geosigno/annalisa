@@ -42,6 +42,9 @@
     "categories": {
       "collection": "categorie",
       "via": "cours"
+    },
+    "duree": {
+      "type": "integer"
     }
   }
 }

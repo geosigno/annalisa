@@ -2,7 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 
 const NiveauThumbnail = (props) => {
-    const { niveaus: { id, nom, description, image }} = props;
+    const {
+        niveaus: { id, nom, description, image }
+    } = props;
     return (
         <div key={id}>
             <Link href={`/niveau?id=${id}`} as={`/niveau/${id}`}>

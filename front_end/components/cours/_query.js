@@ -21,6 +21,7 @@ export const GET_COURS_BY_ID = gql`
             description
             contenu
             created_at
+            duree
             image {
                 url
             }

@@ -20,14 +20,14 @@
     "description": {
       "type": "string"
     },
-    "cours": {
-      "collection": "cours",
-      "via": "niveau"
-    },
     "image": {
       "model": "file",
       "via": "related",
       "plugin": "upload"
+    },
+    "cours": {
+      "collection": "cours",
+      "via": "niveau"
     }
   }
 }

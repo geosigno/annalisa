@@ -2,15 +2,15 @@ import FontFaceObserver from 'fontfaceobserver';
 
 const Fonts = () => {
     const link = document.createElement('link');
-    link.href = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900';
+    link.href = 'https://fonts.googleapis.com/css?family=Abril+Fatface:400';
     link.rel = 'stylesheet';
 
     document.head.appendChild(link);
 
-    const roboto = new FontFaceObserver('Roboto');
+    const AbrilFatface = new FontFaceObserver('Abril Fatface');
 
-    roboto.load().then(() => {
-        document.documentElement.classList.add('roboto');
+    AbrilFatface.load().then(() => {
+        document.documentElement.classList.add('abril-fatface');
     });
 };
 

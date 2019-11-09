@@ -1,8 +1,24 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
 body {
-    font-family: 'Roboto';
+    font-family: 'Open Sans';
 }
 
 img {
     max-width: 100%;
     height: auto;
+}
+h1,
+h2,
+h3 {
+    font-family: 'Abril Fatface';
+    letter-spacing: 1px;
 }
