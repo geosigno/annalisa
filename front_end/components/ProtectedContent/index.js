@@ -4,6 +4,7 @@ import Router from 'next/router';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+
 import store from '../../stores';
 import { addUrl } from '../../actions';
 

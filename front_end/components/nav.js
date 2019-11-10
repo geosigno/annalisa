@@ -5,7 +5,10 @@ import { Container } from '@material-ui/core';
 
 const linksLeft = [{ key: 1, href: '/', label: "page d'accueil" }, { key: 2, href: '/cours', label: 'cours' }];
 
-const linksRight = [{ key: 3, href: '/signin', label: 'se connecter' }, { key: 4, href: '/signup', label: "s'enregistrer" }];
+const linksRight = [
+	{ key: 3, href: '/signin', label: 'se connecter' },
+	{ key: 4, href: '/signup', label: "s'enregistrer" }
+];
 
 const Nav = () => (
 	<nav>

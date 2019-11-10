@@ -11,7 +11,7 @@ class SignUp extends React.Component {
 			loading: false
 		};
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	handleChange(e) {
@@ -26,20 +26,34 @@ class SignUp extends React.Component {
 		});
 	}
 
-	handleSubmit(e) {
-		e.preventDefault();
-
+	onSubmit() {
 		this.setState({
 			loading: true
 		});
 
 		const data = this.state;
 
-		auth.register(data);
+		auth.register(data).then((response) => {
+			if (response.status === 400) {
+				if (response.data.message[0].messages[0].id === 'Auth.form.error.email.taken') {
+					this.setState({
+						error: 'Il semble que cet e-mail est déjà utilisé. Veuillez vous connectez ou utiliser un autre e-mail',
+						loading: false
+					});
+				}
+			}
+		});
 	}
 
 	render() {
-		return <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} loading={this.state.loading} />;
+		return (
+			<SignUpForm
+				onSubmit={this.onSubmit}
+				handleChange={this.handleChange}
+				loading={this.state.loading}
+				error={this.state.error}
+			/>
+		);
 	}
 }
 export default SignUp;

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Auth from '../components/auth';
 import SignInForm from '../components/form/signin-form';
 
@@ -11,7 +12,7 @@ class SignIn extends React.Component {
 			loading: false
 		};
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	handleChange(e) {
@@ -26,19 +27,21 @@ class SignIn extends React.Component {
 		});
 	}
 
-	handleSubmit(e) {
-		e.preventDefault();
-
+	onSubmit() {
 		this.setState({
 			loading: true
 		});
 
 		const data = this.state;
-		auth.login(data);
+		// auth.login(data);
+
+		auth.login(data).then((response) => {
+			console.log(response);
+		});
 	}
 
 	render() {
-		return <SignInForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} loading={this.state.loading} />;
+		return <SignInForm onSubmit={this.onSubmit} handleChange={this.handleChange} loading={this.state.loading} />;
 	}
 }
 export default SignIn;

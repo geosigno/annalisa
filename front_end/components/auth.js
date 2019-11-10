@@ -3,7 +3,7 @@ import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
-import store from '../store';
+import store from '../stores';
 
 class Auth {
 	constructor() {
@@ -14,26 +14,27 @@ class Auth {
 	}
 
 	register(data) {
-		axios
+		return axios
 			.post(this.registerURL, data)
 			.then((response) => {
-				const username = response.data.user;
+				const username = response.data.user.username;
 				const token = response.data.jwt;
 
 				Cookies.set('username', username);
 				Cookies.set('jwt', token);
 
 				this.redirectProcess();
+
+				return true;
 			})
 			.catch((error) => {
 				// Handle error.
-				console.log('An error occurred:', error);
-				return false;
+				return error.response;
 			});
 	}
 
-	login(data) {
-		axios
+	async login(data) {
+		return axios
 			.post(this.loginURL, data)
 			.then((response) => {
 				const username = response.data.user.username;
@@ -43,10 +44,11 @@ class Auth {
 				Cookies.set('jwt', token);
 
 				this.redirectProcess();
+				return true;
 			})
 			.catch((error) => {
 				// Handle error.
-				console.log('An error occurred:', error);
+				return error;
 			});
 	}
 
