@@ -5,41 +5,41 @@ import SignUpForm from '../components/form/signup-form';
 const auth = new Auth();
 
 class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loading: false
-        };
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			loading: false
+		};
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
 
-    handleChange(e) {
-        const key = e.target.id;
-        const { value } = e.target;
+	handleChange(e) {
+		const key = e.target.id;
+		const { value } = e.target;
 
-        this.setState((prevState) => {
-            return {
-                ...prevState.contact,
-                [key]: value
-            };
-        });
-    }
+		this.setState((prevState) => {
+			return {
+				...prevState.contact,
+				[key]: value
+			};
+		});
+	}
 
-    handleSubmit(e) {
-        e.preventDefault();
+	handleSubmit(e) {
+		e.preventDefault();
 
-        this.setState({
-            loading: true
-        });
+		this.setState({
+			loading: true
+		});
 
-        const data = this.state;
+		const data = this.state;
 
-        auth.register(data);
-    }
+		auth.register(data);
+	}
 
-    render() {
-        return <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} loading={this.state.loading} />;
-    }
+	render() {
+		return <SignUpForm handleSubmit={this.handleSubmit} handleChange={this.handleChange} loading={this.state.loading} />;
+	}
 }
 export default SignUp;

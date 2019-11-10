@@ -6,14 +6,14 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "lint": "npx eslint pages/ components/ helpers/ --ext .js --fix",
-    "format": "prettier --write '{pages,components,helpers,styles}/**/*.{js,scss}'"
+    "lint": "npx eslint actions/ components/ helpers/ lib/ pages/ reducers/ stores/ --ext .js --fix",
+    "format": "prettier --write '{actions,components,helpers,lib,pages,reducers,stores,styles}/**/*.{js,scss}'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/react-fontawesome": "^0.1.7",
-    "@material-ui/core": "^4.5.2",
+    "@material-ui/core": "^4.5.2", 
     "@material-ui/icons": "^4.5.1",
     "@next/bundle-analyzer": "^9.1.2",
     "@zeit/next-sass": "^1.0.1",
@@ -41,6 +41,7 @@
     "react-markdown": "^4.2.2",
     "react-normalize": "^0.4.3",
     "recompose": "^0.30.0",
+    "redux": "^4.0.4",
     "typeface-roboto": "0.0.75",
     "webpack-cli": "^3.3.10"
   },

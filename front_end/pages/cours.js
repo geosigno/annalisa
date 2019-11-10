@@ -14,41 +14,41 @@ import CoursMain from '../components/cours/coursMain';
 
 const auth = new Auth();
 
-const Cours = ({ data: { loading, error, cour } }) => {
-    if (loading) {
-        return <Loader />;
-    }
+const Cours = ({ router, data: { loading, error, cour } }) => {
+	if (loading) {
+		return <Loader />;
+	}
 
-    if (error) {
-        if (error.graphQLErrors) {
-            for (let i = 0; i < error.graphQLErrors.length; i++) {
-                if (error.graphQLErrors[i].message.includes('Forbidden')) {
-                    return <ProtectedContent />;
-                }
-            }
-        }
-        // Router.push('/signin');
-    }
+	if (error) {
+		if (error.graphQLErrors) {
+			for (let i = 0; i < error.graphQLErrors.length; i++) {
+				if (error.graphQLErrors[i].message.includes('Forbidden')) {
+					return <ProtectedContent router={router} />;
+				}
+			}
+		}
+		// Router.push('/signin');
+	}
 
-    if (cour) {
-        return <CoursMain cours={cour} />;
-    }
+	if (cour) {
+		return <CoursMain cours={cour} />;
+	}
 
-    return false;
+	return false;
 };
 
 export default compose(
-    withRouter,
-    defaultPage,
-    graphql(GET_COURS_BY_ID, {
-        options: (props) => ({
-            variables: {
-                id: props.router.query.id || 1
-            },
-            context: {
-                headers: auth.getBearer()
-            }
-        }),
-        props: ({ data }) => ({ data })
-    })
+	withRouter,
+	defaultPage,
+	graphql(GET_COURS_BY_ID, {
+		options: (props) => ({
+			variables: {
+				id: props.router.query.id || 1
+			},
+			context: {
+				headers: auth.getBearer()
+			}
+		}),
+		props: ({ data }) => ({ data })
+	})
 )(Cours);
