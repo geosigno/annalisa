@@ -6,25 +6,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 import store from '../../stores';
-import { addUrl } from '../../actions';
+import { addCoursUrl } from '../../actions';
 
 const ProtectedContent = ({ router }) => {
 	// Store the current URL to store
-	store.dispatch(addUrl(router.asPath));
+	const returnURL = router.asPath;
+	store.dispatch(addCoursUrl(returnURL));
 
 	return (
-		<div className="protectedContent">
-			<div className="protectedContent__container">
-				<FontAwesomeIcon icon={faExclamationCircle} size="5x" color="#ff9472" />
-				<h1>Oups, vous n'avez pas encore accès à ce cours.</h1>
+		<div className='protectedContent'>
+			<div className='protectedContent__container'>
+				<FontAwesomeIcon icon={faExclamationCircle} size='5x' color='#ff9472' />
+				<h1>Oups, vous n&apos;avez pas encore accès à ce cours.</h1>
 				<p>
 					Ce cours est protégé, pour le visionner veuillez vous&nbsp;
-					<Link href="/signin">
+					<Link href='/signin'>
 						<a>connecter</a>
 					</Link>
 					.
 				</p>
 				<button
+					type='button'
 					onClick={(e) => {
 						e.preventDefault();
 						Router.back();

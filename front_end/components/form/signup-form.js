@@ -3,102 +3,105 @@ import Link from 'next/link';
 
 import useForm from 'react-hook-form';
 
+import { TextField, Button, CircularProgress } from '@material-ui/core';
+import store from '../../stores';
+
+// import { ThemeProvider } from '@material-ui/styles';
+
 import Alert from '../Alert';
 
-import { TextField, Button, CircularProgress } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/styles';
+import { formStyle, formStyleUI } from './form-style';
 
-import { formStyle, formStyleUI, theme } from './form-style';
+const SignUpForm = (props) => {
+	const { onRegisterSubmit, handleChange, loading, error } = props;
 
-const SignInForm = (props) => {
-	const { onSubmit, handleChange, loading, error } = props;
-	const { register, handleSubmit, watch, errors } = useForm();
+	const { register, handleSubmit, errors } = useForm();
+
 	const classes = formStyleUI();
+
+	const articleTitle = store.getState() ? store.getState().articleLockedTitle : null;
+	const hook = !articleTitle
+		? 'Rejoignez Annalisa lesson'
+		: `Enregistrez vous pour accédez au cours "${articleTitle}"!`;
+
 	return (
-		<div>
-			<div className="fullPage">
-				<div className="fullPage__container">
-					<form className="form" onSubmit={handleSubmit(onSubmit)}>
-						<h2 className="form__title">Rejoingnez Annalise French lessons!</h2>
-						<div className="form__container">
-							{error && <Alert text={error} />}
-							<div className="input__container">
-								{/* <ThemeProvider theme={theme}> */}
-								<TextField
-									id="username"
-									label="nom"
-									name="nom"
-									onChange={handleChange}
-									className={classes.input}
-									inputRef={register({ required: true, minLength: 3 })}
-									error={errors.nom ? true : false}
-								/>
-								{/* </ThemeProvider> */}
-								{errors.nom && errors.nom.type == 'required' && (
-									<p className="input__error">L'identifiant est obligatoire</p>
-								)}
-							</div>
-							<div className="input__container">
-								<TextField
-									id="email"
-									label="email"
-									name="email"
-									onChange={handleChange}
-									className={classes.input}
-									inputRef={register({
-										required: true,
-										pattern: {
-											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-										}
-									})}
-									error={errors.email ? true : false}
-								/>
-								{errors.email && errors.email.type == 'required' && (
-									<p className="input__error">L'email est obligatoire</p>
-								)}
-								{errors.email && errors.email.type == 'pattern' && <p className="input__error">L'email est invalide</p>}
-							</div>
-							<div className="input__container">
-								<TextField
-									id="password"
-									type="password"
-									label="password"
-									name="password"
-									onChange={handleChange}
-									className={classes.input}
-									inputRef={register({ required: true, minLength: 8, maxLength: 30 })}
-									error={errors.password ? true : false}
-								/>
-								{errors.password && errors.password.type == 'required' && (
-									<p className="input__error">Le mot de passe est obligatoire</p>
-								)}
-								{errors.password && errors.password.type == 'minLength' && (
-									<p className="input__error">Le mot de passe doit avoir un minimum de 8 caractères</p>
-								)}
-								{errors.password && errors.password.type == 'maxLength' && (
-									<p className="input__error">Le mot de passe doit avoir un maximum de 30 caractères</p>
-								)}
-							</div>
-						</div>
-						<Button className={classes.btnPrimary} type="submit">
-							{loading && <CircularProgress size={24} className={classes.loader} />}
-							s&apos;enregistrer
-						</Button>
-						<p className="form__info">
-							Vous avez déja un compte?
-							<Link href="/signin">
-								<a>Connectez vous</a>
-							</Link>
-						</p>
-					</form>
-					<Link href="/">
-						<a className="form__back">Retourner à la page d'accueil</a>
-					</Link>
+		<form className='form' onSubmit={handleSubmit(onRegisterSubmit)}>
+			<h2 className='form__title'>{hook}</h2>
+			<div className='form__container'>
+				{error && <Alert text={error} />}
+				<div className='input__container'>
+					{/* <ThemeProvider theme={theme}> */}
+					<TextField
+						id='username'
+						label='nom'
+						name='nom'
+						onChange={handleChange}
+						className={classes.input}
+						inputRef={register({ required: true, minLength: 3 })}
+						error={!!errors.nom}
+					/>
+					{/* </ThemeProvider> */}
+					{errors.nom && errors.nom.type === 'required' && (
+						<p className='input__error'>L&lsquo;identifiant est obligatoire</p>
+					)}
+				</div>
+				<div className='input__container'>
+					<TextField
+						id='email'
+						label='email'
+						name='email'
+						onChange={handleChange}
+						className={classes.input}
+						inputRef={register({
+							required: true,
+							pattern: {
+								value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
+							}
+						})}
+						error={!!errors.email}
+					/>
+					{errors.email && errors.email.type === 'required' && (
+						<p className='input__error'>L&lsquo;email est obligatoire</p>
+					)}
+					{errors.email && errors.email.type === 'pattern' && (
+						<p className='input__error'>L&lsquo;email est invalide</p>
+					)}
+				</div>
+				<div className='input__container'>
+					<TextField
+						id='password'
+						type='password'
+						label='password'
+						name='password'
+						onChange={handleChange}
+						className={classes.input}
+						inputRef={register({ required: true, minLength: 8, maxLength: 30 })}
+						error={!!errors.password}
+					/>
+					{errors.password && errors.password.type === 'required' && (
+						<p className='input__error'>Le mot de passe est obligatoire</p>
+					)}
+					{errors.password && errors.password.type === 'minLength' && (
+						<p className='input__error'>Le mot de passe doit avoir un minimum de 8 caractères</p>
+					)}
+					{errors.password && errors.password.type === 'maxLength' && (
+						<p className='input__error'>Le mot de passe doit avoir un maximum de 30 caractères</p>
+					)}
 				</div>
 			</div>
+			<Button className={classes.btnPrimary} type='submit'>
+				{loading && <CircularProgress size={24} className={classes.loader} />}
+				s&apos;enregistrer
+			</Button>
+			<p className='form__info'>
+				Vous avez déja un compte?
+				<Link href='/signin'>
+					<a>Connectez vous</a>
+				</Link>
+			</p>
 			<style jsx>{formStyle}</style>
-		</div>
+		</form>
 	);
 };
 
-export default SignInForm;
+export default SignUpForm;

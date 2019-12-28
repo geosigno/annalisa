@@ -1,12 +1,11 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
-import { Grid } from '@material-ui/core';
 
 import Auth from '../auth';
 import Loader from '../Loader';
 
-import CategorieThumbnail from './CategorieThumbnail';
+import CardList from '../Card/CardList';
 
 import GET_ALL_CATEGORIES from './_query';
 
@@ -14,7 +13,7 @@ const auth = new Auth();
 
 const CategoriesList = ({ data: { loading, error, categories } }) => {
 	if (loading) {
-		return <Loader size="small" />;
+		return <Loader size='small' />;
 	}
 
 	if (error) {
@@ -22,15 +21,7 @@ const CategoriesList = ({ data: { loading, error, categories } }) => {
 	}
 
 	if (categories && categories.length) {
-		return (
-			<Grid container direction="row" justify="flex-start" spacing={8}>
-				{categories.map((item) => (
-					<Grid key={item.id} item xs={12} sm={3}>
-						<CategorieThumbnail categories={item} />
-					</Grid>
-				))}
-			</Grid>
-		);
+		return <CardList data={categories} type='categorie' />;
 	}
 
 	return false;

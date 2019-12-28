@@ -5,11 +5,4 @@
  * to customize this controller
  */
 
-module.exports = {
-  // GET /hello
-  index: async ctx  => {
-    console.log(ctx);
-    // ctx.redirect('http://localhost:3000');
-    return;
-  },
-};
+module.exports = {};

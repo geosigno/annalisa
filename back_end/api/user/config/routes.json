@@ -1,9 +1,0 @@
-{
-  "routes": [
-    {
-      "method": "GET",
-      "path": "/auth/facebook/:callback",
-      "handler": "User.index"
-    }
-  ]
-}

@@ -1,10 +1,7 @@
-/* hocs/defaultPage.js */
-
 import React from "react";
 
-import Nav from '../components/nav';
+import Nav from '../components/Nav/';
 import { Container } from '@material-ui/core';
-
 
 import Auth from "../components/auth";
 const auth = new Auth();
@@ -20,12 +17,6 @@ export default Page =>
         : auth.getUserFromServerCookie(ctx);
 
       const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
-
-      // console.log('ctx', ctx);
-      // console.log('req.cookie', req.headers.cookie)
-      console.log('browser',process.browser);
-      // console.log("is authenticated");
-      console.log('loggedUser', loggedUser);
 
       let path = ""
       return {
@@ -53,9 +44,9 @@ export default Page =>
     render() {
       return (
         <div>
-        <Nav />
+        <Nav {...this.props} />
         <Container>
-        <Page {...this.props} />
+          <Page {...this.props} />
         </Container>
         </div>
       )

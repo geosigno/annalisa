@@ -12,11 +12,11 @@ const Loader = (props) => {
 	}
 
 	return (
-		<div className="loader-container">
-			<div className="spinner">
-				<div className="bounce1" />
-				<div className="bounce2" />
-				<div className="bounce3" />
+		<div className='loader-container'>
+			<div className='spinner'>
+				<div className='bounce1' />
+				<div className='bounce2' />
+				<div className='bounce3' />
 			</div>
 			<style jsx>{`
 				.loader-container {

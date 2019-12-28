@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 const Alert = (props) => {
-	const { text, type } = props;
+	const { text } = props;
 	return (
-		<div className="alert">
-			<div className="alert__container">
-				<div className="alert__icon">
-					<FontAwesomeIcon icon={faExclamation} size="2x" color="#ff6961" />
+		<div className='alert'>
+			<div className='alert__container'>
+				<div className='alert__icon'>
+					<FontAwesomeIcon icon={faExclamation} size='2x' color='#ff6961' />
 				</div>
-				<div className="alert__content">
+				<div className='alert__content'>
 					<p>{text}</p>
 				</div>
 			</div>

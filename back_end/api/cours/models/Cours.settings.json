@@ -45,6 +45,10 @@
     },
     "duree": {
       "type": "integer"
+    },
+    "commentaires": {
+      "collection": "commentaire",
+      "via": "cour"
     }
   }
 }

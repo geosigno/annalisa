@@ -6,8 +6,6 @@ import withData from '../lib/apollo';
 import Fonts from '../helpers/font';
 import '../styles/base.scss';
 
-import Layout from '../components/layout';
-
 class MyApp extends App {
 	componentDidMount() {
 		Fonts();
@@ -26,7 +24,7 @@ class MyApp extends App {
 			<div>
 				<Normalize />
 				{/* <Layout isAuthenticated={isAuthenticated} {...pageProps}> */}
-				<Component {...pageProps} />
+				<Component isAuthenticated={isAuthenticated} {...pageProps} />
 				{/* </Layout> */}
 			</div>
 		);

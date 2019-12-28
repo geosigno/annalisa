@@ -9,7 +9,7 @@ import defaultPage from '../hoc/defaultPage';
 
 import { GET_ALL_COURS_BY_CAGTEGORIE_ID } from '../components/categorie/_query';
 
-import CoursThumbnail from '../components/cours/CoursThumbnail';
+import CardList from '../components/Card/CardList';
 
 const auth = new Auth();
 
@@ -19,12 +19,17 @@ const Category = ({ data: { loading, error, categorie } }) => {
 	}
 
 	if (error) {
-		Router.push('/signin');
+		if (error.graphQLErrors) {
+			for (let i = 0; i < error.graphQLErrors.length; i++) {
+				if (error.graphQLErrors[i].message.includes('Forbidden')) {
+					return <ProtectedContent router={router} />;
+				}
+			}
+		}
 	}
 
 	if (categorie.cours && categorie.cours.length) {
-		const list = categorie.cours.map((item) => <CoursThumbnail key={item.id} cours={item} />);
-		return list;
+		return <CardList data={categorie.cours} type='cours' />;
 	}
 
 	return false;

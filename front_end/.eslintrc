@@ -17,7 +17,11 @@
       "components": [ "Link" ],
       "specialLink": [ "hrefLeft", "hrefRight" ],
       "aspects": [ "invalidHref", "preferButton" ]
-    }]
+    }],
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0,
+    "react/sort-comp": 0,
+    "no-plusplus": 0
   },
   "globals": {
     "window": true,

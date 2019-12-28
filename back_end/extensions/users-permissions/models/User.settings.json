@@ -60,6 +60,10 @@
       "model": "file",
       "via": "related",
       "plugin": "upload"
+    },
+    "commentaires": {
+      "collection": "commentaire",
+      "via": "user"
     }
   }
 }

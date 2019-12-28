@@ -1,5 +1,5 @@
 import React from 'react';
-import Router, { withRouter } from 'next/router';
+import { withRouter } from 'next/router';
 
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
@@ -27,7 +27,6 @@ const Cours = ({ router, data: { loading, error, cour } }) => {
 				}
 			}
 		}
-		// Router.push('/signin');
 	}
 
 	if (cour) {

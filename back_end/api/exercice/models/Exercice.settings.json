@@ -20,6 +20,10 @@
     "cours": {
       "collection": "cours",
       "via": "exercices"
+    },
+    "commentaires": {
+      "collection": "commentaire",
+      "via": "exercice"
     }
   }
 }

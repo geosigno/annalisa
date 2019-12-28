@@ -1,17 +1,17 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
-import { Grid } from '@material-ui/core';
 import Auth from '../auth';
 import Loader from '../Loader';
-import CoursThumbnail from './CoursThumbnail';
+import CardList from '../Card/CardList';
+
 import GET_ALL_COURS from './_query';
 
 const auth = new Auth();
 
 const CoursList = ({ data: { loading, error, cours } }) => {
 	if (loading) {
-		return <Loader size="small" />;
+		return <Loader size='small' />;
 	}
 
 	if (error) {
@@ -19,15 +19,7 @@ const CoursList = ({ data: { loading, error, cours } }) => {
 	}
 
 	if (cours && cours.length) {
-		return (
-			<Grid container direction="row" justify="flex-start" spacing={8}>
-				{cours.map((item) => (
-					<Grid key={item.id} item xs={12} sm={3}>
-						<CoursThumbnail cours={item} />
-					</Grid>
-				))}
-			</Grid>
-		);
+		return <CardList data={cours} type='cours' />;
 	}
 
 	return false;

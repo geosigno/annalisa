@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import store from '../stores';
+import { clear } from '../actions';
 
 class Auth {
 	constructor() {
@@ -17,7 +18,7 @@ class Auth {
 		return axios
 			.post(this.registerURL, data)
 			.then((response) => {
-				const username = response.data.user.username;
+				const { username } = response.data.user;
 				const token = response.data.jwt;
 
 				Cookies.set('username', username);
@@ -37,7 +38,7 @@ class Auth {
 		return axios
 			.post(this.loginURL, data)
 			.then((response) => {
-				const username = response.data.user.username;
+				const { username } = response.data.user;
 				const token = response.data.jwt;
 
 				Cookies.set('username', username);
@@ -92,61 +93,15 @@ class Auth {
 		Cookies.remove('jwt');
 	}
 
-	getUserFromServerCookie = (ctx) => {
-		// if (!req.headers.cookie || "") {
-		//   return undefined;
-		// }
+	getUserFromServerCookie(ctx) {
+		const { username } = nextCookie(ctx);
 
-		// let username = req.headers.cookie
-		//   .split(";")
-		//   .find(user => user.trim().startsWith("username="));
-		// if (username) {
-		//   username = username.split("=")[1];
-		// }
-
-		// const jwtCookie = req.headers.cookie
-		//   .split(";")
-		//   .find(c => c.trim().startsWith("jwt="));
-		// if (!jwtCookie) {
-		//   return undefined;
-		// }
-
-		console.log('server ', ctx.req.headers.cookie);
-
-		const { jwt, username } = nextCookie(ctx);
-
-		// const jwt = jwtCookie.split("=")[1];
 		return username;
-	};
+	}
 
-	getUserFromLocalCookie = () => {
-		console.log('browser: ', Cookies.get('username'));
+	getUserFromLocalCookie() {
 		return Cookies.get('username');
-	};
-
-	// getCookieFromServer(req) {
-	//     if (!req.headers.cookie || '') {
-	//         return undefined;
-	//     }
-
-	//     let username = req.headers.cookie.split(';').find((user) => user.trim().startsWith('username='));
-
-	//     if (username) {
-	//         username = username.split('=')[1];
-	//     }
-
-	//     let jwt = req.headers.cookie.split(';').find((c) => c.trim().startsWith('jwt='));
-
-	//     if (jwt) {
-	//         jwt = jwtCookie.split('=')[1];
-	//     }
-
-	//     return jwtDecode(jwt), username;
-	// }
-
-	// getCookieFromLocal() {
-	//     return Cookies.get('username');
-	// }
+	}
 
 	getBearer() {
 		const jwt = Cookies.get('jwt');
@@ -157,13 +112,16 @@ class Auth {
 	}
 
 	redirectProcess() {
-		//get the root article that made the user log
-		const articleLockedURL = store.getState().articleLockedURL;
+		// get the root article that made the user log
+		const { articleLockedURL } = store.getState();
 
-		//if any, create the return URI based on it
-		const returnURI = articleLockedURL ? articleLockedURL : null;
+		// if any, create the return URI based on it
+		const returnURI = articleLockedURL || null;
 
-		//redirect the user accordingly
+		// clear the store
+		store.dispatch(clear());
+
+		// redirect the user accordingly
 		if (returnURI) {
 			Router.push(returnURI);
 		} else {
