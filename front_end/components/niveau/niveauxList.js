@@ -2,11 +2,9 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
 import { CircularProgress } from '@material-ui/core';
-import Auth from '../auth';
+import Auth from '../../helpers/auth';
 import CardList from '../Card/CardList';
 import { GET_ALL_NIVEAUX } from './_query';
-
-const auth = new Auth();
 
 const NiveauxList = ({ data: { loading, error, niveaus } }) => {
 	if (loading) {
@@ -31,7 +29,7 @@ const NiveauxList = ({ data: { loading, error, niveaus } }) => {
 export default graphql(GET_ALL_NIVEAUX, {
 	options: {
 		context: {
-			headers: auth.getBearer()
+			headers: Auth.getBearer()
 		}
 	},
 	props: ({ data }) => ({ data })

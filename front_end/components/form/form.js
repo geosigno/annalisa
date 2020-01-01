@@ -1,8 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Auth from '../auth';
-
-const auth = new Auth();
+import Auth from '../../helpers/auth';
 
 export default function Form(Component) {
 	return class extends React.Component {
@@ -35,7 +33,7 @@ export default function Form(Component) {
 
 			const data = this.state;
 
-			auth.login(data).then(() => {});
+			Auth.login(data).then(() => {});
 		}
 
 		onRegisterSubmit() {
@@ -45,7 +43,7 @@ export default function Form(Component) {
 
 			const data = this.state;
 
-			auth.register(data).then((response) => {
+			Auth.register(data).then((response) => {
 				if (response.status === 400) {
 					if (response.data.message[0].messages[0].id === 'Auth.form.error.email.taken') {
 						this.setState({

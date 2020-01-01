@@ -7,15 +7,14 @@ import store from '../../stores';
 import { addCoursID } from '../../actions';
 
 import CommentaireList from '../Commentaires/CommentaireList';
-import CreateComment from '../Commentaires/CreateComment';
 
-import dateToFormat from '../../helpers/date';
+import { dateToFormat } from '../../helpers/date';
 
 import './coursMain.scss';
 
 const CoursMain = (props) => {
 	const {
-		cours: { id, nom, created_at, duree, contenu, niveau, categories, commentaires }
+		cours: { id, nom, created_at, duree, contenu, niveau, categories }
 	} = props;
 	const createMarkup = (htmlString) => ({ __html: htmlString });
 	store.dispatch(addCoursID(id));
@@ -68,13 +67,20 @@ const CoursMain = (props) => {
 					.cours {
 						display: block;
 						max-width: 800px;
-						margin: 0 auto;
+						background: #fff;
+						border-radius: 8px;
+						padding: 0 32px 32px;
+						margin: 64px auto;
 					}
 					.cours__header {
 						margin: 0 0 64px;
 					}
 					.cours__title {
-						font-size: 40px;
+						display: inline-block;
+						font-size: 48px;
+						background: #ff9472;
+						padding: 4px 8px;
+						margin: -32px 0 32px -64px;
 					}
 					.cours__meta {
 						display: flex;
@@ -114,51 +120,56 @@ const CoursMain = (props) => {
 						line-height: 1.8;
 						margin: 0 0 32px;
 					}
-					h2 {
+					.cours__contenu h2,
+					.cours__contenu h3 {
+						display: inline-block;
+						background: #ff9472;
+						padding: 4px 8px;
+						margin-left: -32px;
+					}
+					.cours__contenu h2 {
 						font-size: 32px;
-						margin: 64px 0 32px;
+						margin: 32px 0 32px -64px;
 					}
-					h3 {
+					.cours__contenu h3 {
 						font-size: 24px;
-						margin: 64px 0 24px;
+						margin: 32px 0 24px -64px;
 					}
-					p,
-					.table,
-					img {
+					.cours__contenu p,
+					.cours__contenu .table,
+					.cours__contenu img {
 						margin: 0 0 56px;
 					}
-					.table {
+					.cours__contenu .table {
 						width: 100%;
 					}
-					.table > * {
+					.cours__contenu .table > * {
 						border-collapse: collapse;
 						border-spacing: 0;
 						width: 100%;
 					}
-					.table thead {
-					}
-					.table thead th {
+					.cours__contenu .table thead th {
 						text-transform: uppercase;
 						text-align: left;
 						border-bottom: 1px solid #ccc;
 						padding: 16px;
 					}
-					.table tbody tr {
+					.cours__contenu .table tbody tr {
 						border-bottom: 1px solid #ccc;
 					}
-					.table td {
+					.cours__contenu .table tbody tr:last-child {
+						border: 0;
+					}
+					.cours__contenu .table td {
 						font-size: 18px;
 						padding: 16px;
 					}
-					.table p {
+					.cours__contenu .table p {
 						margin: 0;
 					}
 				`}</style>
 			</article>
-			<CommentaireList data={commentaires} />
-			{/* {isAuthenticated &&  */}
-			<CreateComment coursID={id} />
-			{/* } */}
+			<CommentaireList />
 		</div>
 	);
 };

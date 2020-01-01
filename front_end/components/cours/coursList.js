@@ -1,13 +1,11 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
-import Auth from '../auth';
+import Auth from '../../helpers/auth';
 import Loader from '../Loader';
 import CardList from '../Card/CardList';
 
 import GET_ALL_COURS from './_query';
-
-const auth = new Auth();
 
 const CoursList = ({ data: { loading, error, cours } }) => {
 	if (loading) {
@@ -28,7 +26,7 @@ const CoursList = ({ data: { loading, error, cours } }) => {
 export default graphql(GET_ALL_COURS, {
 	options: {
 		context: {
-			headers: auth.getBearer()
+			headers: Auth.getBearer()
 		}
 	},
 	props: ({ data }) => ({ data })

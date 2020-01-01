@@ -2,14 +2,12 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import Router from 'next/router';
 
-import Auth from '../auth';
+import Auth from '../../helpers/auth';
 import Loader from '../Loader';
 
 import CardList from '../Card/CardList';
 
 import GET_ALL_CATEGORIES from './_query';
-
-const auth = new Auth();
 
 const CategoriesList = ({ data: { loading, error, categories } }) => {
 	if (loading) {
@@ -30,7 +28,7 @@ const CategoriesList = ({ data: { loading, error, categories } }) => {
 export default graphql(GET_ALL_CATEGORIES, {
 	options: {
 		context: {
-			headers: auth.getBearer()
+			headers: Auth.getBearer()
 		}
 	},
 	props: ({ data }) => ({ data })

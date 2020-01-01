@@ -73,8 +73,10 @@ const Nav = ({ isAuthenticated, loggedUser }) => (
 			{`
 				nav {
 					height: 60px;
-					position: sticky;
+					position: fixed;
 					top: 0;
+					left: 0;
+					width: 100%;
 					z-index: 1;
 					background-color: #9cc5e1;
 				}

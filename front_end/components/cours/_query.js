@@ -38,18 +38,6 @@ export const GET_COURS_BY_ID = gql`
 				id
 				nom
 			}
-			commentaires {
-				id
-				texte
-				created_at
-				parentID {
-					id
-				}
-				user {
-					id
-					username
-				}
-			}
 		}
 	}
 `;

@@ -4,15 +4,13 @@ import { withRouter } from 'next/router';
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
 import defaultPage from '../hoc/defaultPage';
-import Auth from '../components/auth';
+import Auth from '../helpers/auth';
 import Loader from '../components/Loader';
 import ProtectedContent from '../components/ProtectedContent';
 
 import { GET_COURS_BY_ID } from '../components/cours/_query';
 
 import CoursMain from '../components/cours/coursMain';
-
-const auth = new Auth();
 
 const Cours = ({ router, data: { loading, error, cour } }) => {
 	if (loading) {
@@ -45,7 +43,7 @@ export default compose(
 				id: props.router.query.id || 1
 			},
 			context: {
-				headers: auth.getBearer()
+				headers: Auth.getBearer()
 			}
 		}),
 		props: ({ data }) => ({ data })

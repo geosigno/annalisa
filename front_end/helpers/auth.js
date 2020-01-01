@@ -1,5 +1,5 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
@@ -14,7 +14,7 @@ class Auth {
 		this.resetPasswordURL = 'http://localhost:1337/auth/reset-password';
 	}
 
-	register(data) {
+	static register(data) {
 		return axios
 			.post(this.registerURL, data)
 			.then((response) => {
@@ -24,7 +24,7 @@ class Auth {
 				Cookies.set('username', username);
 				Cookies.set('jwt', token);
 
-				this.redirectProcess();
+				redirectProcess();
 
 				return true;
 			})
@@ -34,7 +34,7 @@ class Auth {
 			});
 	}
 
-	async login(data) {
+	static async login(data) {
 		return axios
 			.post(this.loginURL, data)
 			.then((response) => {
@@ -44,7 +44,7 @@ class Auth {
 				Cookies.set('username', username);
 				Cookies.set('jwt', token);
 
-				this.redirectProcess();
+				redirectProcess();
 				return true;
 			})
 			.catch((error) => {
@@ -53,7 +53,7 @@ class Auth {
 			});
 	}
 
-	forgotPassword(data) {
+	static forgotPassword(data) {
 		axios
 			.post(this.forgetPaswwordURL, data)
 			.then((response) => {
@@ -66,7 +66,7 @@ class Auth {
 			});
 	}
 
-	resetPassword(data) {
+	static resetPassword(data) {
 		axios
 			.post(this.resetPasswordURL, data)
 			.then((response) => {
@@ -79,7 +79,7 @@ class Auth {
 			});
 	}
 
-	setToken(username, token) {
+	static setToken(username, token) {
 		Cookies.set('username', username);
 		Cookies.set('jwt', token);
 
@@ -88,22 +88,22 @@ class Auth {
 		}
 	}
 
-	unsetToken() {
+	static unsetToken() {
 		Cookies.remove('username');
 		Cookies.remove('jwt');
 	}
 
-	getUserFromServerCookie(ctx) {
+	static getUserFromServerCookie(ctx) {
 		const { username } = nextCookie(ctx);
 
 		return username;
 	}
 
-	getUserFromLocalCookie() {
+	static getUserFromLocalCookie() {
 		return Cookies.get('username');
 	}
 
-	getBearer() {
+	static getBearer() {
 		const jwt = Cookies.get('jwt');
 
 		if (!jwt) return;
@@ -111,7 +111,7 @@ class Auth {
 		return { Authorization: `Bearer ${jwt}` };
 	}
 
-	redirectProcess() {
+	static redirectProcess() {
 		// get the root article that made the user log
 		const { articleLockedURL } = store.getState();
 

@@ -3,6 +3,5 @@ import 'dayjs/locale/fr';
 
 dayjs.locale('fr');
 
-const dateToFormat = (date) => dayjs(date).format('DD MMMM YYYY');
-
-export default dateToFormat;
+export const dateToFormat = (date) => dayjs(date).format('DD MMMM YYYY');
+export const dateToTime = (date) => dayjs(date).format('HH:mm');

@@ -1,19 +1,18 @@
 import React from 'react';
-import Router, { withRouter } from 'next/router';
+import { withRouter } from 'next/router';
 
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
-import Auth from '../components/auth';
+import Auth from '../helpers/auth';
 import Loader from '../components/Loader';
 import defaultPage from '../hoc/defaultPage';
 
+import ProtectedContent from '../components/ProtectedContent';
 import CardList from '../components/Card/CardList';
 
 import { GET_ALL_COURS_BY_NIVEAU_ID } from '../components/niveau/_query';
 
-const auth = new Auth();
-
-const Niveau = ({ data: { loading, error, niveau } }) => {
+const Niveau = ({ router, data: { loading, error, niveau } }) => {
 	if (loading) {
 		return <Loader />;
 	}
@@ -44,7 +43,7 @@ export default compose(
 				id: props.router.query.id
 			},
 			context: {
-				headers: auth.getBearer()
+				headers: Auth.getBearer()
 			}
 		}),
 		props: ({ data }) => ({ data })

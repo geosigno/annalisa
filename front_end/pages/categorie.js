@@ -1,8 +1,10 @@
 import React from 'react';
-import Router, { withRouter } from 'next/router';
+import { withRouter } from 'next/router';
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
-import Auth from '../components/auth';
+import Auth from '../helpers/auth';
+
+import ProtectedContent from '../components/ProtectedContent';
 import Loader from '../components/Loader';
 
 import defaultPage from '../hoc/defaultPage';
@@ -11,9 +13,7 @@ import { GET_ALL_COURS_BY_CAGTEGORIE_ID } from '../components/categorie/_query';
 
 import CardList from '../components/Card/CardList';
 
-const auth = new Auth();
-
-const Category = ({ data: { loading, error, categorie } }) => {
+const Category = ({ router, data: { loading, error, categorie } }) => {
 	if (loading) {
 		return <Loader />;
 	}
@@ -44,7 +44,7 @@ export default compose(
 				id: props.router.query.id
 			},
 			context: {
-				headers: auth.getBearer()
+				headers: Auth.getBearer()
 			}
 		}),
 		props: ({ data }) => ({ data })

@@ -6,30 +6,31 @@ const CardList = (props) => {
 	const { data, type } = props;
 
 	return (
-		<Grid columns={3} gap='64px' columns='repeat(auto-fit,minmax(320px,1fr))'>
+		<Grid gap='64px' columns='repeat(auto-fit,minmax(320px,1fr))'>
 			{data.map((item) => {
+				const element = item;
 				switch (type) {
 					case 'cours':
-						item.LinkHref = `/cours?id=${item.id}`;
-						item.LinkAs = `/cours/${item.id}`;
+						element.LinkHref = `/cours?id=${item.id}`;
+						element.LinkAs = `/cours/${item.id}`;
 						break;
 
 					case 'niveau':
-						item.LinkHref = `/niveau?id=${item.id}`;
-						item.LinkAs = `/niveau/${item.id}`;
+						element.LinkHref = `/niveau?id=${item.id}`;
+						element.LinkAs = `/niveau/${item.id}`;
 						break;
 
 					case 'categorie':
-						item.LinkHref = `/categorie?id=${item.id}`;
-						item.LinkAs = `/categorie/${item.id}`;
+						element.LinkHref = `/categorie?id=${item.id}`;
+						element.LinkAs = `/categorie/${item.id}`;
 						break;
 
 					default:
 						break;
 				}
 				return (
-					<Cell key={item.id}>
-						<Card data={item} />
+					<Cell key={element.id}>
+						<Card data={element} />
 					</Cell>
 				);
 			})}

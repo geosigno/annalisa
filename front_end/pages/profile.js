@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import defaultPage from '../hoc/defaultPage';
-import Auth from '../components/auth';
-
-const auth = new Auth();
+import Auth from '../helpers/auth';
 
 const Profile = ({ data }) => {
 	console.log(data);
@@ -17,7 +14,7 @@ const Profile = ({ data }) => {
 
 Profile.getInitialProps = async ({ req }) => {
 	const bearer = {
-		headers: auth.getBearer()
+		headers: Auth.getBearer()
 	};
 	console.log(`bearer ${bearer}`);
 	return axios

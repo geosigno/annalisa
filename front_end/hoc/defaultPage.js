@@ -3,8 +3,7 @@ import React from "react";
 import Nav from '../components/Nav/';
 import { Container } from '@material-ui/core';
 
-import Auth from "../components/auth";
-const auth = new Auth();
+import Auth from "../helpers/auth";
 
 export default Page =>
 
@@ -13,8 +12,8 @@ export default Page =>
     static async getInitialProps(ctx) {
      
       const loggedUser = process.browser
-        ? auth.getUserFromLocalCookie()
-        : auth.getUserFromServerCookie(ctx);
+        ? Auth.getUserFromLocalCookie()
+        : Auth.getUserFromServerCookie(ctx);
 
       const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
 
