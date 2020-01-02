@@ -3,22 +3,18 @@ import React from 'react';
 import { dateToFormat, dateToTime } from '../../helpers/date';
 
 function Commentaire(props) {
-
 	const {
 		id,
 		texte,
 		created_at,
-		user: { 
-			username,
-			avatar
-		}
+		user: { username, avatar }
 	} = props.data;
-	
+
 	return (
 		<div className='commentaire'>
-			<div className="commentaire__container">
-				{avatar && <img src={`http://localhost:1337/${avatar.url}`} alt={username} className="commentaire__avatar" />}
-				<div className="commentaire__content">
+			<div className='commentaire__container'>
+				{avatar && <img src={`http://localhost:1337/${avatar.url}`} alt={username} className='commentaire__avatar' />}
+				<div className='commentaire__content'>
 					<span className='commentaire__meta'>
 						posté le {dateToFormat(created_at)} à {dateToTime(created_at)} par {username}
 					</span>

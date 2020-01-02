@@ -59,7 +59,7 @@ const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 				<ul>
 					{comments.map((comment) => (
 						<CommentaireItem
-							key={`vgbhjnk${comment.id}`}
+							key={`${comment.id}`}
 							data={comment}
 							refetch={refetch}
 							handleReplyClick={handleReplyClick}

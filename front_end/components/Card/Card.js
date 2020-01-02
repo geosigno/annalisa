@@ -71,7 +71,7 @@ const Card = (props) => {
 						color: #222;
 						margin: 0 0 16px;
 						text-decoration: none;
-						background-image: linear-gradient(0deg, rgba(255, 148, 114, 0.7) 100%, rgba(0, 0, 0, 0) 50%);
+						background-image: linear-gradient(0deg, rgba(195, 240, 220, 1) 100%, rgba(0, 0, 0, 0) 50%);
 						background-repeat: no-repeat;
 						background-position: left center;
 						background-size: 0% 100%;

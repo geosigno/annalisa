@@ -22,7 +22,9 @@ const CoursMain = (props) => {
 		<div>
 			<article key={id} className='cours'>
 				<header className='cours__header'>
-					<h1 className='cours__title'>{nom}</h1>
+					<h1 className='cours__title'>
+						<span>{nom}</span>
+					</h1>
 
 					<div className='cours__meta'>
 						<div className='meta'>
@@ -69,18 +71,22 @@ const CoursMain = (props) => {
 						max-width: 800px;
 						background: #fff;
 						border-radius: 8px;
-						padding: 0 32px 32px;
-						margin: 64px auto;
+						padding: 64px 32px 32px;
+						margin: 0 auto;
 					}
 					.cours__header {
 						margin: 0 0 64px;
 					}
 					.cours__title {
 						display: inline-block;
-						font-size: 48px;
-						background: #ff9472;
-						padding: 4px 8px;
 						margin: -32px 0 32px -64px;
+						width: 70%;
+					}
+					.cours__title span {
+						font-size: 48px;
+						background: #c3f0dc;
+						box-decoration-break: clone;
+						padding: 4px 16px;
 					}
 					.cours__meta {
 						display: flex;
@@ -120,20 +126,22 @@ const CoursMain = (props) => {
 						line-height: 1.8;
 						margin: 0 0 32px;
 					}
-					.cours__contenu h2,
+					 {
+						/* .cours__contenu h2,
 					.cours__contenu h3 {
 						display: inline-block;
-						background: #ff9472;
+						background: #c3f0dc;
 						padding: 4px 8px;
 						margin-left: -32px;
+					}*/
 					}
 					.cours__contenu h2 {
 						font-size: 32px;
-						margin: 32px 0 32px -64px;
+						margin: 48px 0;
 					}
 					.cours__contenu h3 {
 						font-size: 24px;
-						margin: 32px 0 24px -64px;
+						margin: 48px 0;
 					}
 					.cours__contenu p,
 					.cours__contenu .table,

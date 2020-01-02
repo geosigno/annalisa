@@ -10,7 +10,7 @@ function CommentaireItem(props) {
 			{props.data.replies && (
 				<ul>
 					{props.data.replies.map((reply) => (
-						<Commentaire data={reply} child={true} key={reply.id} />
+						<Commentaire data={reply} child key={reply.id} />
 					))}
 				</ul>
 			)}

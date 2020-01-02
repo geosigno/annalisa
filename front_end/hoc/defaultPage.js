@@ -44,7 +44,7 @@ export default Page =>
       return (
         <div>
         <Nav {...this.props} />
-        <Container>
+        <Container id='main'>
           <Page {...this.props} />
         </Container>
         </div>

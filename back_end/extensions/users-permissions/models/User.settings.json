@@ -59,7 +59,8 @@
     "avatar": {
       "model": "file",
       "via": "related",
-      "plugin": "upload"
+      "plugin": "upload",
+      "configurable": false
     },
     "commentaires": {
       "collection": "commentaire",

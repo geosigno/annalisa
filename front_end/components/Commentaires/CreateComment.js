@@ -100,16 +100,18 @@ function CreateComment(props) {
 	return (
 		<div>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<label htmlFor='commentaire'>
-					<textarea
-						id='commentaire'
-						name='commentaire'
-						placeholder='Ecrivez votre note'
-						ref={register({ required: true, minLength: 3 })}
-						onChange={(e) => setValue(e.target.value)}
-						value={value}
-					/>
-				</label>
+				<div className='createCommentaire'>
+					<label htmlFor='commentaire'>
+						<textarea
+							id='commentaire'
+							name='commentaire'
+							placeholder='Ecrivez votre note'
+							ref={register({ required: true, minLength: 3 })}
+							onChange={(e) => setValue(e.target.value)}
+							value={value}
+						/>
+					</label>
+				</div>
 
 				{errors.commentaire && errors.commentaire.type === 'required' && (
 					<p className='input__error'>Veuillez écrire votre commentaire</p>
