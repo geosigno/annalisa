@@ -126,15 +126,6 @@ const CoursMain = (props) => {
 						line-height: 1.8;
 						margin: 0 0 32px;
 					}
-					 {
-						/* .cours__contenu h2,
-					.cours__contenu h3 {
-						display: inline-block;
-						background: #c3f0dc;
-						padding: 4px 8px;
-						margin-left: -32px;
-					}*/
-					}
 					.cours__contenu h2 {
 						font-size: 32px;
 						margin: 48px 0;

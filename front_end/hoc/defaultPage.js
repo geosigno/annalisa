@@ -1,53 +1,48 @@
-import React from "react";
+import React from 'react';
 
 import Nav from '../components/Nav/';
-import { Container } from '@material-ui/core';
+import Container from '../components/Container';
 
-import Auth from "../helpers/auth";
+import Auth from '../helpers/auth';
 
-export default Page =>
+export default (Page) =>
+	class DefaultPage extends React.Component {
+		static async getInitialProps(ctx) {
+			const loggedUser = process.browser ? Auth.getUserFromLocalCookie() : Auth.getUserFromServerCookie(ctx);
 
-  class DefaultPage extends React.Component {
+			const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
 
-    static async getInitialProps(ctx) {
-     
-      const loggedUser = process.browser
-        ? Auth.getUserFromLocalCookie()
-        : Auth.getUserFromServerCookie(ctx);
+			let path = '';
+			return {
+				...pageProps,
+				loggedUser,
+				currentUrl: path,
+				isAuthenticated: !!loggedUser
+			};
+		}
 
-      const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
+		// logout = eve => {
+		//   if (eve.key === "logout") {
+		//     Router.push(`/?logout=${eve.newValue}`);
+		//   }
+		// };
 
-      let path = ""
-      return {
-        ...pageProps,
-        loggedUser,
-        currentUrl: path,
-        isAuthenticated: !!loggedUser
-      };
-    }
+		// componentDidMount() {
+		//   window.addEventListener("storage", this.logout, false);
+		// }
 
-    // logout = eve => {
-    //   if (eve.key === "logout") {
-    //     Router.push(`/?logout=${eve.newValue}`);
-    //   }
-    // };
+		// componentWillUnmount() {
+		//   window.removeEventListener("storage", this.logout, false);
+		// }
 
-    // componentDidMount() {
-    //   window.addEventListener("storage", this.logout, false);
-    // }
-
-    // componentWillUnmount() {
-    //   window.removeEventListener("storage", this.logout, false);
-    // }
-
-    render() {
-      return (
-        <div>
-        <Nav {...this.props} />
-        <Container id='main'>
-          <Page {...this.props} />
-        </Container>
-        </div>
-      )
-    }
-  };
+		render() {
+			return (
+				<div>
+					<Nav {...this.props} />
+					<Container id='main'>
+						<Page {...this.props} />
+					</Container>
+				</div>
+			);
+		}
+	};

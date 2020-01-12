@@ -4,7 +4,7 @@ export const GET_COMMENTAIRES_BY_COURS_ID = gql`
 	query($id: ID!) {
 		cour(id: $id) {
 			id
-			commentaires {
+			commentaires(sort: "created_at:asc") {
 				id
 				texte
 				created_at
@@ -17,6 +17,25 @@ export const GET_COMMENTAIRES_BY_COURS_ID = gql`
 					avatar {
 						url
 					}
+				}
+			}
+		}
+	}
+`;
+
+export const CREATE_COMMENTAIRE = gql`
+	mutation createCommentaire($texte: String!, $cour: ID!, $user: ID!, $parentID: ID) {
+		createCommentaire(input: { data: { texte: $texte, cour: $cour, user: $user, parentID: $parentID } }) {
+			commentaire {
+				id
+				texte
+				created_at
+				parentID {
+					id
+				}
+				user {
+					id
+					username
 				}
 			}
 		}

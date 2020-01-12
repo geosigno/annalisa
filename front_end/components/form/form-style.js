@@ -126,6 +126,15 @@ export const formStyleUI = makeStyles({
 		height: 48,
 		padding: '0 64px'
 	},
+	btnSecondary: {
+		display: 'inline',
+		width: 'auto',
+		background: 'linear-gradient(45deg, #c3f0dc 30%, #84e6ba 90%)',
+		borderRadius: 32,
+		color: 'black',
+		height: 48,
+		padding: '0 64px'
+	},
 	loader: {
 		position: 'absolute',
 		color: 'white',

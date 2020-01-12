@@ -1,35 +1,37 @@
 import React, { useState } from 'react';
 
+import { withRouter } from 'next/router';
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
 
-import { withRouter } from 'next/router';
-
-import Auth from '../../helpers/auth';
-
 import Loader from '../Loader';
-
 import CommentaireItem from './CommentaireItem';
 import CreateComment from './CreateComment';
+
+import Auth from '../../helpers/auth';
 
 import { GET_COMMENTAIRES_BY_COURS_ID } from './_query';
 
 const processComments = (comments) => {
-	const array = comments;
-	const parentComments = array.filter((comment) => !comment.parentID);
-	const childComments = array.filter((comment) => comment.parentID);
-	const newArray = parentComments;
-	childComments.forEach((childComment) => {
-		const parentID = childComment.parentID.id;
-		parentComments.forEach((parentComment, index) => {
-			if (parentComment.id === parentID) {
-				if (!newArray[index].replies) newArray[index].replies = [];
-				newArray[index].replies.push(childComment);
+	// get all parent comments - with no parentID set
+	const parentComments = comments.filter((comment) => !comment.parentID);
+
+	// get all child comments -  with parentID set
+	const childComments = comments.filter((comment) => comment.parentID);
+
+	// go through all child & parent comments and push the child into their respective parent
+	for (let j = 0; j < childComments.length; j++) {
+		for (let k = 0; k < parentComments.length; k++) {
+			if (childComments[j].parentID.id === parentComments[k].id) {
+				if (!parentComments[k].replies) parentComments[k].replies = [];
+				parentComments[k].replies.push(childComments[j]);
+				// ugly way to remove some unknow dupplicata issue with childs
+				parentComments[k].replies = [...new Set(parentComments[k].replies)];
 			}
-		});
-	});
-	// console.log('parentComments', newArray);
-	return newArray;
+		}
+	}
+
+	return parentComments;
 };
 
 const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
@@ -47,30 +49,52 @@ const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 		return false;
 	}
 
-	if (cour) {
+	if (cour.commentaires) {
 		// get list of all parent comments with their respective child comments
-		const test = cour.commentaires;
-		const comments = processComments(test);
+		const comments = processComments(cour.commentaires);
+
 		return (
 			<section className='commentaires'>
 				<div className='commentaires__title'>
 					<h2>Commentaires</h2>
 				</div>
-				<ul>
-					{comments.map((comment) => (
-						<CommentaireItem
-							key={`${comment.id}`}
-							data={comment}
-							refetch={refetch}
-							handleReplyClick={handleReplyClick}
-							replyOn={replyOn === comment.id}
-						/>
-					))}
-				</ul>
-				<div className='commentaires__title'>
-					<h2>Ecrivez un commentaire</h2>
-				</div>
-				<CreateComment refetch={refetch} />
+
+				{comments ? (
+					<ul>
+						{comments.map((comment) => (
+							<li key={comment.id}>
+								<CommentaireItem data={comment} handleReplyClick={handleReplyClick} />
+								{(comment.replies || replyOn === comment.id) && (
+									<ul>
+										{comment.replies &&
+											comment.replies.map((reply) => (
+												<li key={reply.id}>
+													<CommentaireItem data={reply} child />
+												</li>
+											))}
+
+										{replyOn === comment.id && (
+											<li>
+												<CreateComment
+													placeholder='Ecrivez votre réponse...'
+													commentParentID={comment.id}
+													handleReplyCallback={handleReplyClick}
+													refetch={refetch}
+												/>
+											</li>
+										)}
+									</ul>
+								)}
+							</li>
+						))}
+						<li>
+							<CreateComment placeholder='Ecrivez votre commentaire...' refetch={refetch} />
+						</li>
+					</ul>
+				) : (
+					<p>Soyez la première personne à écrire un commentaire</p>
+				)}
+
 				<style jsx>{`
 					ul,
 					li {
@@ -78,12 +102,15 @@ const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 						margin: 0;
 						padding: 0;
 					}
+					li ul {
+						padding-left: 64px;
+					}
 					.commentaires {
 						display: block;
 						max-width: 800px;
 						background: #fff;
 						border-radius: 8px;
-						padding: 0 64px 64px;
+						//padding: 0 64px 64px;
 						margin: 64px auto;
 					}
 					.commentaires__title {
@@ -95,6 +122,15 @@ const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 						background: #9cc5e1;
 						padding: 8px;
 						margin: -32px -64px 32px 0;
+					}
+					.commentaires > ul > li {
+						padding: 32px 64px;
+					}
+					.commentaires ul ul li + li {
+						border-top: 1px solid #ddd;
+					}
+					.commentaires > ul > li:nth-child(even) {
+						background: #f7f7f7;
 					}
 				`}</style>
 			</section>

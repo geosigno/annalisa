@@ -5,6 +5,10 @@ import Router from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
+import { Button } from '@material-ui/core';
+
+import { buttonStyle } from '../../styles/buttons';
+
 import store from '../../stores';
 import { addCoursUrl } from '../../actions';
 
@@ -13,11 +17,13 @@ const ProtectedContent = ({ router }) => {
 	const returnURL = router.asPath;
 	store.dispatch(addCoursUrl(returnURL));
 
+	const classes = buttonStyle();
+
 	return (
 		<div className='protectedContent'>
 			<div className='protectedContent__container'>
-				<FontAwesomeIcon icon={faExclamationCircle} size='5x' color='#ff9472' />
-				<h1>Oups, vous n&apos;avez pas encore accès à ce cours.</h1>
+				<FontAwesomeIcon icon={faExclamationCircle} size='5x' color='#dc6f6f' />
+				<h1>Oups... vous n&apos;avez pas encore accès à ce cours!</h1>
 				<p>
 					Ce cours est protégé, pour le visionner veuillez vous&nbsp;
 					<Link href='/signin'>
@@ -25,14 +31,15 @@ const ProtectedContent = ({ router }) => {
 					</Link>
 					.
 				</p>
-				<button
-					type='button'
+				<Button
+					className={classes.btnSecondary}
+					type='submit'
 					onClick={(e) => {
 						e.preventDefault();
 						Router.back();
 					}}>
 					Retour
-				</button>
+				</Button>
 			</div>
 			<style jsx>{`
 				.protectedContent {

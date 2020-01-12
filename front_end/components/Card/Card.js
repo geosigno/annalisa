@@ -18,7 +18,7 @@ const Card = (props) => {
 					store.dispatch(addCoursTitle(nom));
 				}}>
 				<div className='card__container'>
-					{image && <img src={`http://localhost:1337/${image.url}`} alt={nom} />}
+					{/* {image && <img src={`http://localhost:1337/${image.url}`} alt={nom} />} */}
 					<div className='card__content'>
 						<div className='card__text'>
 							{nom && <h2 className='card__title'>{nom}</h2>}

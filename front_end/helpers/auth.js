@@ -16,7 +16,7 @@ class Auth {
 
 	static register(data) {
 		return axios
-			.post(this.registerURL, data)
+			.post('http://localhost:1337/auth/local/register', data)
 			.then((response) => {
 				const { username } = response.data.user;
 				const token = response.data.jwt;
@@ -24,7 +24,7 @@ class Auth {
 				Cookies.set('username', username);
 				Cookies.set('jwt', token);
 
-				redirectProcess();
+				Auth.redirectProcess();
 
 				return true;
 			})
@@ -36,7 +36,7 @@ class Auth {
 
 	static async login(data) {
 		return axios
-			.post(this.loginURL, data)
+			.post('http://localhost:1337/auth/local', data)
 			.then((response) => {
 				const { username } = response.data.user;
 				const token = response.data.jwt;
@@ -44,7 +44,7 @@ class Auth {
 				Cookies.set('username', username);
 				Cookies.set('jwt', token);
 
-				redirectProcess();
+				Auth.redirectProcess();
 				return true;
 			})
 			.catch((error) => {

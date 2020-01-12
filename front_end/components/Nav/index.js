@@ -25,33 +25,45 @@ const guestLinks = [
 
 const Nav = ({ isAuthenticated, loggedUser }) => (
 	<Menu pageWrapId='main'>
-		<ul>
-			{defaultLinks.map(({ key, href, label }) => {
-				return (
-					<Link key={key} href={href}>
-						<a>{label}</a>
-					</Link>
-				);
-			})}
-		</ul>
 		{isAuthenticated ? (
-			<span> Hi {loggedUser}! </span>
+			<div className='nav__user'>
+				<img src='https://via.placeholder.com/64' alt='user' className='nav__user-avatar' />
+				<div className='nav__user-name'>
+					<p> Bonjour {loggedUser}! </p>
+					<Link href='/profile'>
+						<a>Profile</a>
+					</Link>
+				</div>
+			</div>
 		) : (
-			<ul className='nav-right'>
+			<ul className='nav__user'>
 				{guestLinks.map(({ key, href, label }) => {
 					return (
-						<Link key={key} href={href}>
-							<a
-								onClick={() => {
-									store.dispatch(clear());
-								}}>
-								{label}
-							</a>
-						</Link>
+						<li key={label}>
+							<Link href={href}>
+								<a
+									onClick={() => {
+										store.dispatch(clear());
+									}}>
+									{label}
+								</a>
+							</Link>
+						</li>
 					);
 				})}
 			</ul>
 		)}
+		<ul className='nav__list'>
+			{defaultLinks.map(({ key, href, label }) => {
+				return (
+					<li key={label}>
+						<Link href={href}>
+							<a>{label}</a>
+						</Link>
+					</li>
+				);
+			})}
+		</ul>
 		<style global jsx>{`
 			/* Position and sizing of burger button */
 			.bm-burger-button {
@@ -64,7 +76,13 @@ const Nav = ({ isAuthenticated, loggedUser }) => (
 
 			/* Color/shape of burger icon bars */
 			.bm-burger-bars {
+				height: 4px !important;
+				border-radius: 4px;
 				background: #373a47;
+			}
+
+			.bm-burger-bars:nth-child(2) {
+				width: 30px;
 			}
 
 			/* Color/shape of burger icon bars on hover*/
@@ -94,9 +112,8 @@ const Nav = ({ isAuthenticated, loggedUser }) => (
 
 			/* General sidebar styles */
 			.bm-menu {
-				background: #373a47;
-				padding: 2.5em 1.5em 0;
-				font-size: 1.15em;
+				background: #436578;
+				padding: 64px 0;
 			}
 
 			/* Morph shape necessary with bubble or elastic */
@@ -107,7 +124,6 @@ const Nav = ({ isAuthenticated, loggedUser }) => (
 			/* Wrapper for item list */
 			.bm-item-list {
 				color: #b8b7ad;
-				padding: 0.8em;
 			}
 
 			/* Individual item */
@@ -118,6 +134,45 @@ const Nav = ({ isAuthenticated, loggedUser }) => (
 			/* Styling of overlay */
 			.bm-overlay {
 				background: rgba(0, 0, 0, 0.3);
+			}
+
+			.nav__user {
+				display: flex !important;
+				align-items: center;
+				background: rgba(255, 255, 255, 0.2);
+				padding: 16px 32px;
+				margin: 0 0 40px;
+			}
+
+			.nav__user-avatar {
+				border-radius: 50%;
+				margin-right: 16px;
+			}
+
+			.nav__user-name p {
+				color: white;
+				margin: 0 0 8px;
+			}
+
+			.nav__list {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.nav__list a {
+				display: block;
+				color: white;
+				font-size: 14px;
+				text-transform: uppercase;
+				text-decoration: none;
+				background: transparent;
+				padding: 16px 32px;
+				transition: background 0.1s;
+			}
+
+			.nav__list a:hover {
+				background: rgba(0, 0, 0, 0.2);
 			}
 		`}</style>
 	</Menu>
