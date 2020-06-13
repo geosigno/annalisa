@@ -10,20 +10,47 @@ import CommentaireList from '../Commentaires/CommentaireList';
 
 import { dateToFormat } from '../../helpers/date';
 
-import './coursMain.scss';
+// import './coursMain.scss';
+
+// const quizzScript = () => {
+// 	var qs,
+// 		js,
+// 		q,
+// 		s,
+// 		d=document,
+// 		gi=d.getElementById, 
+// 		ce=d.createElement, 
+// 		gt=d.getElementsByTagName, 
+// 		id="typef_orm", 
+// 		b="https://embed.typeform.com/"; 
+// 		if(!gi.call(d,id)) { 
+// 			js=ce.call(d,"script"); 
+// 			js.id=id; 
+// 			js.src=b+"embed.js"; 
+// 			q=gt.call(d,"script")[0]; 
+// 			q.parentNode.insertBefore(js,q) 
+// 		} 
+// }
 
 const CoursMain = (props) => {
 	const {
-		cours: { id, nom, created_at, duree, contenu, niveau, categories }
+		cours: { id, Name, Image, created_at, Duration, Content, level, categories }
 	} = props;
+
 	const createMarkup = (htmlString) => ({ __html: htmlString });
+
 	store.dispatch(addCoursID(id));
+
+	// if (quizz) {
+	// 	quizzScript();
+	// }
+
 	return (
 		<div>
 			<article key={id} className='cours'>
 				<header className='cours__header'>
 					<h1 className='cours__title'>
-						<span>{nom}</span>
+						<span>{Name}</span>
 					</h1>
 
 					<div className='cours__meta'>
@@ -34,15 +61,17 @@ const CoursMain = (props) => {
 
 						<div className='meta'>
 							<FontAwesomeIcon icon={faGraduationCap} size='1x' color='#999' />
-							<Link as={`/niveau/${niveau.id}`} href={`/niveau?id=${niveau.id}`}>
-								<a>Niveau {niveau.nom}</a>
+							<Link as={`/niveau/${level.id}`} href={`/niveau?id=${level.id}`}>
+								<a>Niveau {level.Name}</a>
 							</Link>
 						</div>
 
-						<div className='meta'>
-							<FontAwesomeIcon icon={faClock} size='1x' color='#999' />
-							<p> Durée approximative de {duree} minutes</p>
-						</div>
+						{ Duration &&
+							<div className='meta'>
+								<FontAwesomeIcon icon={faClock} size='1x' color='#999' />
+								<p>Durée approximative de {Duration} minutes</p>
+							</div>
+						}
 
 						<div className='meta'>
 							{categories.length > 1 ? (
@@ -54,16 +83,20 @@ const CoursMain = (props) => {
 								{categories.map((category) => (
 									<li key={category.id}>
 										<Link as={`/categorie/${category.id}`} href={`/categorie?id=${category.id}`}>
-											<a>{category.nom}</a>
+											<a>{category.Name}</a>
 										</Link>
 									</li>
 								))}
 							</ul>
 						</div>
 					</div>
-					{/* {srcImage && <img src={`http://localhost:1337${srcImage}`} />} */}
+
+					<div className='cours__image'>
+						{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} />}
+					</div>
+					
 				</header>
-				<section className='cours__contenu' dangerouslySetInnerHTML={createMarkup(contenu)} />
+				<section className='cours__contenu' dangerouslySetInnerHTML={createMarkup(Content)} />
 
 				<style global jsx>{`
 					.cours {
@@ -91,6 +124,9 @@ const CoursMain = (props) => {
 					.cours__meta {
 						display: flex;
 						flex-wrap: wrap;
+					}
+					.cours__image img {
+						max-width: 100%;
 					}
 					.meta {
 						display: flex;
@@ -165,6 +201,19 @@ const CoursMain = (props) => {
 					}
 					.cours__contenu .table p {
 						margin: 0;
+					}
+					.quizz__container {
+						position: relative;
+						overflow: hidden;
+						padding-top: 56.25%;
+					}
+					.quizz__container iframe {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						border: 0;
 					}
 				`}</style>
 			</article>

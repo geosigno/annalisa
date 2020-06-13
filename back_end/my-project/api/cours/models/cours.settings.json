@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cours",
+  "info": {
+    "name": "Cours"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "comments": {
+      "via": "cour",
+      "collection": "comments"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Content": {
+      "type": "richtext"
+    },
+    "Duration": {
+      "type": "biginteger"
+    },
+    "Image": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "Name": {
+      "type": "string"
+    },
+    "level": {
+      "model": "levels",
+      "via": "cours"
+    },
+    "categories": {
+      "collection": "categories",
+      "via": "cours",
+      "dominant": true
+    }
+  }
+}

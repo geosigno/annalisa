@@ -4,10 +4,10 @@ const GET_ALL_COURS = gql`
 	{
 		cours {
 			id
-			nom
-			description
+			Name
+			Description
 			created_at
-			image {
+			Image {
 				url
 			}
 		}
@@ -18,25 +18,21 @@ export const GET_COURS_BY_ID = gql`
 	query($id: ID!) {
 		cour(id: $id) {
 			id
-			nom
-			description
-			contenu
+			Name
+			Description
+			Content
 			created_at
-			duree
-			image {
+			Duration
+			Image {
 				url
 			}
-			niveau {
+			level {
 				id
-				nom
-			}
-			exercices {
-				id
-				nom
+				Name
 			}
 			categories {
 				id
-				nom
+				Name
 			}
 		}
 	}

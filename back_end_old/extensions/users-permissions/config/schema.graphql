@@ -1,0 +1,9 @@
+module.exports = {
+  definition: `
+    extend type UsersPermissionsMe {
+      test: String
+      bio: String
+      avatar: String
+    }
+  `
+}

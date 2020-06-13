@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-
 import store from '../../stores';
 import { addCoursTitle } from '../../actions';
 
@@ -8,22 +7,27 @@ import { addCoursTitle } from '../../actions';
 
 const Card = (props) => {
 	const {
-		data: { nom, image, description, LinkHref, LinkAs }
+		data: { id, Name, Image, Description },
+		type
 	} = props;
+
+	const LinkHref = `/${type}?id=${id}`;
+	const LinkAs = `/${type}/${id}`;
+
 	return (
 		<Link href={LinkHref} as={LinkAs}>
 			<a
 				className='card'
 				onClick={() => {
-					store.dispatch(addCoursTitle(nom));
+					store.dispatch(addCoursTitle(Name));
 				}}>
 				<div className='card__container'>
-					{/* {image && <img src={`http://localhost:1337/${image.url}`} alt={nom} />} */}
+					{/* {image && <img src={`http://localhost:1337/${image.url}`} alt={Name} />} */}
 					<div className='card__content'>
 						<div className='card__text'>
-							{nom && <h2 className='card__title'>{nom}</h2>}
+							{Name && <h2 className='card__title'>{Name}</h2>}
 							{/* {created_at && <p className='card__meta'>{dateToFormat(created_at)}</p>} */}
-							{description && <p className='card__description'>{description}</p>}
+							{Description && <p className='card__description'>{Description}</p>}
 						</div>
 						{/* <div className='card__icon'>
 							<FontAwesomeIcon icon={faChevronRight} size='2x' color='#fff' />

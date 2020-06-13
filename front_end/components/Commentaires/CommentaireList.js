@@ -4,13 +4,16 @@ import { withRouter } from 'next/router';
 import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
 
+import { withApollo } from '../../apollo/apollo';
+import { useQuery } from '@apollo/react-hooks';
+
 import Loader from '../Loader';
 import CommentaireItem from './CommentaireItem';
 import CreateComment from './CreateComment';
 
 import Auth from '../../helpers/auth';
 
-import { GET_COMMENTAIRES_BY_COURS_ID } from './_query';
+import { GET_COMMENTS_BY_COURS_ID } from './_query';
 
 const processComments = (comments) => {
 	// get all parent comments - with no parentID set
@@ -34,24 +37,32 @@ const processComments = (comments) => {
 	return parentComments;
 };
 
-const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
+// const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
+const CommentaireList = ({router}) => {
+
+	const { loading, error, data } = useQuery(
+		GET_COMMENTS_BY_COURS_ID,
+		{
+			variables: {
+				id: router.query.id || '1'
+			}
+		}
+	);
+
 	const [replyOn, setReplyOn] = useState(null);
+
+	if (loading) return <Loader />;
+
+	if (error) return false;
+
 
 	const handleReplyClick = (commentID) => {
 		setReplyOn(commentID);
 	};
 
-	if (loading) {
-		return <Loader />;
-	}
-
-	if (error) {
-		return false;
-	}
-
-	if (cour.commentaires) {
+	if (data.cour.comments) {
 		// get list of all parent comments with their respective child comments
-		const comments = processComments(cour.commentaires);
+		const comments = processComments(data.cour.comments);
 
 		return (
 			<section className='commentaires'>
@@ -79,7 +90,7 @@ const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 													placeholder='Ecrivez votre réponse...'
 													commentParentID={comment.id}
 													handleReplyCallback={handleReplyClick}
-													refetch={refetch}
+													//refetch={refetch}
 												/>
 											</li>
 										)}
@@ -88,7 +99,10 @@ const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 							</li>
 						))}
 						<li>
-							<CreateComment placeholder='Ecrivez votre commentaire...' refetch={refetch} />
+							<CreateComment 
+							placeholder='Ecrivez votre commentaire...' 
+							//refetch={refetch} 
+							/>
 						</li>
 					</ul>
 				) : (
@@ -141,15 +155,23 @@ const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 
 export default compose(
 	withRouter,
-	graphql(GET_COMMENTAIRES_BY_COURS_ID, {
-		options: (props) => ({
-			variables: {
-				id: props.router.query.id || '1'
-			},
-			context: {
-				headers: Auth.getBearer()
-			}
-		}),
-		props: ({ data }) => ({ data })
-	})
+	withApollo({ ssr: false })
 )(CommentaireList);
+
+
+// export default compose(
+// 	withRouter,
+// 	graphql(GET_COMMENTS_BY_COURS_ID, {
+// 		options: (props) => ({
+// 			variables: {
+// 				id: props.router.query.id || '1'
+// 			},
+// 			context: {
+// 				headers: Auth.getBearer()
+// 			}
+// 		}),
+// 		props: ({ data }) => ({ data })
+// 	})
+// )(CommentaireList);
+
+

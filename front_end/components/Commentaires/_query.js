@@ -1,16 +1,14 @@
 import gql from 'graphql-tag';
 
-export const GET_COMMENTAIRES_BY_COURS_ID = gql`
+export const GET_COMMENTS_BY_COURS_ID = gql`
 	query($id: ID!) {
 		cour(id: $id) {
 			id
-			commentaires(sort: "created_at:asc") {
+			comments(sort: "created_at:asc") {
 				id
-				texte
+				Content
 				created_at
-				parentID {
-					id
-				}
+				parentID
 				user {
 					id
 					username
@@ -26,9 +24,9 @@ export const GET_COMMENTAIRES_BY_COURS_ID = gql`
 export const CREATE_COMMENTAIRE = gql`
 	mutation createCommentaire($texte: String!, $cour: ID!, $user: ID!, $parentID: ID) {
 		createCommentaire(input: { data: { texte: $texte, cour: $cour, user: $user, parentID: $parentID } }) {
-			commentaire {
+			CREATE_COMMENTAIRE {
 				id
-				texte
+				Content
 				created_at
 				parentID {
 					id
@@ -42,4 +40,4 @@ export const CREATE_COMMENTAIRE = gql`
 	}
 `;
 
-export default GET_COMMENTAIRES_BY_COURS_ID;
+export default GET_COMMENTS_BY_COURS_ID;

@@ -4,9 +4,9 @@ const GET_ALL_CATEGORIES = gql`
 	{
 		categories {
 			id
-			nom
-			description
-			image {
+			Name
+			Description
+			Image {
 				url
 			}
 		}
@@ -18,9 +18,9 @@ export const GET_ALL_COURS_BY_CAGTEGORIE_ID = gql`
 		categorie(id: $id) {
 			cours {
 				id
-				nom
-				description
-				image {
+				Name
+				Description
+				Image {
 					url
 				}
 			}

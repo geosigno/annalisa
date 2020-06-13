@@ -9,7 +9,7 @@ function CommentaireItem(props) {
 	const {
 		data: {
 			id,
-			texte,
+			Content,
 			created_at,
 			user: { username, avatar }
 		},
@@ -20,7 +20,7 @@ function CommentaireItem(props) {
 	return (
 		<div className='commentaire'>
 			<div className='commentaire__container'>
-				{avatar && <img src={`http://localhost:1337/${avatar.url}`} alt={username} className='commentaire__avatar' />}
+				{avatar && <img src={`http://localhost:1337${avatar[0].url}`} alt={username} className='commentaire__avatar' />}
 				<div>
 					<p className='commentaire__user'>{username}</p>
 					<p className='commentaire__meta'>
@@ -29,7 +29,7 @@ function CommentaireItem(props) {
 				</div>
 			</div>
 			<div className='commentaire__content'>
-				<p>{texte}</p>
+				<p>{Content}</p>
 				{!child && (
 					<button
 						type='button'

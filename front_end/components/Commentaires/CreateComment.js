@@ -1,47 +1,52 @@
 import React, { useState } from 'react';
 
-// import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
-import useForm from 'react-hook-form';
+import { withApollo } from '../../apollo/apollo';
+import { useQuery } from '@apollo/react-hooks';
 
-import axios from 'axios';
-import useSWR from 'swr';
+import { useMutation } from '@apollo/react-hooks';
+import {useForm} from 'react-hook-form';
+
 import TextareaAutosize from 'react-autosize-textarea';
 
 import store from '../../stores';
 
-import Auth from '../../helpers/auth';
-
+import { GET_USER_DATA } from '../Profile/_query';
 import { CREATE_COMMENTAIRE } from './_query';
 
-async function getUserID() {
-	const headers = Auth.getBearer();
-	return axios
-		.get('http://localhost:1337/users/me/', { headers })
-		.then((response) => {
-			const { id } = response.data;
-			return id;
-		})
-		.catch((error) => {
-			// Handle error.
-			return error.response;
-		});
-}
+// async function getUserID() {
+// 	const headers = Auth.getBearer();
+// 	return axios
+// 		.get('http://localhost:1337/users/me/', { headers })
+// 		.then((response) => {
+// 			const { id } = response.data;
+// 			return id;
+// 		})
+// 		.catch((error) => {
+// 			// Handle error.
+// 			return error.response;
+// 		});
+// }
 
-function getUserAvatar() {
-	const headers = Auth.getBearer();
-	return axios
-		.get('http://localhost:1337/users/me/', { headers })
-		.then((res) =>
-			axios.get(`http://localhost:1337/users/${res.data.id}/`, { headers }).then((res2) => res2.data.avatar)
-		);
-}
+// function getUserAvatar() {
+// 	const headers = Auth.getBearer();
+// 	return axios
+// 		.get('http://localhost:1337/users/me/', { headers })
+// 		.then((res) =>
+// 			axios.get(`http://localhost:1337/users/${res.data.id}/`, { headers }).then((res2) => res2.data.avatar)
+// 		);
+// }
 
 function CreateComment(props) {
 	const { placeholder, commentParentID, handleReplyCallback, refetch } = props;
 
-	// get the user Avatar
-	const { data, error } = useSWR('getUserAvatar', getUserAvatar);
+	const { loading, error, data } = useQuery(
+		GET_USER_DATA,
+	);
+
+	if (error) return <p> Il y a eu un problème </p>
+
+	const userId = (data ? data.self.id : null);
+	const userAvatar = (data ? data.self.avatar[0].url : null);
 
 	const [value, setValue] = useState('');
 
@@ -85,7 +90,7 @@ function CreateComment(props) {
 					handleReplyCallback('');
 				}
 				setValue('');
-				refetch();
+				// refetch();
 			}
 		}
 	);
@@ -96,12 +101,9 @@ function CreateComment(props) {
 	const onSubmit = (data) => {
 		// get current cour Id
 		const coursID = store.getState() ? store.getState().coursID : null;
-		// get the userID
-		getUserID().then((userID) => {
-			// create a new comment entry
-			createCommentaire({
-				variables: { texte: data.commentaire, cour: coursID, user: userID, parentID: commentParentID }
-			});
+		// create a new comment entry
+		createCommentaire({
+			variables: { texte: data.commentaire, cour: coursID, user: userId, parentID: commentParentID }
 		});
 	};
 
@@ -110,7 +112,7 @@ function CreateComment(props) {
 			<form className='createCommentaire' onSubmit={handleSubmit(onSubmit)}>
 				<div className='createCommentaire__container'>
 					{data ? (
-						<img className='createCommentaire__avatar' src={`http://localhost:1337/${data.url}`} alt='user avatar' />
+						<img className='createCommentaire__avatar' src={`http://localhost:1337${userAvatar}`} alt='user avatar' />
 					) : (
 						<div className='createCommentaire__avatar' />
 					)}
@@ -194,4 +196,5 @@ function CreateComment(props) {
 	);
 }
 
-export default CreateComment;
+export default withApollo({ ssr: false })(CreateComment);
+

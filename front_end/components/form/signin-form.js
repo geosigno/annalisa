@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import useForm from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 
 import { TextField, Button, CircularProgress } from '@material-ui/core';
 import store from '../../stores';

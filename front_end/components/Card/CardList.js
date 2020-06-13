@@ -1,41 +1,70 @@
 import React from 'react';
+import Router from 'next/router';
+import { withApollo } from '../../apollo/apollo';
+import { useQuery } from '@apollo/react-hooks';
+
+import Loader from '../Loader';
 import { Grid, Cell } from 'styled-css-grid';
 import Card from './Card';
 
+import GET_ALL_COURS from '../Cours/_query';
+import GET_ALL_LEVELS from '../Level/_query'
+import GET_ALL_CATEGORIES from '../Categorie/_query'
+
 const CardList = (props) => {
-	const { data, type } = props;
 
-	return (
-		<Grid gap='64px' columns='repeat(auto-fit,minmax(320px,1fr))'>
-			{data.map((item) => {
-				const element = item;
-				switch (type) {
-					case 'cours':
-						element.LinkHref = `/cours?id=${item.id}`;
-						element.LinkAs = `/cours/${item.id}`;
-						break;
+	const { type } = props
+	let query;
+	
+	switch (type) {
+		case 'cours':
+			query = GET_ALL_COURS
+			break;
+		case 'levels':
+			query = GET_ALL_LEVELS;
+			break
+		case 'categories':
+			query = GET_ALL_CATEGORIES;
+			break
+		default:
+			query = GET_ALL_COURS
+			break;
+	}
 
-					case 'niveau':
-						element.LinkHref = `/niveau?id=${item.id}`;
-						element.LinkAs = `/niveau/${item.id}`;
-						break;
+	const { loading, error, data } = useQuery(query);
 
-					case 'categorie':
-						element.LinkHref = `/categorie?id=${item.id}`;
-						element.LinkAs = `/categorie/${item.id}`;
-						break;
+	if (error) Router.push('/signin');
+	if (loading) return <Loader size='small' />;
 
-					default:
-						break;
-				}
+	let response;
+
+	switch (type) {
+		case 'cours':
+			response = data.cours
+			break;
+		case 'levels':
+			response = data.levels
+			break;
+		case 'categories':
+			response = data.categories
+			break; 
+		default:
+			response = data.cours
+	}
+
+	if (response) return (
+		<Grid gap='64px' columns='1fr 1fr 1fr'>
+			{response.map((item) => {
 				return (
-					<Cell key={element.id}>
-						<Card data={element} />
+					<Cell key={item.id}>
+						<Card data={item} type={type} />
 					</Cell>
 				);
 			})}
 		</Grid>
-	);
+	)
+
+	return false;
 };
 
-export default CardList;
+export default withApollo({ ssr: false })(CardList);

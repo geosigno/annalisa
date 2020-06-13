@@ -3,9 +3,7 @@ import Head from 'next/head';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen, faGraduationCap, faTags } from '@fortawesome/free-solid-svg-icons';
 import defaultPage from '../hoc/defaultPage';
-import CoursList from '../components/cours/coursList';
-import NiveauxList from '../components/niveau/niveauxList';
-import CategoriesList from '../components/categorie/categoriesList';
+import CardList from '../components/Card/CardList';
 
 const Home = () => (
 	<div>
@@ -15,20 +13,19 @@ const Home = () => (
 		</Head>
 		<h2>
 			Accédez aux derniers cours
-			<FontAwesomeIcon icon={faBookOpen} size='2x' color='#999' />
+			{/* <FontAwesomeIcon icon={faBookOpen} size='2x' color='#999' /> */}
 		</h2>
-		<CoursList />
+		<CardList type='cours' />
 		<h2>
 			Cherchez un niveau particulier
-			<FontAwesomeIcon icon={faGraduationCap} size='2x' color='#999' />
+			{/* <FontAwesomeIcon icon={faGraduationCap} size='2x' color='#999' /> */}
 		</h2>
-		<NiveauxList />
+		<CardList type='levels' />
 		<h2>
 			Choisissez une catégorie
-			<FontAwesomeIcon icon={faTags} size='2x' color='#999' />
+			{/* <FontAwesomeIcon icon={faTags} size='2x' color='#999' /> */}
 		</h2>
-
-		<CategoriesList />
+		<CardList type='categories' />
 	</div>
 );
 
