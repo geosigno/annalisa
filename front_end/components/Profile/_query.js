@@ -11,7 +11,6 @@ export const GET_USER_DATA = gql`
 	}
 `;
 
-
 export const UPDATE_NAME = gql`
 	mutation createCommentaire($name: String!) {
 		createCommentaire(input: { data: { texte: $texte, cour: $cour, user: $user, parentID: $parentID } }) {

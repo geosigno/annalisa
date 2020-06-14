@@ -1,33 +1,32 @@
 import React from 'react';
 import Router from 'next/router';
-import { withApollo } from '../../apollo/apollo';
 import { useQuery } from '@apollo/react-hooks';
+import { Grid, Cell } from 'styled-css-grid';
+import { withApollo } from '../../apollo/apollo';
 
 import Loader from '../Loader';
-import { Grid, Cell } from 'styled-css-grid';
 import Card from './Card';
 
 import GET_ALL_COURS from '../Cours/_query';
-import GET_ALL_LEVELS from '../Level/_query'
-import GET_ALL_CATEGORIES from '../Categorie/_query'
+import GET_ALL_LEVELS from '../Level/_query';
+import GET_ALL_CATEGORIES from '../Categorie/_query';
 
 const CardList = (props) => {
-
-	const { type } = props
+	const { type } = props;
 	let query;
-	
+
 	switch (type) {
 		case 'cours':
-			query = GET_ALL_COURS
+			query = GET_ALL_COURS;
 			break;
 		case 'levels':
 			query = GET_ALL_LEVELS;
-			break
+			break;
 		case 'categories':
 			query = GET_ALL_CATEGORIES;
-			break
+			break;
 		default:
-			query = GET_ALL_COURS
+			query = GET_ALL_COURS;
 			break;
 	}
 
@@ -40,29 +39,30 @@ const CardList = (props) => {
 
 	switch (type) {
 		case 'cours':
-			response = data.cours
+			response = data.cours;
 			break;
 		case 'levels':
-			response = data.levels
+			response = data.levels;
 			break;
 		case 'categories':
-			response = data.categories
-			break; 
+			response = data.categories;
+			break;
 		default:
-			response = data.cours
+			response = data.cours;
 	}
 
-	if (response) return (
-		<Grid gap='64px' columns='1fr 1fr 1fr'>
-			{response.map((item) => {
-				return (
-					<Cell key={item.id}>
-						<Card data={item} type={type} />
-					</Cell>
-				);
-			})}
-		</Grid>
-	)
+	if (response)
+		return (
+			<Grid gap='64px' columns='1fr 1fr 1fr'>
+				{response.map((item) => {
+					return (
+						<Cell key={item.id}>
+							<Card data={item} type={type} />
+						</Cell>
+					);
+				})}
+			</Grid>
+		);
 
 	return false;
 };

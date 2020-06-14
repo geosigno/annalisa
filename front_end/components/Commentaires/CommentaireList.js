@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-
 import { withRouter } from 'next/router';
-import { graphql } from 'react-apollo';
 import { compose } from 'recompose';
-
-import { withApollo } from '../../apollo/apollo';
 import { useQuery } from '@apollo/react-hooks';
 
+import { withApollo } from '../../apollo/apollo';
 import Loader from '../Loader';
 import CommentaireItem from './CommentaireItem';
 import CreateComment from './CreateComment';
-
-import Auth from '../../helpers/auth';
 
 import { GET_COMMENTS_BY_COURS_ID } from './_query';
 
@@ -23,38 +18,34 @@ const processComments = (comments) => {
 	const childComments = comments.filter((comment) => comment.parentID);
 
 	// go through all child & parent comments and push the child into their respective parent
-	for (let j = 0; j < childComments.length; j++) {
-		for (let k = 0; k < parentComments.length; k++) {
-			if (childComments[j].parentID.id === parentComments[k].id) {
-				if (!parentComments[k].replies) parentComments[k].replies = [];
-				parentComments[k].replies.push(childComments[j]);
-				// ugly way to remove some unknow dupplicata issue with childs
-				parentComments[k].replies = [...new Set(parentComments[k].replies)];
-			}
-		}
-	}
+	childComments &&
+		childComments.forEach((child) => {
+			parentComments.forEach((parent) => {
+				if (child.parentID === parent.id) {
+					if (!parent.replies) parent.replies = [];
+					parent.replies.push(child);
+					// TO INVESTIGATE - ugly way to remove some unknow dupplicata issue with childs
+					parent.replies = [...new Set(parent.replies)];
+				}
+			});
+		});
 
 	return parentComments;
 };
 
 // const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
-const CommentaireList = ({router}) => {
-
-	const { loading, error, data } = useQuery(
-		GET_COMMENTS_BY_COURS_ID,
-		{
-			variables: {
-				id: router.query.id || '1'
-			}
+const CommentaireList = ({ router }) => {
+	const { loading, error, data } = useQuery(GET_COMMENTS_BY_COURS_ID, {
+		variables: {
+			id: router.query.id || '1'
 		}
-	);
+	});
 
 	const [replyOn, setReplyOn] = useState(null);
 
 	if (loading) return <Loader />;
 
 	if (error) return false;
-
 
 	const handleReplyClick = (commentID) => {
 		setReplyOn(commentID);
@@ -80,7 +71,7 @@ const CommentaireList = ({router}) => {
 										{comment.replies &&
 											comment.replies.map((reply) => (
 												<li key={reply.id}>
-													<CommentaireItem data={reply} child />
+													<CommentaireItem data={reply} courID={router.query.id} child />
 												</li>
 											))}
 
@@ -90,7 +81,7 @@ const CommentaireList = ({router}) => {
 													placeholder='Ecrivez votre réponse...'
 													commentParentID={comment.id}
 													handleReplyCallback={handleReplyClick}
-													//refetch={refetch}
+													courID={router.query.id}
 												/>
 											</li>
 										)}
@@ -99,10 +90,7 @@ const CommentaireList = ({router}) => {
 							</li>
 						))}
 						<li>
-							<CreateComment 
-							placeholder='Ecrivez votre commentaire...' 
-							//refetch={refetch} 
-							/>
+							<CreateComment placeholder='Ecrivez votre commentaire...' />
 						</li>
 					</ul>
 				) : (
@@ -153,25 +141,4 @@ const CommentaireList = ({router}) => {
 	return false;
 };
 
-export default compose(
-	withRouter,
-	withApollo({ ssr: false })
-)(CommentaireList);
-
-
-// export default compose(
-// 	withRouter,
-// 	graphql(GET_COMMENTS_BY_COURS_ID, {
-// 		options: (props) => ({
-// 			variables: {
-// 				id: props.router.query.id || '1'
-// 			},
-// 			context: {
-// 				headers: Auth.getBearer()
-// 			}
-// 		}),
-// 		props: ({ data }) => ({ data })
-// 	})
-// )(CommentaireList);
-
-
+export default compose(withRouter, withApollo({ ssr: false }))(CommentaireList);

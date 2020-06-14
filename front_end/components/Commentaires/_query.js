@@ -21,16 +21,14 @@ export const GET_COMMENTS_BY_COURS_ID = gql`
 	}
 `;
 
-export const CREATE_COMMENTAIRE = gql`
-	mutation createCommentaire($texte: String!, $cour: ID!, $user: ID!, $parentID: ID) {
-		createCommentaire(input: { data: { texte: $texte, cour: $cour, user: $user, parentID: $parentID } }) {
-			CREATE_COMMENTAIRE {
+export const CREATE_COMMENT = gql`
+	mutation createComment($content: String!, $cour: ID!, $user: ID!, $parentID: String) {
+		createComment(input: { data: { Content: $content, cour: $cour, user: $user, parentID: $parentID } }) {
+			comment {
 				id
 				Content
 				created_at
-				parentID {
-					id
-				}
+				parentID
 				user {
 					id
 					username

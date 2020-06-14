@@ -18,18 +18,18 @@ import { dateToFormat } from '../../helpers/date';
 // 		q,
 // 		s,
 // 		d=document,
-// 		gi=d.getElementById, 
-// 		ce=d.createElement, 
-// 		gt=d.getElementsByTagName, 
-// 		id="typef_orm", 
-// 		b="https://embed.typeform.com/"; 
-// 		if(!gi.call(d,id)) { 
-// 			js=ce.call(d,"script"); 
-// 			js.id=id; 
-// 			js.src=b+"embed.js"; 
-// 			q=gt.call(d,"script")[0]; 
-// 			q.parentNode.insertBefore(js,q) 
-// 		} 
+// 		gi=d.getElementById,
+// 		ce=d.createElement,
+// 		gt=d.getElementsByTagName,
+// 		id="typef_orm",
+// 		b="https://embed.typeform.com/";
+// 		if(!gi.call(d,id)) {
+// 			js=ce.call(d,"script");
+// 			js.id=id;
+// 			js.src=b+"embed.js";
+// 			q=gt.call(d,"script")[0];
+// 			q.parentNode.insertBefore(js,q)
+// 		}
 // }
 
 const CoursMain = (props) => {
@@ -66,12 +66,12 @@ const CoursMain = (props) => {
 							</Link>
 						</div>
 
-						{ Duration &&
+						{Duration && (
 							<div className='meta'>
 								<FontAwesomeIcon icon={faClock} size='1x' color='#999' />
 								<p>Durée approximative de {Duration} minutes</p>
 							</div>
-						}
+						)}
 
 						<div className='meta'>
 							{categories.length > 1 ? (
@@ -91,10 +91,7 @@ const CoursMain = (props) => {
 						</div>
 					</div>
 
-					<div className='cours__image'>
-						{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} />}
-					</div>
-					
+					<div className='cours__image'>{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} />}</div>
 				</header>
 				<section className='cours__contenu' dangerouslySetInnerHTML={createMarkup(Content)} />
 

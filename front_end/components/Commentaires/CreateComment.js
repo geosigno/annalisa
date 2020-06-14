@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
-
-import { withApollo } from '../../apollo/apollo';
-import { useQuery } from '@apollo/react-hooks';
-
-import { useMutation } from '@apollo/react-hooks';
-import {useForm} from 'react-hook-form';
-
+import React, { useState, useEffect, useRef } from 'react';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useForm } from 'react-hook-form';
 import TextareaAutosize from 'react-autosize-textarea';
 
+import Loader from '../Loader';
+import { withApollo } from '../../apollo/apollo';
 import store from '../../stores';
 
 import { GET_USER_DATA } from '../Profile/_query';
-import { CREATE_COMMENTAIRE } from './_query';
+import { CREATE_COMMENT, GET_COMMENTS_BY_COURS_ID } from './_query';
 
 // async function getUserID() {
 // 	const headers = Auth.getBearer();
@@ -37,147 +34,147 @@ import { CREATE_COMMENTAIRE } from './_query';
 // }
 
 function CreateComment(props) {
-	const { placeholder, commentParentID, handleReplyCallback, refetch } = props;
+	const { placeholder, commentParentID, handleReplyCallback } = props;
 
-	const { loading, error, data } = useQuery(
-		GET_USER_DATA,
-	);
-
-	if (error) return <p> Il y a eu un problème </p>
-
-	const userId = (data ? data.self.id : null);
-	const userAvatar = (data ? data.self.avatar[0].url : null);
+	const { loading, error, data } = useQuery(GET_USER_DATA);
 
 	const [value, setValue] = useState('');
 
-	// const textareaRef = useRef(null);
+	const textareaRef = useRef(null);
 
-	// useEffect(() => {
-	// 	if (commentParentID) {
-	// 		textareaRef.current.focus();
-	// 	}
-	// });
-
-	const [createCommentaire] = useMutation(
-		CREATE_COMMENTAIRE,
-		// {
-		// 	update(cache, { data: { createCommentaire } }) {
-		// 	  const { cour : { commentaires } } = cache.readQuery({ query: GET_COMMENTAIRES_BY_COURS_ID,
-		// 		variables: {
-		// 		  id: "1"
-		// 		},
-		// 		context: {
-		// 			headers: Auth.getBearer()
-		// 		}
-
-		// 	});
-		// 	  cache.writeQuery({
-		// 		query: GET_COMMENTAIRES_BY_COURS_ID,
-		// 		variables: {
-		// 			id: "1"
-		// 		  },
-		// 		  context: {
-		// 			headers: Auth.getBearer()
-		// 		},
-		// 		data: { cour: { commentaires: commentaires.concat([createCommentaire.commentaire]) } },
-		// 	  });
-		// 	}
-		//   }
-
-		{
-			onCompleted() {
-				if (handleReplyCallback) {
-					handleReplyCallback('');
-				}
-				setValue('');
-				// refetch();
-			}
+	useEffect(() => {
+		if (commentParentID) {
+			textareaRef.current.focus();
 		}
-	);
+	});
+
+	const coursID = store.getState() ? store.getState().coursID : null;
+
+	const [createComment] = useMutation(CREATE_COMMENT, {
+		update(cache, { data: { createComment } }) {
+			const { cour } = cache.readQuery({
+				query: GET_COMMENTS_BY_COURS_ID,
+				variables: {
+					id: coursID
+				}
+			});
+			cache.writeQuery({
+				query: GET_COMMENTS_BY_COURS_ID,
+				data: { comments: cour.comments.concat([createComment]) }
+			});
+		},
+		refetchQueries: [
+			{
+				query: GET_COMMENTS_BY_COURS_ID,
+				variables: {
+					id: coursID
+				}
+			}
+		]
+	});
 
 	const { register, handleSubmit, errors } = useForm();
+
+	if (loading) return <Loader />;
+
+	if (error) return <p> Il y a eu un problème </p>;
+
+	const userId = data ? data.self.id : null;
+	const userAvatar = data ? data.self.avatar[0].url : null;
 
 	// handle the comment form submit
 	const onSubmit = (data) => {
 		// get current cour Id
 		const coursID = store.getState() ? store.getState().coursID : null;
+
 		// create a new comment entry
-		createCommentaire({
-			variables: { texte: data.commentaire, cour: coursID, user: userId, parentID: commentParentID }
+		createComment({
+			variables: { content: data.comment, cour: coursID, user: userId, parentID: commentParentID }
+		}).then(() => {
+			if (handleReplyCallback) {
+				handleReplyCallback('');
+			}
+			setValue('');
 		});
 	};
 
 	return (
 		<div>
-			<form className='createCommentaire' onSubmit={handleSubmit(onSubmit)}>
-				<div className='createCommentaire__container'>
+			<form className='createComment' onSubmit={handleSubmit(onSubmit)}>
+				<div className='createComment__container'>
 					{data ? (
-						<img className='createCommentaire__avatar' src={`http://localhost:1337${userAvatar}`} alt='user avatar' />
+						<img className='createComment__avatar' src={`http://localhost:1337${userAvatar}`} alt='user avatar' />
 					) : (
-						<div className='createCommentaire__avatar' />
+						<div className='createComment__avatar' />
 					)}
 
-					<label htmlFor='commentaire'>
+					<label htmlFor='comment'>
 						<TextareaAutosize
 							rows={2}
-							id='commentaire'
-							name='commentaire'
+							id='comment'
+							name='comment'
 							placeholder={placeholder}
-							ref={register({ required: true, minLength: 3 })}
-							// ref={textareaRef}
+							ref={(e) => {
+								textareaRef.current = e;
+								register(e, { required: true, minLength: 3 });
+							}}
 							onChange={(e) => setValue(e.target.value)}
 							value={value}
 						/>
 
-						{errors.commentaire && errors.commentaire.type === 'required' && (
-							<p className='input__error'>Veuillez écrire votre commentaire</p>
+						{errors.comment && errors.comment.type === 'required' && (
+							<p className='input__error'>Vous ne pouvez pas envoyer un commentaire vide!</p>
+						)}
+
+						{errors.comment && errors.comment.type === 'minLength' && (
+							<p className='input__error'>Il faut un minium de contenu dans votre commentaire</p>
 						)}
 					</label>
 				</div>
 
-				<div className='createCommentaire__submit'>
+				<div className='createComment__submit'>
 					<button type='submit'>Envoyer</button>
 				</div>
 
 				<style global jsx>{`
-					.createCommentaire {
+					.createComment {
 						display: block;
 						margin: 32px 0;
 					}
-					.createCommentaire.child {
+					.createComment.child {
 						padding-left: 64px;
 					}
-					.createCommentaire__container {
+					.createComment__container {
 						display: flex;
 						align-items: flex-start;
 					}
-					.createCommentaire__avatar {
+					.createComment__avatar {
 						max-width: 64px;
 						box-shadow: rgba(0, 0, 0, 0.086) 0px 1px 4px 0px, rgba(0, 0, 0, 0.086) 0px 8px 16px 0px;
 						border: 4px solid white;
 						border-radius: 50%;
 						margin-right: 32px;
 					}
-					.createCommentaire label,
-					.createCommentaire textarea {
+					.createComment label,
+					.createComment textarea {
 						width: 100%;
 					}
-					.createCommentaire textarea {
+					.createComment textarea {
 						border-radius: 8px;
 						border: 1px solid #999;
 						padding: 8px;
 					}
-					.createCommentaire__submit {
+					.createComment__submit {
 						text-align: right;
 					}
-					.createCommentaire__submit button {
+					.createComment__submit button {
 						font-weight: 600;
 						background: transparent;
 						border: 2px solid #222;
 						border-radius: 16px;
 						padding: 4px 16px;
 					}
-					.createCommentaire__submit button:hover {
+					.createComment__submit button:hover {
 						cursor: pointer;
 					}
 					.input__error {
@@ -197,4 +194,3 @@ function CreateComment(props) {
 }
 
 export default withApollo({ ssr: false })(CreateComment);
-

@@ -16,13 +16,13 @@
       "model": "cours",
       "via": "comments"
     },
-    "parentID": {
-      "type": "uid"
-    },
     "user": {
-      "via": "comments",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "comments"
+    },
+    "parentID": {
+      "type": "string"
     }
   }
 }

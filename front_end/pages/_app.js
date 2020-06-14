@@ -34,27 +34,25 @@ import Normalize from 'react-normalize';
 
 // function MyApp({ Component, pageProps, isAuthenticated } ) {
 // 	return (
-		
+
 // 	)
 //   }
-  
+
 import { withApollo } from '../apollo/apollo';
 
-const MyApp = ({ Component, pageProps, isAuthenticated } ) => (
+const MyApp = ({ Component, pageProps, isAuthenticated }) => (
 	// const { Component, pageProps, isAuthenticated } = this.props;
-		<div>
-			<Normalize />
-			{/* <Layout isAuthenticated={isAuthenticated} {...pageProps}> */}
-			<Component isAuthenticated={isAuthenticated} {...pageProps} />
-			{/* </Layout> */}
-		</div>
-)
-  
+	<div>
+		<Normalize />
+		{/* <Layout isAuthenticated={isAuthenticated} {...pageProps}> */}
+		<Component isAuthenticated={isAuthenticated} {...pageProps} />
+		{/* </Layout> */}
+	</div>
+);
 
 // export default withApollo(MyApp);
 export default withApollo({ ssr: false })(MyApp);
 // export default MyApp;
-
 
 // import { ApolloProvider } from '@apollo/react-hooks'
 // import { useApollo } from '../apollo/client'
