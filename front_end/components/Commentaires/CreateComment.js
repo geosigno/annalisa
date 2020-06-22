@@ -5,7 +5,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 
 import Loader from '../Loader';
 import { withApollo } from '../../apollo/apollo';
-import store from '../../stores';
+import store from '../../redux/stores';
 
 import { GET_USER_DATA } from '../Profile/_query';
 import { CREATE_COMMENT, GET_COMMENTS_BY_COURS_ID } from './_query';

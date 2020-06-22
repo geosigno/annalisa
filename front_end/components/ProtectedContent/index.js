@@ -9,8 +9,8 @@ import { Button } from '@material-ui/core';
 
 import { buttonStyle } from '../../styles/buttons';
 
-import store from '../../stores';
-import { addCoursUrl } from '../../actions';
+import store from '../../redux/stores';
+import { addCoursUrl } from '../../redux/actions';
 
 const ProtectedContent = ({ router }) => {
 	// Store the current URL to store

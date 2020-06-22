@@ -1,36 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faGraduationCap, faClock, faTag, faTags } from '@fortawesome/free-solid-svg-icons';
-import store from '../../stores';
-import { addCoursID } from '../../actions';
+import store from '../../redux/stores';
+import { addCoursID } from '../../redux/actions';
 
 import CommentaireList from '../Commentaires/CommentaireList';
-
 import { dateToFormat } from '../../helpers/date';
-
-// import './coursMain.scss';
-
-// const quizzScript = () => {
-// 	var qs,
-// 		js,
-// 		q,
-// 		s,
-// 		d=document,
-// 		gi=d.getElementById,
-// 		ce=d.createElement,
-// 		gt=d.getElementsByTagName,
-// 		id="typef_orm",
-// 		b="https://embed.typeform.com/";
-// 		if(!gi.call(d,id)) {
-// 			js=ce.call(d,"script");
-// 			js.id=id;
-// 			js.src=b+"embed.js";
-// 			q=gt.call(d,"script")[0];
-// 			q.parentNode.insertBefore(js,q)
-// 		}
-// }
 
 const CoursMain = (props) => {
 	const {
@@ -40,10 +18,6 @@ const CoursMain = (props) => {
 	const createMarkup = (htmlString) => ({ __html: htmlString });
 
 	store.dispatch(addCoursID(id));
-
-	// if (quizz) {
-	// 	quizzScript();
-	// }
 
 	return (
 		<div>
@@ -93,7 +67,9 @@ const CoursMain = (props) => {
 
 					<div className='cours__image'>{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} />}</div>
 				</header>
-				<section className='cours__contenu' dangerouslySetInnerHTML={createMarkup(Content)} />
+				<section className='cours__contenu'>
+					<ReactMarkdown source={Content} />
+				</section>
 
 				<style global jsx>{`
 					.cours {

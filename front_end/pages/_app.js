@@ -1,10 +1,10 @@
 // // import App from 'next/app';
-// import React from 'react';
+import React, { useEffect } from 'react';
 import Normalize from 'react-normalize';
 // import {withApollo} from 'next-apollo';
 
-// // import Fonts from '../helpers/font';
-// // import '../styles/base.scss';
+import Fonts from '../helpers/font';
+import '../styles/base.scss';
 
 // // class MyApp extends App {
 // // 	componentDidMount() {
@@ -40,15 +40,20 @@ import Normalize from 'react-normalize';
 
 import { withApollo } from '../apollo/apollo';
 
-const MyApp = ({ Component, pageProps, isAuthenticated }) => (
+const MyApp = ({ Component, pageProps, isAuthenticated }) => {
+	useEffect(() => {
+		Fonts();
+	});
 	// const { Component, pageProps, isAuthenticated } = this.props;
-	<div>
-		<Normalize />
-		{/* <Layout isAuthenticated={isAuthenticated} {...pageProps}> */}
-		<Component isAuthenticated={isAuthenticated} {...pageProps} />
-		{/* </Layout> */}
-	</div>
-);
+	return (
+		<div>
+			<Normalize />
+			{/* <Layout isAuthenticated={isAuthenticated} {...pageProps}> */}
+			<Component isAuthenticated={isAuthenticated} {...pageProps} />
+			{/* </Layout> */}
+		</div>
+	);
+};
 
 // export default withApollo(MyApp);
 export default withApollo({ ssr: false })(MyApp);

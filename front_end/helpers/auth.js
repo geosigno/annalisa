@@ -3,8 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
-import store from '../stores';
-import { clear } from '../actions';
+import store from '../redux/stores';
+import { clear } from '../redux/actions';
 
 class Auth {
 	constructor() {

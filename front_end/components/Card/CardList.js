@@ -7,44 +7,33 @@ import { withApollo } from '../../apollo/apollo';
 import Loader from '../Loader';
 import Card from './Card';
 
-import GET_ALL_COURS from '../Cours/_query';
-import GET_ALL_LEVELS from '../Level/_query';
-import GET_ALL_CATEGORIES from '../Categorie/_query';
-
 const CardList = (props) => {
-	const { type } = props;
-	let query;
+	const { query, variables, type } = props;
 
-	switch (type) {
-		case 'cours':
-			query = GET_ALL_COURS;
-			break;
-		case 'levels':
-			query = GET_ALL_LEVELS;
-			break;
-		case 'categories':
-			query = GET_ALL_CATEGORIES;
-			break;
-		default:
-			query = GET_ALL_COURS;
-			break;
-	}
-
-	const { loading, error, data } = useQuery(query);
+	const { loading, error, data } = useQuery(query, variables);
 
 	if (error) Router.push('/signin');
+
 	if (loading) return <Loader size='small' />;
 
 	let response;
 
 	switch (type) {
 		case 'cours':
-			response = data.cours;
+			if (data.cours)
+				// get all cours
+				response = data.cours;
+			else if (data.level && data.level.cours)
+				// get cours by level
+				response = data.level.cours;
+			else if (data.category && data.category.cours)
+				// get cours by category
+				response = data.category.cours;
 			break;
-		case 'levels':
+		case 'level':
 			response = data.levels;
 			break;
-		case 'categories':
+		case 'category':
 			response = data.categories;
 			break;
 		default:
@@ -67,4 +56,4 @@ const CardList = (props) => {
 	return false;
 };
 
-export default withApollo({ ssr: false })(CardList);
+export default withApollo({ ssr: true })(CardList);

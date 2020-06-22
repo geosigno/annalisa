@@ -1,10 +1,14 @@
 import React from 'react';
 import { withRouter } from 'next/router';
+
 import { compose } from 'recompose';
 import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../apollo/apollo';
 
+import store from '../redux/stores';
+
 import defaultPage from '../hoc/defaultPage';
+import Breadcrumb from '../components/Breadcrumb';
 import Loader from '../components/Loader';
 import ProtectedContent from '../components/ProtectedContent';
 import { GET_COURS_BY_ID } from '../components/Cours/_query';
@@ -30,7 +34,22 @@ const Cours = ({ router }) => {
 	if (loading) return <Loader />;
 
 	if (data.cour) {
-		return <CoursMain cours={data.cour} />;
+		const previousPageType = store.getState() ? store.getState().pathReducer.pageType : null;
+		const previousPageName = store.getState() ? store.getState().pathReducer.pageName : null;
+		const previousPageID = store.getState() ? store.getState().pathReducer.pageID : null;
+
+		let previousPage = { href: '', label: 'Cours' };
+		if (previousPageType && previousPageName && previousPageID) {
+			previousPage = { href: `${previousPageType}/${previousPageID}`, label: previousPageName };
+		}
+
+		console.log(store.getState());
+		return (
+			<div>
+				<Breadcrumb items={[previousPage, { href: '', label: data.cour.Name }]} />
+				<CoursMain cours={data.cour} />
+			</div>
+		);
 	}
 
 	return false;

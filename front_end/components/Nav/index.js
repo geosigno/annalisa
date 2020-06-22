@@ -8,8 +8,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 import { Container } from '@material-ui/core';
-import { clear } from '../../actions';
-import store from '../../stores';
+import { clear } from '../../redux/actions';
+import store from '../../redux/stores';
 
 const defaultLinks = [
 	{ key: 1, href: '/', label: 'accueil' },

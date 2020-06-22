@@ -1,28 +1,47 @@
 import React from 'react';
 import Link from 'next/link';
-import store from '../../stores';
-import { addCoursTitle } from '../../actions';
+import slugify from 'slugify';
+import store from '../../redux/stores';
+import { addCoursTitle } from '../../redux/actions';
 
+import getImage from '../Image';
 // import { dateToFormat } from '../../helpers/date';
 
 const Card = (props) => {
 	const {
 		data: { id, Name, Image, Description },
-		type
+		type,
+		parentName
 	} = props;
 
-	const LinkHref = `/${type}?id=${id}`;
-	const LinkAs = `/${type}/${id}`;
+	const slugName = slugify(Name, { lower: true });
+	const linkHref = `/${type}?id=${id}`;
+	let linkAs;
 
+	switch (type) {
+		case 'cours':
+			linkAs = `/cours/${id}`;
+			break;
+		case 'level':
+			linkAs = `/niveau/${id}`;
+			break;
+		case 'category':
+			linkAs = `/categorie/${id}`;
+			break;
+		default:
+			linkAs = `/cours/${id}`;
+	}
 	return (
-		<Link href={LinkHref} as={LinkAs}>
+		<Link href={linkHref} as={linkAs}>
 			<a
 				className='card'
 				onClick={() => {
 					store.dispatch(addCoursTitle(Name));
 				}}>
 				<div className='card__container'>
-					{/* {image && <img src={`http://localhost:1337/${image.url}`} alt={Name} />} */}
+					{Image[0] && (
+						<img src={`http://localhost:1337${getImage(Image, 'medium')}`} className='card__image' alt={Name} />
+					)}
 					<div className='card__content'>
 						<div className='card__text'>
 							{Name && <h2 className='card__title'>{Name}</h2>}
@@ -40,12 +59,13 @@ const Card = (props) => {
 						position: relative;
 						overflow: hidden;
 						border: 1px solid;
-						border-color: transparent;
+						border-color: #eee;
 						border-radius: 8px;
 						box-shadow: 0;
 						text-decoration: none;
 						transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 						will-change: transform;
+						box-shadow: rgba(0, 0, 0, 0.086) 0px 1px 2px 0px, rgba(0, 0, 0, 0.086) 0px 0px 8px 0px;
 					}
 					.card:hover {
 						cursor: pointer;
@@ -62,13 +82,17 @@ const Card = (props) => {
 					}
 					.card:active {
 						transform: translateY(3px);
-						box-shadow: rgba(0, 0, 0, 0.086) 0px 1px 4px 0px, rgba(0, 0, 0, 0.086) 0px 8px 16px 0px;
+						box-shadow: rgba(0, 0, 0, 0.086) 0px 1px 2px 0px, rgba(0, 0, 0, 0.086) 0px 0px 8px 0px;
 					}
 					.card__content {
 						display: flex;
 						align-items: center;
 						justify-content: space-between;
 						padding: 24px;
+					}
+					.card__image {
+						max-width: 100%;
+						height: auto;
 					}
 					.card__title {
 						display: inline-block;

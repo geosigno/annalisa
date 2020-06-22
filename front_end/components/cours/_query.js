@@ -9,6 +9,7 @@ const GET_ALL_COURS = gql`
 			created_at
 			Image {
 				url
+				formats
 			}
 		}
 	}
@@ -33,6 +34,38 @@ export const GET_COURS_BY_ID = gql`
 			categories {
 				id
 				Name
+			}
+		}
+	}
+`;
+
+export const GET_ALL_COURS_BY_LEVEL_ID = gql`
+	query($id: ID!) {
+		level(id: $id) {
+			Name
+			cours {
+				id
+				Name
+				Description
+				Image {
+					url
+				}
+			}
+		}
+	}
+`;
+
+export const GET_ALL_COURS_BY_CAGTEGORY_ID = gql`
+	query($id: ID!) {
+		category(id: $id) {
+			Name
+			cours {
+				id
+				Name
+				Description
+				Image {
+					url
+				}
 			}
 		}
 	}
