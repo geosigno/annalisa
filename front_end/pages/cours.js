@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../apollo/apollo';
 
 import store from '../redux/stores';
+import { clearContentToGo } from '../redux/actions';
 
 import defaultPage from '../hoc/defaultPage';
 import Breadcrumb from '../components/Breadcrumb';
@@ -31,19 +32,23 @@ const Cours = ({ router }) => {
 		}
 	}
 
-	if (loading) return <Loader />;
+	if (loading) return <Loader  />;
 
 	if (data.cour) {
+		//clear the Content To Go states
+		store.dispatch(clearContentToGo());
+
 		const previousPageType = store.getState() ? store.getState().pathReducer.pageType : null;
 		const previousPageName = store.getState() ? store.getState().pathReducer.pageName : null;
 		const previousPageID = store.getState() ? store.getState().pathReducer.pageID : null;
 
 		let previousPage = { href: '', label: 'Cours' };
 		if (previousPageType && previousPageName && previousPageID) {
-			previousPage = { href: `${previousPageType}/${previousPageID}`, label: previousPageName };
+			previousPage = { href: `/${previousPageType}/${previousPageID}`, label: previousPageName };
 		}
 
 		console.log(store.getState());
+
 		return (
 			<div>
 				<Breadcrumb items={[previousPage, { href: '', label: data.cour.Name }]} />

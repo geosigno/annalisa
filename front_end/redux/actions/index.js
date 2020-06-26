@@ -1,29 +1,30 @@
-export const ADD_URL = 'ADD_URL';
-export const ADD_COURS_TITLE = 'ADD_COURS_TITLE';
-export const ADD_COURS_ID = 'ADD_COURS_ID';
-export const ADD_PAGE_TYPE = 'ADD_PAGE_TYPE';
-export const ADD_PAGE_NAME = 'ADD_PAGE_NAME';
-export const ADD_PAGE_ID = 'ADD_PAGE_ID';
-export const CLEAR = 'CLEAR';
+export const ADD_CONTENT_TO_GO_URL = 'ADD_CONTENT_TO_GO_URL';
+export const ADD_CONTENT_TO_GO_TITLE = 'ADD_CONTENT_TO_GO_TITLE';
+export const CLEAR_CONTENT_TO_GO = 'CLEAR_CONTENT_TO_GO';
 
-export function addCoursUrl(url) {
-	return { type: 'ADD_URL', url };
+export const ADD_PAGE_FROM_TYPE = 'ADD_PAGE_FROM_TYPE';
+export const ADD_PAGE_FROM_NAME = 'ADD_PAGE_FROM_NAME';
+export const ADD_PAGE_FROM_ID = 'ADD_PAGE_FROM_ID';
+export const CLEAR_PAGE_FROM = 'CLEAR_PAGE_FROM';
+
+export function addContentToGoURL(url) {
+	return { type: 'ADD_CONTENT_TO_GO_URL', url };
 }
-export function addCoursTitle(hook) {
-	return { type: 'ADD_COURS_TITLE', hook };
+export function addContentToGoTitle(title) {
+	return { type: 'ADD_CONTENT_TO_GO_TITLE', title };
 }
-export function addCoursID(coursID) {
-	return { type: 'ADD_COURS_ID', coursID };
+export function clearContentToGo() {
+	return { type: 'CLEAR_CONTENT_TO_GO' };
 }
-export function addPageType(pageType) {
-	return { type: 'ADD_PAGE_TYPE', pageType };
+export function addPageFromType(pageType) {
+	return { type: 'ADD_PAGE_FROM_TYPE', pageType };
 }
-export function addPageName(pageName) {
-	return { type: 'ADD_PAGE_NAME', pageName };
+export function addPageFromName(pageName) {
+	return { type: 'ADD_PAGE_FROM_NAME', pageName };
 }
-export function addPageID(pageID) {
-	return { type: 'ADD_PAGE_ID', pageID };
+export function addPageFromID(pageID) {
+	return { type: 'ADD_PAGE_FROM_ID', pageID };
 }
-export function clear() {
-	return { type: 'CLEAR' };
+export function clearPageFrom() {
+	return { type: 'CLEAR_PAGE_FROM' };
 }

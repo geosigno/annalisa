@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 import { TextField, Button, CircularProgress } from '@material-ui/core';
-import store from '../../stores';
+import store from '../../redux/stores';
 
 // import { ThemeProvider } from '@material-ui/styles';
 
@@ -19,10 +19,11 @@ const SignUpForm = (props) => {
 
 	const classes = formStyleUI();
 
-	const articleTitle = store.getState() ? store.getState().articleLockedTitle : null;
-	const hook = !articleTitle
+	const { contentToGoTitle } = store.getState().rootReducer;
+
+	const hook = !contentToGoTitle
 		? 'Rejoignez Annalisa lesson'
-		: `Enregistrez vous pour accédez au cours "${articleTitle}"!`;
+		: `Enregistrez vous pour accédez au cours "${contentToGoTitle}"!`;
 
 	return (
 		<form className='form' onSubmit={handleSubmit(onRegisterSubmit)}>

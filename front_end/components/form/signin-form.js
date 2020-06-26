@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 import { TextField, Button, CircularProgress } from '@material-ui/core';
-import store from '../../stores';
+import store from '../../redux/stores';
 
 import { formStyle, formStyleUI } from './form-style';
 
@@ -15,8 +15,11 @@ const SignInForm = (props) => {
 
 	const classes = formStyleUI();
 
-	const articleTitle = store.getState() ? store.getState().articleLockedTitle : null;
-	const hook = !articleTitle ? 'Content de vous revoir!' : `Connectez vous pour accédez au cours "${articleTitle}"!`;
+	const { contentToGoTitle } = store.getState().rootReducer;
+
+	const hook = !contentToGoTitle 
+		? 'Content de vous revoir!' 
+		: `Connectez vous pour accédez au cours "${contentToGoTitle}"!`;
 
 	return (
 		<form className='form' onSubmit={handleSubmit(onLoginSubmit)}>

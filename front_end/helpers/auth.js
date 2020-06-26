@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import store from '../redux/stores';
-import { clear } from '../redux/actions';
+import { clearContentToGo } from '../redux/actions';
 
 class Auth {
 	constructor() {
@@ -113,13 +113,13 @@ class Auth {
 
 	static redirectProcess() {
 		// get the root article that made the user log
-		const { articleLockedURL } = store.getState();
+		const { contentToGoURL } = store.getState().rootReducer;
 
 		// if any, create the return URI based on it
-		const returnURI = articleLockedURL || null;
+		const returnURI = contentToGoURL || null;
 
 		// clear the store
-		store.dispatch(clear());
+		store.dispatch(clearContentToGo());
 
 		// redirect the user accordingly
 		if (returnURI) {

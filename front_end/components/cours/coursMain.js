@@ -15,9 +15,9 @@ const CoursMain = (props) => {
 		cours: { id, Name, Image, created_at, Duration, Content, level, categories }
 	} = props;
 
-	const createMarkup = (htmlString) => ({ __html: htmlString });
+	// const createMarkup = (htmlString) => ({ __html: htmlString });
 
-	store.dispatch(addCoursID(id));
+	// store.dispatch(addCoursID(id));
 
 	return (
 		<div>
@@ -86,7 +86,7 @@ const CoursMain = (props) => {
 					.cours__title {
 						display: inline-block;
 						margin: -32px 0 32px -64px;
-						width: 70%;
+						width: 80%;
 					}
 					.cours__title span {
 						font-size: 48px;
@@ -147,6 +147,10 @@ const CoursMain = (props) => {
 					.cours__contenu .table,
 					.cours__contenu img {
 						margin: 0 0 56px;
+					}
+					.cours__contenu strong {
+						background-color: #ffff00;
+						padding: 2px 4px;
 					}
 					.cours__contenu .table {
 						width: 100%;

@@ -9,14 +9,7 @@ import { Button } from '@material-ui/core';
 
 import { buttonStyle } from '../../styles/buttons';
 
-import store from '../../redux/stores';
-import { addCoursUrl } from '../../redux/actions';
-
 const ProtectedContent = ({ router }) => {
-	// Store the current URL to store
-	const returnURL = router.asPath;
-	store.dispatch(addCoursUrl(returnURL));
-
 	const classes = buttonStyle();
 
 	return (
@@ -36,7 +29,7 @@ const ProtectedContent = ({ router }) => {
 					type='submit'
 					onClick={(e) => {
 						e.preventDefault();
-						Router.back();
+						router.back();
 					}}>
 					Retour
 				</Button>

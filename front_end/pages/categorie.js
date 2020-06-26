@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { withRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 import store from '../redux/stores';
-import { addPageType, addPageName, addPageID } from '../redux/actions';
+import { addPageFromType, addPageFromName, addPageFromID } from '../redux/actions';
 
 import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
@@ -24,9 +24,9 @@ const Category = ({ router }) => {
 	if (loading) return <Loader size='small' />;
 
 	if (data) {
-		store.dispatch(addPageType('categorie'));
-		store.dispatch(addPageName(data.category.Name));
-		store.dispatch(addPageID(router.query.id));
+		store.dispatch(addPageFromType('categorie'));
+		store.dispatch(addPageFromName(data.category.Name));
+		store.dispatch(addPageFromID(router.query.id));
 
 		return (
 			<div>

@@ -1,8 +1,9 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from 'next/link';
 import slugify from 'slugify';
 import store from '../../redux/stores';
-import { addCoursTitle } from '../../redux/actions';
+import { addContentToGoTitle, addContentToGoURL } from '../../redux/actions';
 
 import getImage from '../Image';
 // import { dateToFormat } from '../../helpers/date';
@@ -36,11 +37,24 @@ const Card = (props) => {
 			<a
 				className='card'
 				onClick={() => {
-					store.dispatch(addCoursTitle(Name));
-				}}>
+					//REDUX - store content URL
+					console.log('redux',Name)
+					store.dispatch(addContentToGoTitle(Name));
+					//REDUX - store content Title
+					store.dispatch(addContentToGoURL(linkAs));
+				}}
+			>
 				<div className='card__container'>
 					{Image[0] && (
-						<img src={`http://localhost:1337${getImage(Image, 'medium')}`} className='card__image' alt={Name} />
+						<div>
+						  	<LazyLoadImage
+								alt={Name}
+								src={`http://localhost:1337${getImage(Image, 'medium')}`} // use normal <img> attributes as props
+								wrapperClassName='card__image'
+							/>
+								<span>Ahkaka</span>
+							</div>
+						// <img src={`http://localhost:1337${getImage(Image, 'medium')}`} className='card__image' alt={Name} />
 					)}
 					<div className='card__content'>
 						<div className='card__text'>
@@ -57,6 +71,8 @@ const Card = (props) => {
 					.card {
 						display: block;
 						position: relative;
+						height: 100%;
+
 						overflow: hidden;
 						border: 1px solid;
 						border-color: #eee;
@@ -106,7 +122,7 @@ const Card = (props) => {
 						transition: background 0.2s;
 					}
 					.card__description {
-						color: #222;
+						color: #555;
 						margin: 0;
 					}
 					.card__icon {

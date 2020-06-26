@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Grid, Cell } from 'styled-css-grid';
 import { withApollo } from '../../apollo/apollo';
 
-import Loader from '../Loader';
+import { CardListLoader } from '../Loader';
 import Card from './Card';
 
 const CardList = (props) => {
@@ -14,7 +14,7 @@ const CardList = (props) => {
 
 	if (error) Router.push('/signin');
 
-	if (loading) return <Loader size='small' />;
+	if (loading) return (<CardListLoader />)
 
 	let response;
 

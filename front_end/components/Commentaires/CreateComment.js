@@ -34,7 +34,7 @@ import { CREATE_COMMENT, GET_COMMENTS_BY_COURS_ID } from './_query';
 // }
 
 function CreateComment(props) {
-	const { placeholder, commentParentID, handleReplyCallback } = props;
+	const { placeholder, commentParentID, handleReplyCallback, coursID } = props;
 
 	const { loading, error, data } = useQuery(GET_USER_DATA);
 
@@ -47,8 +47,6 @@ function CreateComment(props) {
 			textareaRef.current.focus();
 		}
 	});
-
-	const coursID = store.getState() ? store.getState().coursID : null;
 
 	const [createComment] = useMutation(CREATE_COMMENT, {
 		update(cache, { data: { createComment } }) {
@@ -85,7 +83,7 @@ function CreateComment(props) {
 	// handle the comment form submit
 	const onSubmit = (data) => {
 		// get current cour Id
-		const coursID = store.getState() ? store.getState().coursID : null;
+		// const coursID = store.getState() ? store.getState().coursID : null;
 
 		// create a new comment entry
 		createComment({
