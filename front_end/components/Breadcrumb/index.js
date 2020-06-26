@@ -4,7 +4,6 @@ import Router from 'next/router';
 
 import { CLEAR_PAGE_FROM } from '../../redux/actions';
 
-
 const Breadcrumb = (props) => {
 	const { items } = props;
 	return (
@@ -42,7 +41,7 @@ const Breadcrumb = (props) => {
 				))}
 			</ul>
 			<style jsx>{`
-				ul {	
+				ul {
 					display: flex;
 					max-width: 800px;
 					padding: 0;

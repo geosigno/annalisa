@@ -4,6 +4,8 @@ import Normalize from 'react-normalize';
 // import {withApollo} from 'next-apollo';
 
 import Fonts from '../helpers/font';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 import '../styles/base.scss';
 
 // // class MyApp extends App {

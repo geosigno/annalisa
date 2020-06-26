@@ -14,7 +14,7 @@ const CardList = (props) => {
 
 	if (error) Router.push('/signin');
 
-	if (loading) return (<CardListLoader />)
+	if (loading) return <CardListLoader />;
 
 	let response;
 

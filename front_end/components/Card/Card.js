@@ -8,6 +8,10 @@ import { addContentToGoTitle, addContentToGoURL } from '../../redux/actions';
 import getImage from '../Image';
 // import { dateToFormat } from '../../helpers/date';
 
+const PlaceholderImage = () => (
+	<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" />
+);
+
 const Card = (props) => {
 	const {
 		data: { id, Name, Image, Description },
@@ -37,25 +41,25 @@ const Card = (props) => {
 			<a
 				className='card'
 				onClick={() => {
-					//REDUX - store content URL
-					console.log('redux',Name)
+					// REDUX - store content URL
+					console.log('redux', Name);
 					store.dispatch(addContentToGoTitle(Name));
-					//REDUX - store content Title
+					// REDUX - store content Title
 					store.dispatch(addContentToGoURL(linkAs));
-				}}
-			>
+				}}>
 				<div className='card__container'>
-					{Image[0] && (
-						<div>
-						  	<LazyLoadImage
+					<div className='card__image'>
+						{Image[0] && (
+							<LazyLoadImage
 								alt={Name}
 								src={`http://localhost:1337${getImage(Image, 'medium')}`} // use normal <img> attributes as props
-								wrapperClassName='card__image'
+								placeholderSrc={`http://localhost:1337${getImage(Image, 'thumbnail')}`}
+								effect='blur'
+								placeholder={<PlaceholderImage />}
 							/>
-								<span>Ahkaka</span>
-							</div>
-						// <img src={`http://localhost:1337${getImage(Image, 'medium')}`} className='card__image' alt={Name} />
-					)}
+						)}
+					</div>
+
 					<div className='card__content'>
 						<div className='card__text'>
 							{Name && <h2 className='card__title'>{Name}</h2>}
@@ -105,10 +109,6 @@ const Card = (props) => {
 						align-items: center;
 						justify-content: space-between;
 						padding: 24px;
-					}
-					.card__image {
-						max-width: 100%;
-						height: auto;
 					}
 					.card__title {
 						display: inline-block;

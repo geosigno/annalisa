@@ -32,10 +32,10 @@ const Cours = ({ router }) => {
 		}
 	}
 
-	if (loading) return <Loader  />;
+	if (loading) return <Loader />;
 
 	if (data.cour) {
-		//clear the Content To Go states
+		// clear the Content To Go states
 		store.dispatch(clearContentToGo());
 
 		const previousPageType = store.getState() ? store.getState().pathReducer.pageType : null;

@@ -19,9 +19,9 @@ function rootReducer(state = initialContentToGoState, action) {
 		return { ...state, contentToGoTitle: action.title };
 	}
 	if (action.type === 'CLEAR_CONTENT_TO_GO') {
-		return { ...state, contentToGoURL: '', contentToGoTitle: '',  };
+		return { ...state, contentToGoURL: '', contentToGoTitle: '' };
 	}
-	
+
 	return state;
 }
 

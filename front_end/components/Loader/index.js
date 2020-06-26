@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentLoader from "react-content-loader"
+import ContentLoader from 'react-content-loader';
 
 // const Loader = (props) => {
 // 	const { size } = props;
@@ -82,43 +82,42 @@ import ContentLoader from "react-content-loader"
 // 	);
 // };
 
-
-
 const Loader = (props) => (
-  <ContentLoader 
-    speed={3}
-    width={357}
-    height={410}
-    viewBox="0 0 357 410"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
-    {...props}
-  >
-	<rect width="356" height="233" rx="8" ry="8"/>
-	<rect x="25" y="269" width="306" height="11" rx="4" ry="4"/>
-	<rect x="25" y="296" width="210" height="11" rx="4" ry="4"/>
-	<rect x="25" y="337" width="306" height="6" rx="2" ry="2"/>
-	<rect x="25" y="356" width="306" height="6" rx="2" ry="2"/>
-	<rect x="25" y="373" width="210" height="6" rx="2" ry="2"/>
-  </ContentLoader>
-)
+	<ContentLoader
+		speed={3}
+		width={357}
+		height={410}
+		viewBox='0 0 357 410'
+		backgroundColor='#f3f3f3'
+		foregroundColor='#ecebeb'
+		{...props}>
+		<rect width='356' height='233' rx='8' ry='8' />
+		<rect x='25' y='269' width='306' height='11' rx='4' ry='4' />
+		<rect x='25' y='296' width='210' height='11' rx='4' ry='4' />
+		<rect x='25' y='337' width='306' height='6' rx='2' ry='2' />
+		<rect x='25' y='356' width='306' height='6' rx='2' ry='2' />
+		<rect x='25' y='373' width='210' height='6' rx='2' ry='2' />
+	</ContentLoader>
+);
 
 export const CardListLoader = () => (
 	<div>
-		<div className="grid">
-			{[1, 2, 3].map(() => <Loader/> )}
+		<div className='grid'>
+			{[1, 2, 3].map(() => (
+				<Loader />
+			))}
 		</div>
 		<style jsx>{`
 			.grid {
 				display: grid;
 				height: auto;
 				grid-auto-flow: row;
-				grid-auto-rows: minmax(20px,auto);
+				grid-auto-rows: minmax(20px, auto);
 				grid-template-columns: 1fr 1fr 1fr;
 				grid-gap: 64px;
 			}
 		`}</style>
 	</div>
-)
+);
 
 export default Loader;

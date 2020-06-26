@@ -17,8 +17,8 @@ const SignInForm = (props) => {
 
 	const { contentToGoTitle } = store.getState().rootReducer;
 
-	const hook = !contentToGoTitle 
-		? 'Content de vous revoir!' 
+	const hook = !contentToGoTitle
+		? 'Content de vous revoir!'
 		: `Connectez vous pour accédez au cours "${contentToGoTitle}"!`;
 
 	return (
