@@ -78,7 +78,7 @@ function CreateComment(props) {
 	if (error) return <p> Il y a eu un problème </p>;
 
 	const userId = data ? data.self.id : null;
-	const userAvatar = data ? data.self.avatar[0].url : null;
+	const userAvatar = data.self.avatar[0] ? data.self.avatar[0].url : null;
 
 	// handle the comment form submit
 	const onSubmit = (data) => {

@@ -8,6 +8,7 @@ import { addPageFromType, addPageFromName, addPageFromID } from '../redux/action
 
 import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
+import Container from '../components/Container';
 import Loader from '../components/Loader';
 import Breadcrumb from '../components/Breadcrumb';
 import CardList from '../components/Card/CardList';
@@ -34,24 +35,26 @@ const Category = ({ router }) => {
 					<title>Categorie: {data.category.Name}</title>
 				</Head>
 
-				<Breadcrumb
-					items={[
-						{ href: '', label: 'Catégorie' },
-						{ href: '', label: data.category.Name }
-					]}
-				/>
+				<Container>
+					<Breadcrumb
+						items={[
+							{ href: '', label: 'Catégorie' },
+							{ href: '', label: data.category.Name }
+						]}
+					/>
 
-				<h2>Categorie: {data.category.Name}</h2>
+					<h2>Categorie: {data.category.Name}</h2>
 
-				<CardList
-					query={GET_ALL_COURS_BY_CAGTEGORY_ID}
-					variables={{
-						variables: {
-							id: router.query.id
-						}
-					}}
-					type='cours'
-				/>
+					<CardList
+						query={GET_ALL_COURS_BY_CAGTEGORY_ID}
+						variables={{
+							variables: {
+								id: router.query.id
+							}
+						}}
+						type='cours'
+					/>
+				</Container>
 			</div>
 		);
 	}

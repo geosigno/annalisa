@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import Auth from '../../helpers/auth';
 
+import Visual from './visual.svg';
+
 export default function Form(Component) {
 	return class extends React.Component {
 		constructor(props) {
@@ -58,17 +60,22 @@ export default function Form(Component) {
 		render() {
 			return (
 				<div className='fullPage'>
-					<div className='fullPage__container'>
-						<Component
-							onLoginSubmit={this.onLoginSubmit}
-							onRegisterSubmit={this.onRegisterSubmit}
-							handleChange={this.handleChange}
-							loading={this.state.loading}
-							error={this.state.error}
-						/>
-						<Link href='/'>
-							<a className='form__back'>Retourner à la page d&apos;accueil</a>
-						</Link>
+					<div className='fullPage__left'>
+						<Visual />
+					</div>
+					<div className='fullPage__right'>
+						<div className='form__wrapper'>
+							<Component
+								onLoginSubmit={this.onLoginSubmit}
+								onRegisterSubmit={this.onRegisterSubmit}
+								handleChange={this.handleChange}
+								loading={this.state.loading}
+								error={this.state.error}
+							/>
+							<Link href='/'>
+								<a className='form__back'>Retourner à la page d&apos;accueil</a>
+							</Link>
+						</div>
 					</div>
 				</div>
 			);

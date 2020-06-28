@@ -39,9 +39,9 @@ export default (Page) =>
 			return (
 				<div>
 					<Nav {...this.props} />
-					<Container id='main'>
+					{/* <Container id='main'> */}
 						<Page {...this.props} />
-					</Container>
+					{/* </Container> */}
 				</div>
 			);
 		}

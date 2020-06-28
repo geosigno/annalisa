@@ -12,7 +12,7 @@ const CardList = (props) => {
 
 	const { loading, error, data } = useQuery(query, variables);
 
-	if (error) Router.push('/signin');
+	if (error) Router.push('/connection');
 
 	if (loading) return <CardListLoader />;
 

@@ -96,7 +96,7 @@ const SignUpForm = (props) => {
 			</Button>
 			<p className='form__info'>
 				Vous avez déja un compte?
-				<Link href='/signin'>
+				<Link href='/connection'>
 					<a>Connectez vous</a>
 				</Link>
 			</p>

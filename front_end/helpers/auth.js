@@ -5,6 +5,7 @@ import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import store from '../redux/stores';
 import { clearContentToGo } from '../redux/actions';
+import { modal } from '../components/form/signin-form';
 
 class Auth {
 	constructor() {
@@ -29,7 +30,7 @@ class Auth {
 				return true;
 			})
 			.catch((error) => {
-				// Handle error.
+				router.push('/');
 				return error.response;
 			});
 	}
@@ -48,7 +49,27 @@ class Auth {
 				return true;
 			})
 			.catch((error) => {
-				// Handle error.
+				router.push('/');
+				return error;
+			});
+	}
+
+	static providerCallback(provider, search) {
+		return axios
+			.get(`http://localhost:1337/auth/${provider}/callback${search}`)
+			.then((response) => {
+				const { username } = response.data.user;
+				const token = response.data.jwt;
+
+				Cookies.set('username', username);
+				Cookies.set('jwt', token);
+
+				Auth.redirectProcess();
+
+				return true;
+			})
+			.catch((error) => {
+				router.push('/');
 				return error;
 			});
 	}
@@ -113,7 +134,8 @@ class Auth {
 
 	static redirectProcess() {
 		// get the root article that made the user log
-		const { contentToGoURL } = store.getState().rootReducer;
+		let { contentToGoURL } = store.getState().rootReducer;
+		contentToGoURL === '' && (contentToGoURL = Cookies.get('contentToGoURL'));
 
 		// if any, create the return URI based on it
 		const returnURI = contentToGoURL || null;
@@ -123,6 +145,7 @@ class Auth {
 
 		// redirect the user accordingly
 		if (returnURI) {
+			Cookies.remove('contentToGoURL');
 			Router.push(returnURI);
 		} else {
 			Router.push('/');

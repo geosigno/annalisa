@@ -19,8 +19,8 @@ const defaultLinks = [
 ];
 
 const guestLinks = [
-	{ key: 3, href: '/signin', label: 'se connecter' },
-	{ key: 4, href: '/signup', label: "s'enregistrer" }
+	{ key: 3, href: '/connection', label: 'se connecter' },
+	{ key: 4, href: '/enregistrement', label: "s'enregistrer" }
 ];
 
 const Nav = ({ isAuthenticated, loggedUser }) => (

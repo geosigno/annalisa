@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const formStyle = css.global`
 	.fullPage {
+		display: flex;
+		align-items: center;
+		min-height: 100vh;
 		background: linear-gradient(45deg, #83a4d4, #b6fbff);
 		background-size: 150% 150%;
 		-webkit-animation: AnimationName 8s ease infinite;
@@ -43,6 +46,13 @@ export const formStyle = css.global`
 			background-position: 0% 90%;
 		}
 	}
+	.fullPage__left,
+	.fullPage__right {
+		flex: 50% 0 0;
+	}
+	.fullPage__left svg {
+		max-height: 70vh;
+	}
 	.fullPage__container {
 		display: flex;
 		align-items: center;
@@ -64,14 +74,43 @@ export const formStyle = css.global`
 	.MuiButton-label {
 		position: relative;
 	}
+	.form__wrapper {
+		max-width: 480px;
+	}
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		line-height: normal;
+		white-space: nowrap;
+		vertical-align: middle;
+		text-align: center;
+		cursor: pointer;
+		user-select: none;
+		box-sizing: border-box;
+		color: rgba(0, 0, 0, 0.7);
+		padding: 8px 24px;
+		border-radius: 32px;
+		background: white;
+		border: 2px solid rgba(0, 0, 0, 0.7);
+		text-transform: uppercase;
+		text-decoration: none;
+		font-size: 14px;
+		font-weight: 600;
+	}
+	.btn svg {
+		margin-right: 16px;
+	}
 	.form {
 		width: 100%;
 		text-align: center;
-		max-width: 480px;
+
 		border-radius: 8px;
 		padding: 64px;
 		background-color: white;
 		box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+	}
+	.form__social {
+		margin-bottom: 32px;
 	}
 	.form__container {
 		display: flex;
@@ -90,9 +129,11 @@ export const formStyle = css.global`
 		margin-left: 4px;
 	}
 	.form__back {
+		display: block;
 		font-size: 12px;
 		color: white;
-		margin-top: 16px;
+		text-align: center;
+		margin-top: 8px;
 	}
 	.input__error {
 		font-style: italic;
