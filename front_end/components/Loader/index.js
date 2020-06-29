@@ -79,7 +79,7 @@ export const LoaderBounce = (props) => {
 	);
 };
 
-const Loader = (props) => (
+const CardSkeleton = (props) => (
 	<ContentLoader
 		speed={3}
 		width={357}
@@ -97,10 +97,10 @@ const Loader = (props) => (
 	</ContentLoader>
 );
 
-export const CardListLoader = ({ n }) => {
+export const CardListLoader = ({ n = 3 }) => {
 	const cartLoaders = [];
 	while (n > 0) {
-		cartLoaders.push(<Loader />);
+		cartLoaders.push(<CardSkeleton />);
 		n--;
 	}
 	return (
@@ -140,4 +140,4 @@ export const LoaderArticle = (props) => (
 	</ContentLoader>
 );
 
-export default Loader;
+export default LoaderBounce;

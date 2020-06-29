@@ -9,7 +9,7 @@ import VisualWaiting from '../../assets/waiting.svg';
 
 const Connect = ({ router }) => {
 	useEffect(() => {
-		const search = router.asPath.replace('/connect/google', '');
+		let search = router.asPath.replace('/connect/google', '');
 
 		if (!search) router.push('/');
 

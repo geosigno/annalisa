@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Container = (props) => (
-	<div className='container' id={props.id ? props.id : ''}>
-		{props.children}
+const Container = ({id, children}) => (
+	<div className='container' id={id ? id : ''}>
+		{children}
 		<style jsx>{`
 			.container {
 				max-width: 1200px;

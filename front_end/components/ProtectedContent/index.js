@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 
 import Poster from '../Poster';
 import VisualProtected from '../../assets/protected.svg';
 
-const ProtectedContent = ({ router, props }) => {
+const ProtectedContent = () => {
 	return (
 		<Poster title="Oups... vous n'avez pas encore accès à ce cours!" Visual={VisualProtected}>
 			<div>
@@ -19,7 +20,7 @@ const ProtectedContent = ({ router, props }) => {
 					type='submit'
 					onClick={(e) => {
 						e.preventDefault();
-						router.back();
+						Router.back();
 					}}>
 					Retour
 				</button>

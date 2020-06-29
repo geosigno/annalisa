@@ -14,7 +14,6 @@ import GoogleLogo from './google.svg';
 let providerWindow;
 
 class Modal {
-
 	constructor() {
 		this.providerWindow;
 	}
@@ -26,16 +25,14 @@ class Modal {
 		const winTop = screen.height / 2 - height / 2;
 		const winLeft = screen.width / 2 - width / 2;
 		const options = `top=${winTop},left=${winLeft},toolbar=0,status=0,width=${width},height=${height}`;
-		const url = 'http://localhost:1337/connect/google/'
+		const url = 'http://localhost:1337/connect/google/';
 		this.providerWindow = window.open(url, '_blank', options);
+	};
 
-
-	}
-	
 	closeModal = (e) => {
-		console.log('close', this.providerWindow)
+		console.log('close', this.providerWindow);
 		this.providerWindow.close();
-	}
+	};
 }
 
 export let modal = new Modal();
@@ -52,16 +49,18 @@ const SignInForm = (props) => {
 	const hook = !contentToGoTitle
 		? 'Content de vous revoir!'
 		: `Connectez vous pour accédez au cours "${contentToGoTitle}"!`;
-	
+
 	return (
 		<form className='form' onSubmit={handleSubmit(onLoginSubmit)}>
 			<h2 className='form__title'>{hook}</h2>
 			<div className='form__social'>
-				<a href='http://localhost:1337/connect/google' onClick={e => {
+				<a
+					href='http://localhost:1337/connect/google'
+					onClick={(e) => {
 						const { contentToGoURL } = store.getState().rootReducer;
 						contentToGoURL && Cookies.set('contentToGoURL', contentToGoURL);
 					}}
-					className='btn btn--google' >
+					className='btn btn--google'>
 					<GoogleLogo />
 					Se connecter avec Google
 				</a>
@@ -115,4 +114,3 @@ const SignInForm = (props) => {
 };
 
 export default SignInForm;
-

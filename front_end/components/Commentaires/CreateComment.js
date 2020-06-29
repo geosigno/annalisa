@@ -5,33 +5,9 @@ import TextareaAutosize from 'react-autosize-textarea';
 
 import Loader from '../Loader';
 import { withApollo } from '../../apollo/apollo';
-import store from '../../redux/stores';
 
-import { GET_USER_DATA } from '../Profile/_query';
-import { CREATE_COMMENT, GET_COMMENTS_BY_COURS_ID } from './_query';
-
-// async function getUserID() {
-// 	const headers = Auth.getBearer();
-// 	return axios
-// 		.get('http://localhost:1337/users/me/', { headers })
-// 		.then((response) => {
-// 			const { id } = response.data;
-// 			return id;
-// 		})
-// 		.catch((error) => {
-// 			// Handle error.
-// 			return error.response;
-// 		});
-// }
-
-// function getUserAvatar() {
-// 	const headers = Auth.getBearer();
-// 	return axios
-// 		.get('http://localhost:1337/users/me/', { headers })
-// 		.then((res) =>
-// 			axios.get(`http://localhost:1337/users/${res.data.id}/`, { headers }).then((res2) => res2.data.avatar)
-// 		);
-// }
+import { GET_USER_DATA } from '../../apollo/query/profile';
+import { CREATE_COMMENT, GET_COMMENTS_BY_COURS_ID } from '../../apollo/query/comment';
 
 function CreateComment(props) {
 	const { placeholder, commentParentID, handleReplyCallback, coursID } = props;
@@ -81,13 +57,10 @@ function CreateComment(props) {
 	const userAvatar = data.self.avatar[0] ? data.self.avatar[0].url : null;
 
 	// handle the comment form submit
-	const onSubmit = (data) => {
-		// get current cour Id
-		// const coursID = store.getState() ? store.getState().coursID : null;
-
+	const onSubmit = (payload) => {
 		// create a new comment entry
 		createComment({
-			variables: { content: data.comment, cour: coursID, user: userId, parentID: commentParentID }
+			variables: { content: payload.comment, cour: coursID, user: userId, parentID: commentParentID }
 		}).then(() => {
 			if (handleReplyCallback) {
 				handleReplyCallback('');

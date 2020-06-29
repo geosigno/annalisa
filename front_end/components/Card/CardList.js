@@ -1,20 +1,28 @@
 import React from 'react';
-import Router from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 import { Grid, Cell } from 'styled-css-grid';
 import { withApollo } from '../../apollo/apollo';
 
+import ProtectedContent from '../ProtectedContent';
 import { CardListLoader } from '../Loader';
 import Card from './Card';
 
 const CardList = (props) => {
-	const { query, variables, type } = props;
+	const { query, variables, limit, type } = props;
 
 	const { loading, error, data } = useQuery(query, variables);
 
-	if (error) Router.push('/connection');
+	// error logic
+	if (error && error.graphQLErrors) {
+		const isForbidden = error.graphQLErrors.some((error) => error.message.includes('Forbidden'));
+		if (isForbidden) {
+			return <ProtectedContent />;
+		}
+	}
 
-	if (loading) return <CardListLoader />;
+	// loading state
+	const nbSkeletonToDisplay = limit ? limit + 1 : 6;
+	if (loading) return <CardListLoader n={nbSkeletonToDisplay} />;
 
 	let response;
 
@@ -50,6 +58,7 @@ const CardList = (props) => {
 						</Cell>
 					);
 				})}
+				{limit && <Card data={{}} type={type} loadMore />}
 			</Grid>
 		);
 

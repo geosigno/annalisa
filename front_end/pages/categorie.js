@@ -9,22 +9,61 @@ import { addPageFromType, addPageFromName, addPageFromID } from '../redux/action
 import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
 import Container from '../components/Container';
-import Loader from '../components/Loader';
 import Breadcrumb from '../components/Breadcrumb';
+import { CardListLoader } from '../components/Loader';
+import ProtectedContent from '../components/ProtectedContent';
+
 import CardList from '../components/Card/CardList';
 
-import { GET_ALL_COURS_BY_CAGTEGORY_ID } from '../components/Cours/_query';
+import { GET_ALL_COURS_BY_CAGTEGORY_ID } from '../apollo/query/cours';
+import GET_ALL_CATEGORIES from '../apollo/query/category';
 
 const Category = ({ router }) => {
-	const { loading, error, data } = useQuery(GET_ALL_COURS_BY_CAGTEGORY_ID, {
+	const isDetailledPage = !!router.query.id;
+
+	// if no id is set, that means this is the All Categories page
+	if (!isDetailledPage) {
+		return (
+			<div>
+				<Head>
+					<title>Toutes les catégories</title>
+				</Head>
+				<Container>
+					<Breadcrumb items={[{ href: '/categorie', label: 'Categories' }]} />
+					<h2>Toutes les catégories</h2>
+					<CardList type='category' query={GET_ALL_CATEGORIES} />
+				</Container>
+			</div>
+		);
+	}
+
+	const variables = {
 		variables: {
 			id: router.query.id
 		}
-	});
+	};
 
-	if (loading) return <Loader size='small' />;
+	// get the category
+	const { loading, error, data } = useQuery(GET_ALL_COURS_BY_CAGTEGORY_ID, variables);
 
-	if (data) {
+	// manage errors
+	if (error && error.graphQLErrors) {
+		const isForbidden = error.graphQLErrors.some((item) => item.message.includes('Forbidden'));
+		if (isForbidden) {
+			return <ProtectedContent />;
+		}
+	}
+
+	if (loading)
+		return (
+			<Container>
+				<Breadcrumb items={[{ href: '/categorie', label: 'Categories' }]} />
+				<h2>Categorie:</h2>
+				<CardListLoader n={3} />
+			</Container>
+		);
+
+	if (data && data.category) {
 		store.dispatch(addPageFromType('categorie'));
 		store.dispatch(addPageFromName(data.category.Name));
 		store.dispatch(addPageFromID(router.query.id));
@@ -38,22 +77,12 @@ const Category = ({ router }) => {
 				<Container>
 					<Breadcrumb
 						items={[
-							{ href: '', label: 'Catégorie' },
+							{ href: '/categorie', label: 'Categories' },
 							{ href: '', label: data.category.Name }
 						]}
 					/>
-
 					<h2>Categorie: {data.category.Name}</h2>
-
-					<CardList
-						query={GET_ALL_COURS_BY_CAGTEGORY_ID}
-						variables={{
-							variables: {
-								id: router.query.id
-							}
-						}}
-						type='cours'
-					/>
+					<CardList type='cours' query={GET_ALL_COURS_BY_CAGTEGORY_ID} variables={variables} />
 				</Container>
 			</div>
 		);

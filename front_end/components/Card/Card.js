@@ -1,55 +1,80 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from 'next/link';
-import slugify from 'slugify';
+// import slugify from 'slugify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import store from '../../redux/stores';
 import { addContentToGoTitle, addContentToGoURL } from '../../redux/actions';
 
 import getImage from '../Image';
 // import { dateToFormat } from '../../helpers/date';
 
+import AllCoursVisual from '../../assets/allcours.svg';
+import AllCategoriesVisual from '../../assets/allcategories.svg';
+
 const PlaceholderImage = () => (
 	<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" />
 );
 
 const Card = (props) => {
-	const {
+	let {
 		data: { id, Name, Image, Description },
 		type,
-		parentName
+		loadMore
 	} = props;
 
-	const slugName = slugify(Name, { lower: true });
-	const linkHref = `/${type}?id=${id}`;
+	// const slugName = slugify(Name, { lower: true });
+	let linkHref = id && `/${type}?id=${id}`;
 	let linkAs;
+	let visual;
 
 	switch (type) {
 		case 'cours':
 			linkAs = `/cours/${id}`;
+			if (loadMore) {
+				linkAs = `/cours`;
+				linkHref = `/cours`;
+				Name = 'Tous les cours';
+			}
+			visual = <AllCoursVisual />;
 			break;
 		case 'level':
 			linkAs = `/niveau/${id}`;
+			if (loadMore) {
+				linkAs = `/niveau`;
+				linkHref = `/niveau`;
+				Name = 'Tous les niveaux';
+			}
+			visual = <AllCategoriesVisual />;
 			break;
 		case 'category':
 			linkAs = `/categorie/${id}`;
+			if (loadMore) {
+				linkAs = `/categorie`;
+				linkHref = `/categorie`;
+				Name = 'Toutes les catégories';
+			}
+
 			break;
 		default:
 			linkAs = `/cours/${id}`;
 	}
+
 	return (
 		<Link href={linkHref} as={linkAs}>
 			<a
-				className='card'
+				className={`card${loadMore ? ' loadMore' : ''}`}
 				onClick={() => {
+					if (loadMore) return;
 					// REDUX - store content URL
-					console.log('redux', Name);
 					store.dispatch(addContentToGoTitle(Name));
 					// REDUX - store content Title
 					store.dispatch(addContentToGoURL(linkAs));
 				}}>
 				<div className='card__container'>
-					<div className='card__image'>
-						{Image[0] && (
+					{Image && Image[0] && (
+						<div className='card__image'>
 							<LazyLoadImage
 								alt={Name}
 								src={`http://localhost:1337${getImage(Image, 'medium')}`} // use normal <img> attributes as props
@@ -57,18 +82,17 @@ const Card = (props) => {
 								effect='blur'
 								placeholder={<PlaceholderImage />}
 							/>
-						)}
-					</div>
+						</div>
+					)}
+					{loadMore && visual && <div className='card__image'>{visual}</div>}
 
 					<div className='card__content'>
 						<div className='card__text'>
+							{loadMore && <FontAwesomeIcon icon={faArrowRight} size='2x' color='#555' />}
 							{Name && <h2 className='card__title'>{Name}</h2>}
 							{/* {created_at && <p className='card__meta'>{dateToFormat(created_at)}</p>} */}
 							{Description && <p className='card__description'>{Description}</p>}
 						</div>
-						{/* <div className='card__icon'>
-							<FontAwesomeIcon icon={faChevronRight} size='2x' color='#fff' />
-						</div> */}
 					</div>
 				</div>
 				<style jsx>{`
@@ -76,7 +100,6 @@ const Card = (props) => {
 						display: block;
 						position: relative;
 						height: 100%;
-
 						overflow: hidden;
 						border: 1px solid;
 						border-color: #eee;
@@ -104,11 +127,30 @@ const Card = (props) => {
 						transform: translateY(3px);
 						box-shadow: rgba(0, 0, 0, 0.086) 0px 1px 2px 0px, rgba(0, 0, 0, 0.086) 0px 0px 8px 0px;
 					}
+					.card__container {
+						display: flex;
+						flex-direction: column;
+						height: 100%;
+					}
 					.card__content {
 						display: flex;
 						align-items: center;
 						justify-content: space-between;
+
 						padding: 24px;
+					}
+					.loadMore .card__image {
+						padding: 32px 48px 0;
+					}
+					.loadMore .card__content {
+						flex-grow: 1;
+					}
+					.loadMore .card__text {
+						display: flex;
+						align-items: center;
+					}
+					.loadMore .card__title {
+						margin: 0 0 0 16px;
 					}
 					.card__title {
 						display: inline-block;
@@ -124,17 +166,6 @@ const Card = (props) => {
 					.card__description {
 						color: #555;
 						margin: 0;
-					}
-					.card__icon {
-						padding: 0px;
-						position: absolute;
-						top: 50%;
-						transform: translateY(-50%);
-						right: -24px;
-						border-radius: 50%;
-						background: rgba(255, 148, 114, 0.7);
-						opacity: 0;
-						transition: opacity 0.2s, padding 0.2s;
 					}
 				`}</style>
 			</a>

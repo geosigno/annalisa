@@ -4,9 +4,6 @@ import ReactMarkdown from 'react-markdown';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faGraduationCap, faClock, faTag, faTags } from '@fortawesome/free-solid-svg-icons';
-import store from '../../redux/stores';
-import { addCoursID } from '../../redux/actions';
-
 import CommentaireList from '../Commentaires/CommentaireList';
 import { dateToFormat } from '../../helpers/date';
 
@@ -14,10 +11,6 @@ const CoursMain = (props) => {
 	const {
 		cours: { id, Name, Image, created_at, Duration, Content, level, categories }
 	} = props;
-
-	// const createMarkup = (htmlString) => ({ __html: htmlString });
-
-	// store.dispatch(addCoursID(id));
 
 	return (
 		<div>
@@ -65,7 +58,7 @@ const CoursMain = (props) => {
 						</div>
 					</div>
 
-					<div className='cours__image'>{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} />}</div>
+					<div className='cours__image'>{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}</div>
 				</header>
 				<section className='cours__contenu'>
 					<ReactMarkdown source={Content} />

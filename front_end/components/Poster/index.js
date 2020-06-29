@@ -1,8 +1,8 @@
-import React from 'React';
+import React from 'react';
 import { LoaderBounce } from '../Loader';
 
 const Poster = (props) => {
-	const { title, loader, Visual } = props;
+	const { title, loader, Visual, children } = props;
 	return (
 		<div className='poster'>
 			<div className='poster__container'>
@@ -21,7 +21,7 @@ const Poster = (props) => {
 							</div>
 						)}
 						{title && <h1>{title}</h1>}
-						{props.children}
+						{children}
 					</div>
 				</div>
 			</div>

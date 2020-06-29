@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Nav from '../components/Nav/';
-import Container from '../components/Container';
+import Nav from '../components/Nav';
+// import Container from '../components/Container';
 
 import Auth from '../helpers/auth';
 
@@ -12,7 +12,7 @@ export default (Page) =>
 
 			const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
 
-			let path = '';
+			const path = '';
 			return {
 				...pageProps,
 				loggedUser,
@@ -40,7 +40,7 @@ export default (Page) =>
 				<div>
 					<Nav {...this.props} />
 					{/* <Container id='main'> */}
-						<Page {...this.props} />
+					<Page {...this.props} />
 					{/* </Container> */}
 				</div>
 			);

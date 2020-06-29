@@ -3,52 +3,92 @@ import Head from 'next/head';
 import { compose } from 'recompose';
 import { withRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
+import store from '../redux/stores';
+import { addPageFromType, addPageFromName, addPageFromID } from '../redux/actions';
 
 import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
-import Loader from '../components/Loader';
+import Container from '../components/Container';
 import Breadcrumb from '../components/Breadcrumb';
+import { CardListLoader } from '../components/Loader';
+import ProtectedContent from '../components/ProtectedContent';
+
 import CardList from '../components/Card/CardList';
 
-import { GET_ALL_COURS_BY_LEVEL_ID } from '../components/cours/_query';
+import { GET_ALL_COURS_BY_LEVEL_ID } from '../apollo/query/cours';
+import GET_ALL_LEVELS from '../apollo/query/level';
 
 const Niveau = ({ router }) => {
-	const { loading, error, data } = useQuery(GET_ALL_COURS_BY_LEVEL_ID, {
+	const isDetailledPage = !!router.query.id;
+
+	// if no id is set, that means this is the All Levels page
+	if (!isDetailledPage) {
+		return (
+			<div>
+				<Head>
+					<title>Tous les niveaux</title>
+				</Head>
+				<Container>
+					<Breadcrumb items={[{ href: '/niveau', label: 'Niveaux' }]} />
+					<h2>Tous les niveaux</h2>
+					<CardList type='level' query={GET_ALL_LEVELS} />
+				</Container>
+			</div>
+		);
+	}
+
+	const variables = {
 		variables: {
 			id: router.query.id
 		}
-	});
+	};
 
-	if (loading) return <Loader size='small' />;
-	console.log(data);
-	if (data) {
+	// get the category
+	const { loading, error, data } = useQuery(GET_ALL_COURS_BY_LEVEL_ID, variables);
+
+	// manage errors
+	if (error && error.graphQLErrors) {
+		const isForbidden = error.graphQLErrors.some((item) => item.message.includes('Forbidden'));
+		if (isForbidden) {
+			return <ProtectedContent />;
+		}
+	}
+
+	if (loading)
+		return (
+			<Container>
+				<Breadcrumb items={[{ href: '/niveau', label: 'Niveaux' }]} />
+				<h2>Niveau:</h2>
+				<CardListLoader n={3} />
+			</Container>
+		);
+
+	if (data && data.level) {
+		store.dispatch(addPageFromType('niveau'));
+		store.dispatch(addPageFromName(data.level.Name));
+		store.dispatch(addPageFromID(router.query.id));
+
 		return (
 			<div>
 				<Head>
 					<title>Niveau: {data.level.Name}</title>
 				</Head>
 
-				<Breadcrumb
-					items={[
-						{ href: '', label: 'Niveau' },
-						{ href: '', label: data.level.Name }
-					]}
-				/>
-
-				<h2>Niveau: {data.level.Name}</h2>
-
-				<CardList
-					query={GET_ALL_COURS_BY_LEVEL_ID}
-					variables={{
-						variables: {
-							id: router.query.id
-						}
-					}}
-					type='cours'
-				/>
+				<Container>
+					<Breadcrumb
+						items={[
+							{ href: '/niveau', label: 'Niveaux' },
+							{ href: '', label: data.level.Name }
+						]}
+					/>
+					<h2>Niveau: {data.level.Name}</h2>
+					<CardList type='cours' query={GET_ALL_COURS_BY_LEVEL_ID} variables={variables} />
+				</Container>
 			</div>
 		);
 	}
+
+	return false;
 };
 
 export default compose(withApollo({ ssr: false }), withRouter, defaultPage)(Niveau);

@@ -5,7 +5,7 @@ import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import store from '../redux/stores';
 import { clearContentToGo } from '../redux/actions';
-import { modal } from '../components/form/signin-form';
+// import { modal } from '../components/form/signin-form';
 
 class Auth {
 	constructor() {
@@ -30,7 +30,7 @@ class Auth {
 				return true;
 			})
 			.catch((error) => {
-				router.push('/');
+				Router.push('/');
 				return error.response;
 			});
 	}
@@ -49,7 +49,7 @@ class Auth {
 				return true;
 			})
 			.catch((error) => {
-				router.push('/');
+				Router.push('/');
 				return error;
 			});
 	}
@@ -69,7 +69,7 @@ class Auth {
 				return true;
 			})
 			.catch((error) => {
-				router.push('/');
+				Router.push('/');
 				return error;
 			});
 	}

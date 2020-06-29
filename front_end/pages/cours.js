@@ -3,7 +3,6 @@ import { withRouter } from 'next/router';
 
 import { compose } from 'recompose';
 import { useQuery } from '@apollo/react-hooks';
-import { Grid, Cell } from 'styled-css-grid';
 import { withApollo } from '../apollo/apollo';
 
 import store from '../redux/stores';
@@ -12,55 +11,55 @@ import { clearContentToGo } from '../redux/actions';
 import defaultPage from '../hoc/defaultPage';
 import Container from '../components/Container';
 import Breadcrumb from '../components/Breadcrumb';
-import { CardListLoader, LoaderArticle } from '../components/Loader';
+import { LoaderArticle } from '../components/Loader';
 import ProtectedContent from '../components/ProtectedContent';
-import { GET_COURS_BY_ID, GET_ALL_COURS } from '../components/Cours/_query';
+
 import CoursMain from '../components/Cours/coursMain';
-import Card from '../components/Card/Card';
+import CardList from '../components/Card/CardList';
+
+import { GET_COURS_BY_ID, GET_ALL_COURS } from '../apollo/query/cours';
 
 const Cours = ({ router }) => {
 	const isDetailledPage = !!router.query.id;
-	let query;
-	let options = {};
-	if (isDetailledPage) {
-		query = GET_COURS_BY_ID;
-		options = {
-			variables: {
-				id: router.query.id
-			}
-		};
-	} else {
-		query = GET_ALL_COURS;
+
+	// if no id is set, that means this is the All Cours page
+	if (!isDetailledPage) {
+		return (
+			<Container>
+				<Breadcrumb items={[{ href: '/cours', label: 'Cours' }]} />
+				<h2>Tous les cours</h2>
+				<CardList type='cours' query={GET_ALL_COURS} />
+			</Container>
+		);
 	}
 
-	const { loading, error, data } = useQuery(query, options);
+	// get the main cours
+	const { loading, error, data } = useQuery(GET_COURS_BY_ID, {
+		variables: {
+			id: router.query.id
+		}
+	});
 
+	// manage errors
 	if (error && error.graphQLErrors) {
-		const isForbidden = error.graphQLErrors.some((error) => error.message.includes('Forbidden'));
+		const isForbidden = error.graphQLErrors.some((item) => item.message.includes('Forbidden'));
 		if (isForbidden) {
-			return <ProtectedContent router={router} />;
+			return <ProtectedContent />;
 		}
 	}
 
+	// return skeleton loader
 	if (loading) {
-		if (isDetailledPage) {
-			return (
-				<Container>
-					<LoaderArticle n={3} />
-				</Container>
-			);
-		} else {
-			return (
-				<Container>
-					<CardListLoader n={9} />
-				</Container>
-			);
-		}
+		return (
+			<Container>
+				<LoaderArticle />
+			</Container>
+		);
 	}
 
 	if (!data) return false;
 
-	if (isDetailledPage && data.cour) {
+	if (data.cour) {
 		// clear the Content To Go states
 		store.dispatch(clearContentToGo());
 
@@ -76,20 +75,6 @@ const Cours = ({ router }) => {
 			<Container>
 				<Breadcrumb items={[previousPage, { href: '', label: data.cour.Name }]} />
 				<CoursMain cours={data.cour} />
-			</Container>
-		);
-	}
-	if (data.cours) {
-		return (
-			<Container>
-				<Breadcrumb items={[{ href: '/cours', label: 'Cours' }]} />
-				<Grid gap='64px' columns='1fr 1fr 1fr'>
-					{data.cours.map((item) => (
-						<Cell key={item.id}>
-							<Card data={item} type='cours' />
-						</Cell>
-					))}
-				</Grid>
 			</Container>
 		);
 	}

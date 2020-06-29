@@ -8,7 +8,7 @@ import Loader from '../Loader';
 import CommentaireItem from './CommentaireItem';
 import CreateComment from './CreateComment';
 
-import { GET_COMMENTS_BY_COURS_ID } from './_query';
+import { GET_COMMENTS_BY_COURS_ID } from '../../apollo/query/comment';
 
 const processComments = (comments) => {
 	// get all parent comments - with no parentID set
@@ -18,7 +18,7 @@ const processComments = (comments) => {
 	const childComments = comments.filter((comment) => comment.parentID);
 
 	// go through all child & parent comments and push the child into their respective parent
-	childComments &&
+	if (childComments) {
 		childComments.forEach((child) => {
 			parentComments.forEach((parent) => {
 				if (child.parentID === parent.id) {
@@ -29,6 +29,7 @@ const processComments = (comments) => {
 				}
 			});
 		});
+	}
 
 	return parentComments;
 };
