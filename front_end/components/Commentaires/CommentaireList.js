@@ -52,9 +52,9 @@ const CommentaireList = ({ router }) => {
 		setReplyOn(commentID);
 	};
 
-	if (data.cour.comments) {
+	if (data.courBySlug.comments) {
 		// get list of all parent comments with their respective child comments
-		const comments = processComments(data.cour.comments);
+		const comments = processComments(data.courBySlug.comments);
 
 		return (
 			<section className='commentaires'>

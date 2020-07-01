@@ -63,25 +63,25 @@ const Category = ({ router }) => {
 			</Container>
 		);
 
-	if (data && data.category) {
+	if (data && data.categoryBySlug) {
 		store.dispatch(addPageFromType('categorie'));
-		store.dispatch(addPageFromName(data.category.Name));
+		store.dispatch(addPageFromName(data.categoryBySlug.Name));
 		store.dispatch(addPageFromID(router.query.id));
 
 		return (
 			<div>
 				<Head>
-					<title>Categorie: {data.category.Name}</title>
+					<title>Categorie: {data.categoryBySlug.Name}</title>
 				</Head>
 
 				<Container>
 					<Breadcrumb
 						items={[
 							{ href: '/categorie', label: 'Categories' },
-							{ href: '', label: data.category.Name }
+							{ href: '', label: data.categoryBySlug.Name }
 						]}
 					/>
-					<h2>Categorie: {data.category.Name}</h2>
+					<h2>Categorie: {data.categoryBySlug.Name}</h2>
 					<CardList type='cours' query={GET_ALL_COURS_BY_CAGTEGORY_ID} variables={variables} />
 				</Container>
 			</div>

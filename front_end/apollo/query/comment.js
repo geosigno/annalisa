@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_COMMENTS_BY_COURS_ID = gql`
-	query($id: ID!) {
-		cour(id: $id) {
+	query($id: String!) {
+		courBySlug(slug: $id) {
 			id
 			comments(sort: "created_at:asc") {
 				id

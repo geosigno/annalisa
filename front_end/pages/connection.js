@@ -1,4 +1,10 @@
-import Form from '../components/form/form';
-import SignInForm from '../components/form/signin-form';
+import FullPageForm from '../components/form/FullPageForm';
+import SignInForm from '../components/form/SignInForm';
 
-export default Form(SignInForm);
+const Connection = () => (
+	<FullPageForm>
+		<SignInForm />
+	</FullPageForm>
+);
+
+export default Connection;

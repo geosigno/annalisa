@@ -63,25 +63,25 @@ const Niveau = ({ router }) => {
 			</Container>
 		);
 
-	if (data && data.level) {
+	if (data && data.levelBySlug) {
 		store.dispatch(addPageFromType('niveau'));
-		store.dispatch(addPageFromName(data.level.Name));
+		store.dispatch(addPageFromName(data.levelBySlug.Name));
 		store.dispatch(addPageFromID(router.query.id));
 
 		return (
 			<div>
 				<Head>
-					<title>Niveau: {data.level.Name}</title>
+					<title>Niveau: {data.levelBySlug.Name}</title>
 				</Head>
 
 				<Container>
 					<Breadcrumb
 						items={[
 							{ href: '/niveau', label: 'Niveaux' },
-							{ href: '', label: data.level.Name }
+							{ href: '', label: data.levelBySlug.Name }
 						]}
 					/>
-					<h2>Niveau: {data.level.Name}</h2>
+					<h2>Niveau: {data.levelBySlug.Name}</h2>
 					<CardList type='cours' query={GET_ALL_COURS_BY_LEVEL_ID} variables={variables} />
 				</Container>
 			</div>

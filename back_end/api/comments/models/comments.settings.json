@@ -13,8 +13,8 @@
       "type": "string"
     },
     "cour": {
-      "model": "cours",
-      "via": "comments"
+      "via": "comments",
+      "model": "cours"
     },
     "user": {
       "plugin": "users-permissions",

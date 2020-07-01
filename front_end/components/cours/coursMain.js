@@ -2,8 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faGraduationCap, faClock, faTag, faTags } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCalendarAlt, faGraduationCap, faClock, faTag, faTags } from '@fortawesome/free-solid-svg-icons';
 import CommentaireList from '../Commentaires/CommentaireList';
 import { dateToFormat } from '../../helpers/date';
 
@@ -22,34 +22,34 @@ const CoursMain = (props) => {
 
 					<div className='cours__meta'>
 						<div className='meta'>
-							<FontAwesomeIcon icon={faCalendarAlt} size='1x' color='#999' />
+							{/* <FontAwesomeIcon icon={faCalendarAlt} size='1x' color='#999' /> */}
 							<p> Posté le {dateToFormat(created_at)}</p>
 						</div>
 
 						<div className='meta'>
-							<FontAwesomeIcon icon={faGraduationCap} size='1x' color='#999' />
-							<Link as={`/niveau/${level.id}`} href={`/niveau?id=${level.id}`}>
+							{/* <FontAwesomeIcon icon={faGraduationCap} size='1x' color='#999' /> */}
+							<Link as={`/niveau/${level.slug}`} href={`/niveau?id=${level.slug}`}>
 								<a>Niveau {level.Name}</a>
 							</Link>
 						</div>
 
 						{Duration && (
 							<div className='meta'>
-								<FontAwesomeIcon icon={faClock} size='1x' color='#999' />
+								{/* <FontAwesomeIcon icon={faClock} size='1x' color='#999' /> */}
 								<p>Durée approximative de {Duration} minutes</p>
 							</div>
 						)}
 
 						<div className='meta'>
-							{categories.length > 1 ? (
+							{/* {categories.length > 1 ? (
 								<FontAwesomeIcon icon={faTags} size='1x' color='#999' />
 							) : (
 								<FontAwesomeIcon icon={faTag} size='1x' color='#999' />
-							)}
+							)} */}
 							<ul>
 								{categories.map((category) => (
-									<li key={category.id}>
-										<Link as={`/categorie/${category.id}`} href={`/categorie?id=${category.id}`}>
+									<li key={category.slug}>
+										<Link as={`/categorie/${category.slug}`} href={`/categorie?id=${category.slug}`}>
 											<a>{category.Name}</a>
 										</Link>
 									</li>
@@ -58,7 +58,9 @@ const CoursMain = (props) => {
 						</div>
 					</div>
 
-					<div className='cours__image'>{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}</div>
+					<div className='cours__image'>
+						{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}
+					</div>
 				</header>
 				<section className='cours__contenu'>
 					<ReactMarkdown source={Content} />

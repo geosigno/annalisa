@@ -2,8 +2,8 @@ import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from 'next/link';
 // import slugify from 'slugify';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import store from '../../redux/stores';
 import { addContentToGoTitle, addContentToGoURL } from '../../redux/actions';
 
@@ -19,19 +19,19 @@ const PlaceholderImage = () => (
 
 const Card = (props) => {
 	let {
-		data: { id, Name, Image, Description },
+		data: { id, slug, Name, Image, Description },
 		type,
 		loadMore
 	} = props;
 
 	// const slugName = slugify(Name, { lower: true });
-	let linkHref = id && `/${type}?id=${id}`;
+	let linkHref = slug && `/${type}?id=${slug}`;
 	let linkAs;
 	let visual;
 
 	switch (type) {
 		case 'cours':
-			linkAs = `/cours/${id}`;
+			linkAs = `/cours/${slug}`;
 			if (loadMore) {
 				linkAs = `/cours`;
 				linkHref = `/cours`;
@@ -40,7 +40,7 @@ const Card = (props) => {
 			visual = <AllCoursVisual />;
 			break;
 		case 'level':
-			linkAs = `/niveau/${id}`;
+			linkAs = `/niveau/${slug}`;
 			if (loadMore) {
 				linkAs = `/niveau`;
 				linkHref = `/niveau`;
@@ -49,7 +49,7 @@ const Card = (props) => {
 			visual = <AllCategoriesVisual />;
 			break;
 		case 'category':
-			linkAs = `/categorie/${id}`;
+			linkAs = `/categorie/${slug}`;
 			if (loadMore) {
 				linkAs = `/categorie`;
 				linkHref = `/categorie`;
@@ -58,7 +58,7 @@ const Card = (props) => {
 
 			break;
 		default:
-			linkAs = `/cours/${id}`;
+			linkAs = `/cours/${slug}`;
 	}
 
 	return (
@@ -88,7 +88,7 @@ const Card = (props) => {
 
 					<div className='card__content'>
 						<div className='card__text'>
-							{loadMore && <FontAwesomeIcon icon={faArrowRight} size='2x' color='#555' />}
+							{/* {loadMore && <FontAwesomeIcon icon={faArrowRight} size='2x' color='#555' />} */}
 							{Name && <h2 className='card__title'>{Name}</h2>}
 							{/* {created_at && <p className='card__meta'>{dateToFormat(created_at)}</p>} */}
 							{Description && <p className='card__description'>{Description}</p>}

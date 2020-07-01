@@ -20,8 +20,10 @@
     }],
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
+    "import/named": 0,
     "react/sort-comp": 0,
-    "no-plusplus": 0
+    "no-plusplus": 0,
+    "react/jsx-props-no-spreading": 0
   },
   "globals": {
     "window": true,

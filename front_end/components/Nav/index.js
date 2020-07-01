@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 import { push as Menu } from 'react-burger-menu';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faSearch } from '@fortawesome/free-solid-svg-icons';
+// import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 import { Container } from '@material-ui/core';
 // import { clear } from '../../redux/actions';

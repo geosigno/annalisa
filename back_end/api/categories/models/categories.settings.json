@@ -27,8 +27,12 @@
       "required": false
     },
     "cours": {
-      "via": "categories",
-      "collection": "cours"
+      "collection": "cours",
+      "via": "categories"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Name"
     }
   }
 }

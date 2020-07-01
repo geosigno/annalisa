@@ -4,6 +4,8 @@ export const GET_USER_DATA = gql`
 	query {
 		self {
 			id
+			username
+			email
 			avatar {
 				url
 			}

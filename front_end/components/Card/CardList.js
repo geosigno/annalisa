@@ -31,12 +31,12 @@ const CardList = (props) => {
 			if (data.cours)
 				// get all cours
 				response = data.cours;
-			else if (data.level && data.level.cours)
+			else if (data.levelBySlug && data.levelBySlug.cours)
 				// get cours by level
-				response = data.level.cours;
-			else if (data.category && data.category.cours)
+				response = data.levelBySlug.cours;
+			else if (data.categoryBySlug && data.categoryBySlug.cours)
 				// get cours by category
-				response = data.category.cours;
+				response = data.categoryBySlug.cours;
 			break;
 		case 'level':
 			response = data.levels;

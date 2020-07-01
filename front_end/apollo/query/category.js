@@ -4,6 +4,7 @@ const GET_ALL_CATEGORIES = gql`
 	query($limit: Int) {
 		categories(limit: $limit) {
 			id
+			slug
 			Name
 			Description
 			Image {

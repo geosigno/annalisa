@@ -27,8 +27,12 @@
       "required": false
     },
     "cours": {
-      "via": "level",
-      "collection": "cours"
+      "collection": "cours",
+      "via": "level"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Name"
     }
   }
 }

@@ -10,8 +10,8 @@
   },
   "attributes": {
     "comments": {
-      "via": "cour",
-      "collection": "comments"
+      "collection": "comments",
+      "via": "cour"
     },
     "Description": {
       "type": "string"
@@ -37,13 +37,17 @@
       "type": "string"
     },
     "level": {
-      "model": "levels",
-      "via": "cours"
+      "via": "cours",
+      "model": "levels"
     },
     "categories": {
-      "collection": "categories",
       "via": "cours",
+      "collection": "categories",
       "dominant": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "Name"
     }
   }
 }

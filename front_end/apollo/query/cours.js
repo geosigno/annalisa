@@ -4,6 +4,7 @@ export const GET_ALL_COURS = gql`
 	query($limit: Int) {
 		cours(limit: $limit) {
 			id
+			slug
 			Name
 			Description
 			created_at
@@ -16,9 +17,10 @@ export const GET_ALL_COURS = gql`
 `;
 
 export const GET_COURS_BY_ID = gql`
-	query($id: ID!) {
-		cour(id: $id) {
+	query($id: String!) {
+		courBySlug(slug: $id) {
 			id
+			slug
 			Name
 			Description
 			Content
@@ -29,10 +31,12 @@ export const GET_COURS_BY_ID = gql`
 			}
 			level {
 				id
+				slug
 				Name
 			}
 			categories {
 				id
+				slug
 				Name
 			}
 		}
@@ -40,11 +44,12 @@ export const GET_COURS_BY_ID = gql`
 `;
 
 export const GET_ALL_COURS_BY_LEVEL_ID = gql`
-	query($id: ID!) {
-		level(id: $id) {
+	query($id: String!) {
+		levelBySlug(slug: $id) {
 			Name
 			cours {
 				id
+				slug
 				Name
 				Description
 				Image {
@@ -56,11 +61,12 @@ export const GET_ALL_COURS_BY_LEVEL_ID = gql`
 `;
 
 export const GET_ALL_COURS_BY_CAGTEGORY_ID = gql`
-	query($id: ID!) {
-		category(id: $id) {
+	query($id: String!) {
+		categoryBySlug(slug: $id) {
 			Name
 			cours {
 				id
+				slug
 				Name
 				Description
 				Image {

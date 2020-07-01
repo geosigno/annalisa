@@ -49,17 +49,17 @@ const Cours = ({ router }) => {
 	}
 
 	// return skeleton loader
-	if (loading) {
-		return (
-			<Container>
-				<LoaderArticle />
-			</Container>
-		);
-	}
+	// if (loading) {
+	// 	return (
+	// 		<Container>
+	// 			<LoaderArticle />
+	// 		</Container>
+	// 	);
+	// }
 
 	if (!data) return false;
 
-	if (data.cour) {
+	if (data.courBySlug) {
 		// clear the Content To Go states
 		store.dispatch(clearContentToGo());
 
@@ -73,8 +73,8 @@ const Cours = ({ router }) => {
 		}
 		return (
 			<Container>
-				<Breadcrumb items={[previousPage, { href: '', label: data.cour.Name }]} />
-				<CoursMain cours={data.cour} />
+				<Breadcrumb items={[previousPage, { href: '', label: data.courBySlug.Name }]} />
+				<CoursMain cours={data.courBySlug} />
 			</Container>
 		);
 	}

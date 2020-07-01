@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReply } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faReply } from '@fortawesome/free-solid-svg-icons';
 
 import { dateToFormat, dateToTime } from '../../helpers/date';
 
@@ -39,7 +39,7 @@ function CommentaireItem(props) {
 							handleReplyClick(id);
 						}}>
 						<span>répondre</span>
-						<FontAwesomeIcon icon={faReply} size='1x' color='#f2709c' />
+						{/* <FontAwesomeIcon icon={faReply} size='1x' color='#f2709c' /> */}
 					</button>
 				)}
 			</div>

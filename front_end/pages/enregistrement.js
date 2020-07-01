@@ -1,4 +1,10 @@
-import Form from '../components/form/form';
-import SignUpForm from '../components/form/signup-form';
+import FullPageForm from '../components/form/FullPageForm';
+import SignUpForm from '../components/form/SignUpForm';
 
-export default Form(SignUpForm);
+const Enregistrement = () => (
+	<FullPageForm>
+		<SignUpForm />
+	</FullPageForm>
+);
+
+export default Enregistrement;

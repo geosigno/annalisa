@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Container = ({id, children}) => (
-	<div className='container' id={id ? id : ''}>
+const Container = ({ id, children }) => (
+	<div className='container' id={id || ''}>
 		{children}
 		<style jsx>{`
 			.container {
