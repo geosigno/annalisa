@@ -8,7 +8,7 @@ import Auth from '../../helpers/auth';
 
 import formStyle from './form-style';
 
-import Input from './input';
+import Input from './Input';
 
 import GoogleLogo from './google.svg';
 

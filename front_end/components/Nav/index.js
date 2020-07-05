@@ -7,7 +7,6 @@ import { push as Menu } from 'react-burger-menu';
 // import { faSearch } from '@fortawesome/free-solid-svg-icons';
 // import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
-import { Container } from '@material-ui/core';
 // import { clear } from '../../redux/actions';
 import store from '../../redux/stores';
 

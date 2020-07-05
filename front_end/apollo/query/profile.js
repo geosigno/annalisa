@@ -6,6 +6,7 @@ export const GET_USER_DATA = gql`
 			id
 			username
 			email
+			Bio
 			avatar {
 				url
 			}

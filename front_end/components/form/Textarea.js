@@ -1,7 +1,12 @@
 import React from 'react';
+import autosize from 'autosize';
 
-const Input = ({ id, label, name, value, disabled, type, onChange, register, errors }) => {
-	const handleFocus = (e) => {
+const Textarea = ({ id, label, name, value, disabled, type, onChange, register, errors }) => {
+    const handleChange = (e) => {
+        autosize(e.target);
+    }
+
+    const handleFocus = (e) => {
 		e.target.closest('div').classList.add('active');
 	};
 
@@ -24,7 +29,7 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 	return (
 		<div className={classNames.join(' ')}>
 			{label && <label htmlFor={id}>{label}</label>}
-			<input
+			<textarea
 				id={id}
 				name={name}
 				defaultValue={value}
@@ -32,7 +37,7 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 				type={type}
 				onFocus={handleFocus}
 				onBlur={handleBlur}
-				onChange={onChange}
+				onChange={handleChange}
 				ref={register}
 				onAnimationStart={handleAutoFill}
 			/>
@@ -55,9 +60,9 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 					font-size: 12px;
 					color: #a0a0a0;
 				}
-				input {
+				textarea {
 					font-size: 16px;
-					padding: 16px 8px 4px;
+					padding: 20px 8px 4px;
 					height: 48px;
 					width: 100%;
 					border: 1px solid #dedede;
@@ -65,24 +70,14 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 					background: #fbfbfb;
 					margin: 0 0 8px;
 				}
-				input:-webkit-autofill,
-				input:-webkit-autofill:hover,
-				input:-webkit-autofill:focus {
-					animation-name: onAutoFillStart;
-					transition: background-color 5000s ease-in-out 0s;
-				}
-
-				.input:not(:-webkit-autofill) {
-					animation-name: onAutoFillCancel;
-				}
-				.error input {
+				.error textarea {
 					border-color: rgba(237, 67, 55, 1);
 					margin: 0 0 24px;
 				}
 				.error label {
 					color: rgba(237, 67, 55, 1);
 				}
-				.disabled input {
+				.disabled textarea {
 					background: #efefef;
 				}
 			`}</style>
@@ -90,4 +85,4 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 	);
 };
 
-export default Input;
+export default Textarea;
