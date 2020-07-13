@@ -5,34 +5,21 @@ import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 
 const ProfileForm = (props) => {
-	
-	console.log('username',props);
+	console.log('username', props);
 	const { register, handleSubmit, errors } = useForm();
 	const {
-		data: {
-			id,
-			username,
-			email,
-			Bio,
-			avatar
-		}
+		data: { id, username, email, Bio, avatar }
 	} = props;
 
 	const onFormSubmit = (data) => {
 		console.log(data);
-	}
+	};
 
 	return (
 		<div>
 			<form onSubmit={handleSubmit(onFormSubmit)}>
 				<div>
-					<Input
-						id='email'
-						label='Email'
-						name='email'
-						value={email}
-						disabled={true}
-					/>
+					<Input id='email' label='Email' name='email' value={email} disabled />
 				</div>
 				<div>
 					<Input
@@ -48,17 +35,9 @@ const ProfileForm = (props) => {
 					)}
 				</div>
 				<div>
-					<Textarea
-						id='bio'
-						label='Bio'
-						name='Bio'
-						value={Bio && Bio}
-						register={register}
-						errors={errors}
-					/>
+					<Textarea id='bio' label='Bio' name='Bio' value={Bio && Bio} register={register} errors={errors} />
 				</div>
 				<button type='submit'>Mettre à jour</button>
-
 			</form>
 			<style jsx>{`
 				form {
@@ -67,8 +46,7 @@ const ProfileForm = (props) => {
 				}
 			`}</style>
 		</div>
-
-	)
+	);
 };
 
 export default ProfileForm;

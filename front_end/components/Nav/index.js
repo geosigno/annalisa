@@ -1,42 +1,30 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { push as Menu } from 'react-burger-menu';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortawesome/free-solid-svg-icons';
-// import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-
-// import { clear } from '../../redux/actions';
+// import { push as Menu } from 'react-burger-menu';
 import store from '../../redux/stores';
 
 const defaultLinks = [
-	{ key: 1, href: '/', label: 'accueil' },
-	{ key: 2, href: '/cours', label: 'cours' },
-	{ key: 3, href: '/categories', label: 'catégories' },
-	{ key: 4, href: '/niveaux', label: 'niveaux' }
+	{ href: '/cours', label: 'cours' },
+	{ href: '/categorie', label: 'catégories' },
+	{ href: '/niveau', label: 'niveaux' }
 ];
 
 const guestLinks = [
-	{ key: 3, href: '/connection', label: 'se connecter' },
-	{ key: 4, href: '/enregistrement', label: "s'enregistrer" }
+	{ href: '/connection', label: 'connection' },
+	{ href: '/enregistrement', label: 'enregistrement' }
 ];
 
-const Nav = ({ isAuthenticated, loggedUser }) => (
-	<Menu pageWrapId='main'>
-		{isAuthenticated ? (
-			<div className='nav__user'>
-				<img src='https://via.placeholder.com/64' alt='user' className='nav__user-avatar' />
-				<div className='nav__user-name'>
-					<p> Bonjour {loggedUser}! </p>
-					<Link href='/profile'>
-						<a>Profile</a>
-					</Link>
-				</div>
-			</div>
-		) : (
-			<ul className='nav__user'>
-				{guestLinks.map(({ key, href, label }) => {
+const Nav = ({ isAuthenticated, username, userAvatar }) => (
+	<nav>
+		<div className='nav__container'>
+			<Link href='/'>
+				<a>
+					<h1>Annalisa lessons</h1>
+				</a>
+			</Link>
+			<ul>
+				{defaultLinks.map(({ href, label }) => {
 					return (
 						<li key={label}>
 							<Link href={href}>
@@ -51,130 +39,163 @@ const Nav = ({ isAuthenticated, loggedUser }) => (
 					);
 				})}
 			</ul>
-		)}
-		<ul className='nav__list'>
-			{defaultLinks.map(({ key, href, label }) => {
-				return (
-					<li key={label}>
-						<Link href={href}>
-							<a>{label}</a>
+			{isAuthenticated ? (
+				<div className='navUser'>
+					<p>
+						<Link href='/profile'>
+							<a>{username}</a>
 						</Link>
-					</li>
-				);
-			})}
-		</ul>
-		<style global jsx>{`
-			/* Position and sizing of burger button */
-			.bm-burger-button {
+					</p>
+					{userAvatar ? (
+						<img src={`http://localhost:1337${userAvatar}`} alt={username} />
+					) : (
+						<img src='https://via.placeholder.com/64' alt={username} />
+					)}
+				</div>
+			) : (
+				<ul className='nav__user'>
+					{guestLinks.map(({ href, label }) => {
+						return (
+							<li key={label}>
+								<Link href={href}>
+									<a
+										onClick={() => {
+											store.dispatch(clear());
+										}}>
+										{label}
+									</a>
+								</Link>
+							</li>
+						);
+					})}
+				</ul>
+			)}
+		</div>
+		<style jsx>{`
+			nav {
 				position: fixed;
-				width: 36px;
-				height: 30px;
-				left: 36px;
-				top: 36px;
+				top: 0;
+				left: 0;
+				z-index: 1;
+				width: 100%;
+				background-color: white;
+				box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
 			}
-
-			/* Color/shape of burger icon bars */
-			.bm-burger-bars {
-				height: 4px !important;
-				border-radius: 4px;
-				background: #373a47;
-			}
-
-			.bm-burger-bars:nth-child(2) {
-				width: 30px;
-			}
-
-			/* Color/shape of burger icon bars on hover*/
-			.bm-burger-bars-hover {
-				background: #a90000;
-			}
-
-			/* Position and sizing of clickable cross button */
-			.bm-cross-button {
-				height: 24px;
-				width: 24px;
-			}
-
-			/* Color/shape of close button cross */
-			.bm-cross {
-				background: #bdc3c7;
-			}
-
-			/*
-			Sidebar wrapper styles
-			Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-			*/
-			.bm-menu-wrap {
-				position: fixed;
-				height: 100%;
-			}
-
-			/* General sidebar styles */
-			.bm-menu {
-				background: #436578;
-				padding: 64px 0;
-			}
-
-			/* Morph shape necessary with bubble or elastic */
-			.bm-morph-shape {
-				fill: #373a47;
-			}
-
-			/* Wrapper for item list */
-			.bm-item-list {
-				color: #b8b7ad;
-			}
-
-			/* Individual item */
-			.bm-item {
-				display: inline-block;
-			}
-
-			/* Styling of overlay */
-			.bm-overlay {
-				background: rgba(0, 0, 0, 0.3);
-			}
-
-			.nav__user {
-				display: flex !important;
+			.nav__container {
+				display: flex;
 				align-items: center;
-				background: rgba(255, 255, 255, 0.2);
-				padding: 16px 32px;
-				margin: 0 0 40px;
+				justify-content: space-between;
+				width: 100%;
+				height: 64px;
+				max-width: 1200px;
+				margin: 0 auto;
 			}
-
-			.nav__user-avatar {
-				border-radius: 50%;
-				margin-right: 16px;
+			nav h1 {
+				margin: 0 32px 0 0;
 			}
-
-			.nav__user-name p {
-				color: white;
-				margin: 0 0 8px;
-			}
-
-			.nav__list {
+			nav ul {
+				display: flex;
+				align-items: center;
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
 			}
-
-			.nav__list a {
-				display: block;
-				color: white;
-				font-size: 14px;
-				text-transform: uppercase;
-				text-decoration: none;
-				background: transparent;
-				padding: 16px 32px;
-				transition: background 0.1s;
+			nav ul a {
+				padding: 8px 16px;
 			}
-
-			.nav__list a:hover {
-				background: rgba(0, 0, 0, 0.2);
+			.navUser {
+				display: flex;
+				align-items: center;
+			}
+			.navUser img {
+				max-width: 40px;
+				border-radius: 50%;
+				margin-left: 8px;
 			}
 		`}</style>
-	</Menu>
+	</nav>
+
+	// <Menu pageWrapId='main'>
+	// 	{isAuthenticated ? (
+	// 		<div className='nav__user'>
+	// 			<img src='https://via.placeholder.com/64' alt='user' className='nav__user-avatar' />
+	// 			<div className='nav__user-name'>
+	// 				<p> Bonjour {loggedUser}! </p>
+	// 				<Link href='/profile'>
+	// 					<a>Profile</a>
+	// 				</Link>
+	// 			</div>
+	// 		</div>
+	// 	) : (
+	// 		<ul className='nav__user'>
+	// 			{guestLinks.map(({ key, href, label }) => {
+	// 				return (
+	// 					<li key={label}>
+	// 						<Link href={href}>
+	// 							<a
+	// 								onClick={() => {
+	// 									store.dispatch(clear());
+	// 								}}>
+	// 								{label}
+	// 							</a>
+	// 						</Link>
+	// 					</li>
+	// 				);
+	// 			})}
+	// 		</ul>
+	// 	)}
+	// 	<ul className='nav__list'>
+	// 		{defaultLinks.map(({ key, href, label }) => {
+	// 			return (
+	// 				<li key={label}>
+	// 					<Link href={href}>
+	// 						<a>{label}</a>
+	// 					</Link>
+	// 				</li>
+	// 			);
+	// 		})}
+	// 	</ul>
+	// 	<style global jsx>{`
+	// 		.nav__user {
+	// 			display: flex !important;
+	// 			align-items: center;
+	// 			background: rgba(255, 255, 255, 0.2);
+	// 			padding: 16px 32px;
+	// 			margin: 0 0 40px;
+	// 		}
+
+	// 		.nav__user-avatar {
+	// 			border-radius: 50%;
+	// 			margin-right: 16px;
+	// 		}
+
+	// 		.nav__user-name p {
+	// 			color: white;
+	// 			margin: 0 0 8px;
+	// 		}
+
+	// 		.nav__list {
+	// 			list-style-type: none;
+	// 			margin: 0;
+	// 			padding: 0;
+	// 		}
+
+	// 		.nav__list a {
+	// 			display: block;
+	// 			color: white;
+	// 			font-size: 14px;
+	// 			text-transform: uppercase;
+	// 			text-decoration: none;
+	// 			background: transparent;
+	// 			padding: 16px 32px;
+	// 			transition: background 0.1s;
+	// 		}
+
+	// 		.nav__list a:hover {
+	// 			background: rgba(0, 0, 0, 0.2);
+	// 		}
+	// 	`}</style>
+	// </Menu>
 );
 
 // 	<nav>

@@ -41,18 +41,24 @@ const Breadcrumb = (props) => {
 				))}
 			</ul>
 			<style jsx>{`
+				div {
+					display: flex;
+					align-items: center;
+					background-color: #f5f5f5;
+					border-radius: 8px;
+					padding: 8px;
+				}
 				ul {
 					display: flex;
-					max-width: 800px;
+					margin: 0;
 					padding: 0;
-					margin: 0 auto;
 				}
 				li {
 					list-style-type: none;
 					padding: 8px 0 8px 8px;
 				}
 				li:after {
-					content: '/';
+					content: '>';
 					padding-left: 8px;
 				}
 				li:last-child:after {

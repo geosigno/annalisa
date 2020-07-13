@@ -20,9 +20,11 @@ class Auth {
 			.post('http://localhost:1337/auth/local/register', data)
 			.then((response) => {
 				const { username } = response.data.user;
+				const userAvatar = response.data.user.avatar[0].formats.thumbnail.url || null;
 				const token = response.data.jwt;
 
 				Cookies.set('username', username);
+				Cookies.set('userAvatar', userAvatar);
 				Cookies.set('jwt', token);
 
 				Auth.redirectProcess();
@@ -39,10 +41,13 @@ class Auth {
 		return axios
 			.post('http://localhost:1337/auth/local', data)
 			.then((response) => {
+				console.log(response.data.user.avatar[0].formats.thumbnail.url);
 				const { username } = response.data.user;
+				const userAvatar = response.data.user.avatar[0].formats.thumbnail.url || null;
 				const token = response.data.jwt;
 
 				Cookies.set('username', username);
+				Cookies.set('userAvatar', userAvatar);
 				Cookies.set('jwt', token);
 
 				Auth.redirectProcess();
@@ -115,13 +120,16 @@ class Auth {
 	}
 
 	static getUserFromServerCookie(ctx) {
-		const { username } = nextCookie(ctx);
-
-		return username;
+		return nextCookie(ctx);
 	}
 
 	static getUserFromLocalCookie() {
-		return Cookies.get('username');
+		const username = Cookies.get('username') || null;
+		const userAvatar = Cookies.get('userAvatar') || null;
+		return {
+			username,
+			userAvatar
+		};
 	}
 
 	static getBearer() {

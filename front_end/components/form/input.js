@@ -16,7 +16,7 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 		}
 	};
 
-	let classNames = [];
+	const classNames = [];
 	if (errors && Object.keys(errors).length > 0) classNames.push('error');
 	if (value) classNames.push('active');
 	if (disabled) classNames.push('disabled');

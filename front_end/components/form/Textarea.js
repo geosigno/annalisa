@@ -2,11 +2,11 @@ import React from 'react';
 import autosize from 'autosize';
 
 const Textarea = ({ id, label, name, value, disabled, type, onChange, register, errors }) => {
-    const handleChange = (e) => {
-        autosize(e.target);
-    }
+	const handleChange = (e) => {
+		autosize(e.target);
+	};
 
-    const handleFocus = (e) => {
+	const handleFocus = (e) => {
 		e.target.closest('div').classList.add('active');
 	};
 
@@ -21,7 +21,7 @@ const Textarea = ({ id, label, name, value, disabled, type, onChange, register, 
 		}
 	};
 
-	let classNames = [];
+	const classNames = [];
 	if (errors && Object.keys(errors).length > 0) classNames.push('error');
 	if (value) classNames.push('active');
 	if (disabled) classNames.push('disabled');

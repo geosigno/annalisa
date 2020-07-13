@@ -8,16 +8,17 @@ import Auth from '../helpers/auth';
 export default (Page) =>
 	class DefaultPage extends React.Component {
 		static async getInitialProps(ctx) {
-			const loggedUser = process.browser ? Auth.getUserFromLocalCookie() : Auth.getUserFromServerCookie(ctx);
-
+			const { username, userAvatar } = process.browser
+				? Auth.getUserFromLocalCookie()
+				: Auth.getUserFromServerCookie(ctx);
 			const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
-
 			const path = '';
 			return {
 				...pageProps,
-				loggedUser,
+				username,
+				userAvatar,
 				currentUrl: path,
-				isAuthenticated: !!loggedUser
+				isAuthenticated: !!username
 			};
 		}
 
@@ -42,6 +43,11 @@ export default (Page) =>
 					{/* <Container id='main'> */}
 					<Page {...this.props} />
 					{/* </Container> */}
+					<style global jsx>{`
+						body {
+							padding-top: 96px;
+						}
+					`}</style>
 				</div>
 			);
 		}

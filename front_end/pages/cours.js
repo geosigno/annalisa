@@ -63,17 +63,26 @@ const Cours = ({ router }) => {
 		// clear the Content To Go states
 		store.dispatch(clearContentToGo());
 
+		const previousPages = [];
 		const previousPageType = store.getState() ? store.getState().pathReducer.pageType : null;
 		const previousPageName = store.getState() ? store.getState().pathReducer.pageName : null;
 		const previousPageID = store.getState() ? store.getState().pathReducer.pageID : null;
 
-		let previousPage = { href: '/cours', label: 'Cours' };
 		if (previousPageType && previousPageName && previousPageID) {
-			previousPage = { href: `/${previousPageType}/${previousPageID}`, label: previousPageName };
+			previousPages.push({
+				href: `/${previousPageType}`,
+				label: previousPageType === 'niveau' ? 'Niveaux' : 'Catégories'
+			});
+			previousPages.push({ href: `/${previousPageType}/${previousPageID}`, label: previousPageName });
+		} else {
+			previousPages.push({ href: '/cours', label: 'Cours' });
 		}
+
+		previousPages.push({ href: '', label: data.courBySlug.Name });
+
 		return (
 			<Container>
-				<Breadcrumb items={[previousPage, { href: '', label: data.courBySlug.Name }]} />
+				<Breadcrumb items={previousPages} />
 				<CoursMain cours={data.courBySlug} />
 			</Container>
 		);

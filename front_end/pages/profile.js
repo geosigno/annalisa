@@ -11,12 +11,9 @@ import ProfileForm from '../components/Profile/ProfileForm';
 
 const Profile = () => {
 	const { loading, error, data } = useQuery(GET_USER_DATA);
-	
+
 	if (data && data.self) {
-		return (
-			<ProfileForm data={data.self} />
-		)
-		
+		return <ProfileForm data={data.self} />;
 	}
 	return <h1>Profile</h1>;
 };

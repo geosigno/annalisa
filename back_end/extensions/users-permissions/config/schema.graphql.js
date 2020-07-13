@@ -12,19 +12,34 @@ module.exports = {
 }
 
 
-module.exports = {
-  query: `
-    updateUserMe(id: ID slug: String): UsersPermissionsUser
-  `,
-  resolver: {
-    Query: {
-      updateUserMe: {
-        resolverOf: 'User.updateme',
-        async resolver(_, { slug }) {
-          const entity = await strapi.services.categories.findOne({ slug });
-          return sanitizeEntity(entity, { model: strapi.models.categories });
-        },
-      },
-    },
-  },
-};
+// module.exports = {
+//   mutation: `
+//     updateUserMe(username: String): UsersPermissionsUser
+//   `,
+//   resolver: {
+//     Mutation: {
+//       updateUserMe: {
+//         resolverOf: 'plugins::users-permissions.user.update',
+//         async resolver(_, { username }) {
+//           const entity = await strapi.services.users.findOne({ username });
+//           return sanitizeEntity(entity, { model: strapi.models.users });
+//         },
+//       },
+//     },
+//   },
+// }
+
+// updateUser: {
+//   description: 'Update an existing user',
+//   resolverOf: 'plugins::users-permissions.user.update',
+//   resolver: async (obj, options, { context }) => {
+//     context.params = _.toPlainObject(options.input.where);
+//     context.request.body = _.toPlainObject(options.input.data);
+
+//     await strapi.plugins['users-permissions'].controllers.user.update(context);
+
+//     return {
+//       user: context.body.toJSON ? context.body.toJSON() : context.body,
+//     };
+//   },
+// },
