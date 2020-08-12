@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../apollo/apollo';
 
 import store from '../redux/stores';
-import { clearContentToGo } from '../redux/actions';
+import { clearContentToGo, setCoursID } from '../redux/actions';
 
 import defaultPage from '../hoc/defaultPage';
 import Container from '../components/Container';
@@ -18,6 +18,8 @@ import CoursMain from '../components/Cours/coursMain';
 import CardList from '../components/Card/CardList';
 
 import { GET_COURS_BY_ID, GET_ALL_COURS } from '../apollo/query/cours';
+
+import { buildPreviousPath } from '../helpers/path';
 
 const Cours = ({ router }) => {
 	const isDetailledPage = !!router.query.id;
@@ -49,13 +51,13 @@ const Cours = ({ router }) => {
 	}
 
 	// return skeleton loader
-	// if (loading) {
-	// 	return (
-	// 		<Container>
-	// 			<LoaderArticle />
-	// 		</Container>
-	// 	);
-	// }
+	if (loading) {
+		return (
+			<Container>
+				<LoaderArticle />
+			</Container>
+		);
+	}
 
 	if (!data) return false;
 
@@ -63,26 +65,16 @@ const Cours = ({ router }) => {
 		// clear the Content To Go states
 		store.dispatch(clearContentToGo());
 
-		const previousPages = [];
-		const previousPageType = store.getState() ? store.getState().pathReducer.pageType : null;
-		const previousPageName = store.getState() ? store.getState().pathReducer.pageName : null;
-		const previousPageID = store.getState() ? store.getState().pathReducer.pageID : null;
+		// get the previous path to build the breadcrumb
+		const previousPaths = buildPreviousPath(data.courBySlug.Name);
 
-		if (previousPageType && previousPageName && previousPageID) {
-			previousPages.push({
-				href: `/${previousPageType}`,
-				label: previousPageType === 'niveau' ? 'Niveaux' : 'Catégories'
-			});
-			previousPages.push({ href: `/${previousPageType}/${previousPageID}`, label: previousPageName });
-		} else {
-			previousPages.push({ href: '/cours', label: 'Cours' });
-		}
-
-		previousPages.push({ href: '', label: data.courBySlug.Name });
+		// sto the current cours ID
+		const coursID = data.courBySlug.id;
+		coursID && store.dispatch(setCoursID(coursID));
 
 		return (
-			<Container>
-				<Breadcrumb items={previousPages} />
+			<Container size='small'>
+				<Breadcrumb items={previousPaths} />
 				<CoursMain cours={data.courBySlug} />
 			</Container>
 		);

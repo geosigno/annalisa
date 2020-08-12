@@ -7,7 +7,7 @@ import VisualProtected from '../../assets/protected.svg';
 
 const ProtectedContent = () => {
 	return (
-		<Poster title="Oups... vous n'avez pas encore accès à ce cours!" Visual={VisualProtected}>
+		<Poster title="Oups... vous n'avez pas encore accès à ce cours!" Visual={VisualProtected} hasNavigation>
 			<div>
 				<p>
 					Ce cours est protégé, pour le visionner veuillez vous&nbsp;

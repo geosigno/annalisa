@@ -7,6 +7,52 @@ import ProtectedContent from '../ProtectedContent';
 import { CardListLoader } from '../Loader';
 import Card from './Card';
 
+const proceedData = (data, type, loadMore) => {
+	let response;
+
+	if (type === 'cours') {
+		response = data?.cours || data?.coursBySlug?.cours || data?.categoryBySlug?.cours || data?.levelBySlug?.cours;
+	} else if (type === 'level') {
+		response = data?.levels;
+	} else {
+		response = data?.categories;
+	}
+
+	response = response.map((item) => {
+		item.linkHref = `/${type}?id=${item.slug}`;
+		if (type === 'cours') {
+			item.linkAs = `/cours/${item.slug}`;
+		} else if (type === 'level') {
+			item.linkAs = `/niveau/${item.slug}`;
+		} else {
+			item.linkAs = `/categorie/${item.slug}`;
+		}
+		return item;
+	});
+
+	if (loadMore) {
+		let item = { loadMore: true };
+		if (type === 'cours') {
+			item.linkAs = `/cours`;
+			item.linkHref = `/cours`;
+			item.Name = 'Tous les cours';
+			item.slug = 'tous-les-cours';
+		} else if (type === 'level') {
+			item.linkAs = `/niveau`;
+			item.linkHref = `/niveau`;
+			item.Name = 'Tous les niveaux';
+			item.slug = 'tous-les-niveaux';
+		} else {
+			item.linkAs = `/categorie`;
+			item.linkHref = `/categorie`;
+			item.Name = 'Toutes les catégories';
+			item.slug = 'tous-les-categories';
+		}
+		response.push(item);
+	}
+	return response;
+};
+
 const CardList = (props) => {
 	const { query, variables, limit, type } = props;
 
@@ -23,42 +69,16 @@ const CardList = (props) => {
 	// loading state
 	const nbSkeletonToDisplay = limit ? limit + 1 : 6;
 	if (loading) return <CardListLoader n={nbSkeletonToDisplay} />;
-
-	let response;
-
-	switch (type) {
-		case 'cours':
-			if (data.cours)
-				// get all cours
-				response = data.cours;
-			else if (data.levelBySlug && data.levelBySlug.cours)
-				// get cours by level
-				response = data.levelBySlug.cours;
-			else if (data.categoryBySlug && data.categoryBySlug.cours)
-				// get cours by category
-				response = data.categoryBySlug.cours;
-			break;
-		case 'level':
-			response = data.levels;
-			break;
-		case 'category':
-			response = data.categories;
-			break;
-		default:
-			response = data.cours;
-	}
+	const response = proceedData(data, type, limit);
 
 	if (response)
 		return (
 			<Grid gap='64px' columns='1fr 1fr 1fr'>
-				{response.map((item) => {
-					return (
-						<Cell key={item.id}>
-							<Card data={item} type={type} />
-						</Cell>
-					);
-				})}
-				{limit && <Card data={{}} type={type} loadMore />}
+				{response.map((item) => (
+					<Cell key={item.slug}>
+						<Card data={item} type={type} />
+					</Cell>
+				))};
 			</Grid>
 		);
 

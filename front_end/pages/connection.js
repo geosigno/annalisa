@@ -1,3 +1,4 @@
+import React from 'react';
 import FullPageForm from '../components/form/FullPageForm';
 import SignInForm from '../components/form/SignInForm';
 

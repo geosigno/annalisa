@@ -7,6 +7,8 @@ export const ADD_PAGE_FROM_NAME = 'ADD_PAGE_FROM_NAME';
 export const ADD_PAGE_FROM_ID = 'ADD_PAGE_FROM_ID';
 export const CLEAR_PAGE_FROM = 'CLEAR_PAGE_FROM';
 
+export const SET_COUR_ID = 'SET_COUR_ID';
+
 export function addContentToGoURL(url) {
 	return { type: 'ADD_CONTENT_TO_GO_URL', url };
 }
@@ -27,4 +29,7 @@ export function addPageFromID(pageID) {
 }
 export function clearPageFrom() {
 	return { type: 'CLEAR_PAGE_FROM' };
+}
+export function setCoursID(coursID) {
+	return { type: 'SET_COURS_ID', coursID };
 }

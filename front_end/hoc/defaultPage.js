@@ -3,14 +3,12 @@ import React from 'react';
 import Nav from '../components/Nav';
 // import Container from '../components/Container';
 
-import Auth from '../helpers/auth';
+import { getUserFromLocalCookie, getUserFromServerCookie } from '../helpers/auth';
 
-export default (Page) =>
+const defaultPage =(Page) =>
 	class DefaultPage extends React.Component {
 		static async getInitialProps(ctx) {
-			const { username, userAvatar } = process.browser
-				? Auth.getUserFromLocalCookie()
-				: Auth.getUserFromServerCookie(ctx);
+			const { username, userAvatar } = process.browser ? getUserFromLocalCookie() : getUserFromServerCookie(ctx);
 			const pageProps = Page.getInitialProps && Page.getInitialProps(ctx);
 			const path = '';
 			return {
@@ -45,10 +43,12 @@ export default (Page) =>
 					{/* </Container> */}
 					<style global jsx>{`
 						body {
-							padding-top: 96px;
+							padding-top: 64px;
 						}
 					`}</style>
 				</div>
 			);
 		}
 	};
+
+	export default defaultPage;

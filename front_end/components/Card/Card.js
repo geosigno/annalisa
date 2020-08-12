@@ -18,48 +18,12 @@ const PlaceholderImage = () => (
 );
 
 const Card = (props) => {
-	let {
-		data: { id, slug, Name, Image, Description },
-		type,
-		loadMore
+	const {
+		data: { id, slug, Name, Image, Description, linkHref, linkAs, loadMore },
+		type
 	} = props;
 
-	// const slugName = slugify(Name, { lower: true });
-	let linkHref = slug && `/${type}?id=${slug}`;
-	let linkAs;
-	let visual;
-
-	switch (type) {
-		case 'cours':
-			linkAs = `/cours/${slug}`;
-			if (loadMore) {
-				linkAs = `/cours`;
-				linkHref = `/cours`;
-				Name = 'Tous les cours';
-			}
-			visual = <AllCoursVisual />;
-			break;
-		case 'level':
-			linkAs = `/niveau/${slug}`;
-			if (loadMore) {
-				linkAs = `/niveau`;
-				linkHref = `/niveau`;
-				Name = 'Tous les niveaux';
-			}
-			visual = <AllCategoriesVisual />;
-			break;
-		case 'category':
-			linkAs = `/categorie/${slug}`;
-			if (loadMore) {
-				linkAs = `/categorie`;
-				linkHref = `/categorie`;
-				Name = 'Toutes les catégories';
-			}
-
-			break;
-		default:
-			linkAs = `/cours/${slug}`;
-	}
+	const visual = type === 'cours' ? <AllCoursVisual /> : <AllCategoriesVisual />;
 
 	return (
 		<Link href={linkHref} as={linkAs}>

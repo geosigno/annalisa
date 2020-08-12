@@ -2,7 +2,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
-import Auth from '../helpers/auth';
+import { getBearer } from '../helpers/auth';
 
 export default function createApolloClient(initialState, ctx) {
 	// The `ctx` (NextPageContext) will only be present on the server.
@@ -13,7 +13,7 @@ export default function createApolloClient(initialState, ctx) {
 			uri: 'http://localhost:1337/graphql', // Server URL (must be absolute)
 			credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
 			fetch,
-			headers: Auth.getBearer() // auth token
+			headers: getBearer() // auth token
 		}),
 		cache: new InMemoryCache().restore(initialState)
 	});

@@ -47,7 +47,7 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 					font-size: 15px;
 					color: #555;
 					text-align: left;
-					padding: 6px 8px;
+					padding: 6px 12px;
 					transition: all 0.2s;
 				}
 				.active label {
@@ -57,8 +57,8 @@ const Input = ({ id, label, name, value, disabled, type, onChange, register, err
 				}
 				input {
 					font-size: 16px;
-					padding: 16px 8px 4px;
-					height: 48px;
+					padding: 20px 12px 4px;
+					height: 50px;
 					width: 100%;
 					border: 1px solid #dedede;
 					border-radius: 4px;

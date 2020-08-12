@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'next/router';
 
-import Auth from '../../helpers/auth';
+import { authProviderCallback } from '../../helpers/auth';
 import store from '../../redux/stores';
 
 import Poster from '../../components/Poster';
@@ -19,7 +19,7 @@ const Connect = ({ router }) => {
 			search += `redirectURI=${contentToGoURL}`;
 		}
 
-		Auth.providerCallback('google', search);
+		authProviderCallback('google', search);
 	}, []);
 
 	return (

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ProfileMain = (props) => {
 	const { email, username, avatar, bio } = props;
 
@@ -5,7 +7,7 @@ const ProfileMain = (props) => {
 		<section>
 			<h1>Profile</h1>
 
-			{avatar.url && <img src={`http://localhost:1337${avatar.url}`} />}
+			{avatar.url && <img src={`http://localhost:1337${avatar.url}`} alt={`Avatar de ${username}`} />}
 
 			<input type='disabled' name='email' value={email} />
 

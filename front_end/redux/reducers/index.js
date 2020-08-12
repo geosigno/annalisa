@@ -11,6 +11,10 @@ const initialPathState = {
 	pageID: ''
 };
 
+const initialCoursState = {
+	coursID: ''
+};
+
 function rootReducer(state = initialContentToGoState, action) {
 	if (action.type === 'ADD_CONTENT_TO_GO_URL') {
 		return { ...state, contentToGoURL: action.url };
@@ -41,11 +45,17 @@ function pathReducer(state = initialPathState, action) {
 	return state;
 }
 
+function coursReducer(state = initialCoursState, action) {
+	if (action.type === 'SET_COURS_ID') {
+		return { ...state, coursID: action.coursID };
+	}
+	return state;
+}
+
 const app = combineReducers({
 	rootReducer,
-	pathReducer
+	pathReducer,
+	coursReducer
 });
 
 export default app;
-
-// export default rootReducer;

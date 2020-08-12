@@ -100,12 +100,13 @@ const CardSkeleton = (props) => (
 export const CardListLoader = ({ n = 3 }) => {
 	const cartLoaders = [];
 	while (n > 0) {
-		cartLoaders.push(<CardSkeleton />);
+		cartLoaders.push(<CardSkeleton key={n}/>);
 		n--;
 	}
 	return (
 		<div>
-			<div className='grid'>{cartLoaders}</div>
+			<div className='grid'>
+				{cartLoaders}</div>
 			<style jsx>{`
 				.grid {
 					display: grid;

@@ -82,7 +82,6 @@ const CommentaireList = ({ router }) => {
 													placeholder='Ecrivez votre réponse...'
 													commentParentID={comment.id}
 													handleReplyCallback={handleReplyClick}
-													coursID={router.query.id}
 												/>
 											</li>
 										)}

@@ -69,11 +69,9 @@ const CoursMain = (props) => {
 				<style global jsx>{`
 					.cours {
 						display: block;
-						max-width: 800px;
 						background: #fff;
 						border-radius: 8px;
 						padding: 64px 32px 32px;
-						margin: 0 auto;
 					}
 					.cours__header {
 						margin: 0 0 64px;

@@ -3,8 +3,6 @@ import Head from 'next/head';
 import { compose } from 'recompose';
 import { withRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
-import store from '../redux/stores';
-import { addPageFromType, addPageFromName, addPageFromID } from '../redux/actions';
 
 import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
@@ -17,6 +15,8 @@ import CardList from '../components/Card/CardList';
 
 import { GET_ALL_COURS_BY_LEVEL_ID } from '../apollo/query/cours';
 import GET_ALL_LEVELS from '../apollo/query/level';
+
+import { setCurrentPath } from '../helpers/path';
 
 const Niveau = ({ router }) => {
 	const isDetailledPage = !!router.query.id;
@@ -64,9 +64,7 @@ const Niveau = ({ router }) => {
 		);
 
 	if (data && data.levelBySlug) {
-		store.dispatch(addPageFromType('niveau'));
-		store.dispatch(addPageFromName(data.levelBySlug.Name));
-		store.dispatch(addPageFromID(router.query.id));
+		setCurrentPath('niveau', data.levelBySlug.Name, router.query.id);
 
 		return (
 			<div>

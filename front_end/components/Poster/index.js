@@ -2,9 +2,9 @@ import React from 'react';
 import { LoaderBounce } from '../Loader';
 
 const Poster = (props) => {
-	const { title, loader, Visual, children } = props;
+	const { title, loader, Visual, children, hasNavigation } = props;
 	return (
-		<div className='poster'>
+		<div className={`poster${hasNavigation ? ' hasNavigation' : ''}`}>
 			<div className='poster__container'>
 				{Visual && (
 					<div className='poster__left'>
@@ -35,6 +35,9 @@ const Poster = (props) => {
 					max-height: 100vh;
 					overflow: hidden;
 					background-color: #f5f5f5;
+				}
+				.hasNavigation .poster__container {
+					max-height: calc(100vh - 64px);
 				}
 				.poster__left {
 					flex: 60% 0 0;

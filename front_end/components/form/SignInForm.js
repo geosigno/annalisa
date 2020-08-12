@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 import { useForm } from 'react-hook-form';
 import store from '../../redux/stores';
-import Auth from '../../helpers/auth';
+import { login } from '../../helpers/auth';
 
 import formStyle from './form-style';
 
@@ -17,7 +17,7 @@ const SignInForm = () => {
 
 	const { contentToGoTitle } = store.getState().rootReducer;
 
-	const onLoginSubmit = (data) => Auth.login(data);
+	const onLoginSubmit = (data) => login(data);
 
 	const hook = !contentToGoTitle
 		? 'Content de vous revoir!'
@@ -39,7 +39,7 @@ const SignInForm = () => {
 				</a> */}
 				<a
 					href='http://localhost:1337/connect/google'
-					onClick={(e) => {
+					onClick={() => {
 						const { contentToGoURL } = store.getState().rootReducer;
 						contentToGoURL && Cookies.set('contentToGoURL', contentToGoURL);
 					}}
@@ -58,7 +58,7 @@ const SignInForm = () => {
 						errors={errors}
 					/>
 					{errors.identifier && errors.identifier.type === 'required' && (
-						<p className='input__error'>L'identifiant est obligatoire</p>
+						<p className='input__error'>L&apos;identifiant est obligatoire</p>
 					)}
 				</div>
 				<div className='input__container'>

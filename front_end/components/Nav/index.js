@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+import { Dropdown } from 'semantic-ui-react';
 
 // import { push as Menu } from 'react-burger-menu';
 import store from '../../redux/stores';
+import { unsetToken } from '../../helpers/auth';
 
 const defaultLinks = [
 	{ href: '/cours', label: 'cours' },
@@ -41,11 +43,15 @@ const Nav = ({ isAuthenticated, username, userAvatar }) => (
 			</ul>
 			{isAuthenticated ? (
 				<div className='navUser'>
-					<p>
-						<Link href='/profile'>
-							<a>{username}</a>
-						</Link>
-					</p>
+					<Dropdown text={username}>
+						<Dropdown.Menu>
+							<Link href='/profile'>
+								<a>Edit Profile</a>
+							</Link>
+							{/* <Dropdown.Divider /> */}
+							<button onClick={() => unsetToken()}>Logout</button>
+						</Dropdown.Menu>
+					</Dropdown>
 					{userAvatar ? (
 						<img src={`http://localhost:1337${userAvatar}`} alt={username} />
 					) : (
@@ -101,7 +107,18 @@ const Nav = ({ isAuthenticated, username, userAvatar }) => (
 				padding: 0;
 			}
 			nav ul a {
+				color: #222;
+				font-family: 'Raleway';
+				font-size: 16px;
+				font-weight: 300;
+				text-transform: uppercase;
 				padding: 8px 16px;
+			}
+			nav ul li:after {
+				content: '/';
+			}
+			nav ul li:last-child:after {
+				content: '';
 			}
 			.navUser {
 				display: flex;
@@ -111,6 +128,18 @@ const Nav = ({ isAuthenticated, username, userAvatar }) => (
 				max-width: 40px;
 				border-radius: 50%;
 				margin-left: 8px;
+			}
+			.navUser a {
+				display: block;
+				padding: 12px 16px;
+			}
+			.navUser button {
+				display: block;
+				background: transparent;
+				padding: 12px 16px;
+			}
+			.navUser button:hover {
+				cursor: pointer;
 			}
 		`}</style>
 	</nav>

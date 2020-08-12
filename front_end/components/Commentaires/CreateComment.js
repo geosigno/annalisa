@@ -1,53 +1,56 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { withRouter } from 'next/router';
+import { compose } from 'recompose';
+
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useForm } from 'react-hook-form';
-import TextareaAutosize from 'react-autosize-textarea';
-
-import Loader from '../Loader';
 import { withApollo } from '../../apollo/apollo';
+
+import store from '../../redux/stores';
+import Textarea from '../form/Textarea';
+import Loader from '../Loader';
 
 import { GET_USER_DATA } from '../../apollo/query/profile';
 import { CREATE_COMMENT, GET_COMMENTS_BY_COURS_ID } from '../../apollo/query/comment';
 
 function CreateComment(props) {
-	const { placeholder, commentParentID, handleReplyCallback, coursID } = props;
+	const { placeholder, commentParentID, handleReplyCallback, router } = props;
+
+	const coursID = store.getState() ? store.getState().coursReducer.coursID : null;
+	const coursSlug = router.query.id;
 
 	const { loading, error, data } = useQuery(GET_USER_DATA);
-
-	const [value, setValue] = useState('');
 
 	const textareaRef = useRef(null);
 
 	useEffect(() => {
-		if (commentParentID) {
-			textareaRef.current.focus();
-		}
+		commentParentID && textareaRef.current.focus();
 	});
 
 	const [createComment] = useMutation(CREATE_COMMENT, {
 		update(cache, { data: { createComment } }) {
-			const { cour } = cache.readQuery({
+			const { courBySlug } = cache.readQuery({
 				query: GET_COMMENTS_BY_COURS_ID,
 				variables: {
-					id: coursID
+					id: coursSlug
 				}
 			});
 			cache.writeQuery({
 				query: GET_COMMENTS_BY_COURS_ID,
-				data: { comments: cour.comments.concat([createComment]) }
+				data: { comments: courBySlug.comments.concat([createComment]) }
 			});
 		},
 		refetchQueries: [
 			{
 				query: GET_COMMENTS_BY_COURS_ID,
 				variables: {
-					id: coursID
+					id: coursSlug
 				}
 			}
 		]
 	});
 
-	const { register, handleSubmit, errors } = useForm();
+	const { register, handleSubmit, errors, setValue } = useForm();
 
 	if (loading) return <Loader />;
 
@@ -65,7 +68,8 @@ function CreateComment(props) {
 			if (handleReplyCallback) {
 				handleReplyCallback('');
 			}
-			setValue('');
+			// clear the textarea once done
+			setValue('comment', '');
 		});
 	};
 
@@ -80,17 +84,14 @@ function CreateComment(props) {
 					)}
 
 					<label htmlFor='comment'>
-						<TextareaAutosize
-							rows={2}
+						<Textarea
 							id='comment'
 							name='comment'
-							placeholder={placeholder}
-							ref={(e) => {
+							label={placeholder}
+							register={(e) => {
 								textareaRef.current = e;
 								register(e, { required: true, minLength: 3 });
 							}}
-							onChange={(e) => setValue(e.target.value)}
-							value={value}
 						/>
 
 						{errors.comment && errors.comment.type === 'required' && (
@@ -130,11 +131,6 @@ function CreateComment(props) {
 					.createComment textarea {
 						width: 100%;
 					}
-					.createComment textarea {
-						border-radius: 8px;
-						border: 1px solid #999;
-						padding: 8px;
-					}
 					.createComment__submit {
 						text-align: right;
 					}
@@ -164,4 +160,4 @@ function CreateComment(props) {
 	);
 }
 
-export default withApollo({ ssr: false })(CreateComment);
+export default compose(withRouter, withApollo({ ssr: false }))(CreateComment);

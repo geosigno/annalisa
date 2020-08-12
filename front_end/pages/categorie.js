@@ -3,8 +3,6 @@ import Head from 'next/head';
 import { compose } from 'recompose';
 import { withRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
-import store from '../redux/stores';
-import { addPageFromType, addPageFromName, addPageFromID } from '../redux/actions';
 
 import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
@@ -17,6 +15,8 @@ import CardList from '../components/Card/CardList';
 
 import { GET_ALL_COURS_BY_CAGTEGORY_ID } from '../apollo/query/cours';
 import GET_ALL_CATEGORIES from '../apollo/query/category';
+
+import { setCurrentPath } from '../helpers/path';
 
 const Category = ({ router }) => {
 	const isDetailledPage = !!router.query.id;
@@ -64,9 +64,7 @@ const Category = ({ router }) => {
 		);
 
 	if (data && data.categoryBySlug) {
-		store.dispatch(addPageFromType('categorie'));
-		store.dispatch(addPageFromName(data.categoryBySlug.Name));
-		store.dispatch(addPageFromID(router.query.id));
+		setCurrentPath('categorie', data.categoryBySlug.Name, router.query.id);
 
 		return (
 			<div>

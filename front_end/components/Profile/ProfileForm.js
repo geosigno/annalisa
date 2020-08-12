@@ -1,18 +1,25 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Router from 'next/router';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
+import { getBearer } from '../../helpers/auth';
 import Input from '../form/Input';
 import Textarea from '../form/Textarea';
 
 const ProfileForm = (props) => {
-	console.log('username', props);
 	const { register, handleSubmit, errors } = useForm();
 	const {
 		data: { id, username, email, Bio, avatar }
 	} = props;
 
 	const onFormSubmit = (data) => {
-		console.log(data);
+		const headers = getBearer();
+		axios.put('http://localhost:1337/users/me', data, { headers }).then((response) => {
+			response.data.username && Cookies.set('username', response.data.username);
+			Router.push('/profile');
+		});
 	};
 
 	return (
@@ -23,15 +30,15 @@ const ProfileForm = (props) => {
 				</div>
 				<div>
 					<Input
-						id='identifier'
-						label='Identifiant'
-						name='identifier'
+						id='username'
+						label='Username'
+						name='username'
 						value={username}
 						register={register({ required: true })}
 						errors={errors}
 					/>
-					{errors.identifier && errors.identifier.type === 'required' && (
-						<p className='input__error'>L'identifiant est obligatoire</p>
+					{errors.username && errors.username.type === 'required' && (
+						<p className='input__error'>L&apos;identifiant est obligatoire</p>
 					)}
 				</div>
 				<div>

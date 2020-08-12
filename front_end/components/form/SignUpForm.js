@@ -108,7 +108,7 @@ const SignUpForm = () => {
 					)}
 				</div>
 			</div>
-			<button type='submit'>S'enregistrer</button>
+			<button type='submit'>S&apos;enregistrer</button>
 			<p className='form__info'>
 				Vous avez déja un compte?
 				<Link href='/connection'>
