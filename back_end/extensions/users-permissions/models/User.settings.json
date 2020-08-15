@@ -54,8 +54,8 @@
       "configurable": false
     },
     "comments": {
-      "via": "user",
-      "collection": "comments"
+      "collection": "comments",
+      "via": "user"
     },
     "avatar": {
       "collection": "file",
@@ -69,6 +69,12 @@
       "required": false
     },
     "Bio": {
+      "type": "string"
+    },
+    "country_of_origin": {
+      "type": "string"
+    },
+    "current_country": {
       "type": "string"
     }
   }

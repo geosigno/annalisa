@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import autosize from 'autosize';
 
-const Textarea = ({ id, label, name, value, disabled, type, register, errors }) => {
-	const handleChange = (e) => {
-		autosize(e.target);
-	};
+const Textarea = ({ id, label, name, value, disabled, type, autoFocus, onBlur, register, errors }) => {
+	let textareaNode;
+
+	useEffect(() => {
+		autosize(textareaNode);
+	});
+
+	// const handleChange = (e) => {
+	// 	autosize(e.target);
+	// };
 
 	const handleFocus = (e) => {
 		e.target.closest('div').classList.add('active');
@@ -13,6 +19,7 @@ const Textarea = ({ id, label, name, value, disabled, type, register, errors }) 
 	const handleBlur = (e) => {
 		const isFilled = !!e.target.value;
 		!isFilled && e.target.closest('div').classList.remove('active');
+		onBlur();
 	};
 
 	const handleAutoFill = (e) => {
@@ -37,10 +44,17 @@ const Textarea = ({ id, label, name, value, disabled, type, register, errors }) 
 				type={type}
 				onFocus={handleFocus}
 				onBlur={handleBlur}
-				onChange={handleChange}
-				ref={register}
+				autoFocus={autoFocus}
+				// onChange={handleChange}
+				ref={(e) => {
+					register(e);
+					textareaNode = e;
+				}}
 				onAnimationStart={handleAutoFill}
 			/>
+			{errors && errors[name]?.type === 'required' &&
+				<p className='input__error'>Ce champs est obligatoire</p>
+			}
 			<style jsx>{`
 				div {
 					position: relative;
@@ -76,6 +90,16 @@ const Textarea = ({ id, label, name, value, disabled, type, register, errors }) 
 				}
 				.error label {
 					color: rgba(237, 67, 55, 1);
+				}
+				.input__error {
+					font-style: italic;
+					font-size: 12px;
+					text-align: left;
+					color: #e8616d;
+					position: absolute;
+					left: 12px;
+					bottom: 6px;
+					margin: 0;
 				}
 				.disabled textarea {
 					background: #efefef;

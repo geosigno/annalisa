@@ -11,7 +11,7 @@ import { clearContentToGo, setCoursID } from '../redux/actions';
 import defaultPage from '../hoc/defaultPage';
 import Container from '../components/Container';
 import Breadcrumb from '../components/Breadcrumb';
-import { LoaderArticle } from '../components/Loader';
+import CoursLoader from '../components/Loader/CoursLoader';
 import ProtectedContent from '../components/ProtectedContent';
 
 import CoursMain from '../components/Cours/coursMain';
@@ -52,11 +52,7 @@ const Cours = ({ router }) => {
 
 	// return skeleton loader
 	if (loading) {
-		return (
-			<Container>
-				<LoaderArticle />
-			</Container>
-		);
+		return <CoursLoader />;
 	}
 
 	if (!data) return false;

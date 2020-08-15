@@ -51,6 +51,7 @@ function CommentaireItem(props) {
 				.commentaire__container {
 					display: flex;
 					align-items: center;
+					margin: 0 0 24px;
 				}
 				.commentaire__avatar {
 					max-width: 64px;
@@ -62,7 +63,7 @@ function CommentaireItem(props) {
 				.commentaire__user {
 					font-size: 18px;
 					font-weight: 600;
-					margin: 0 0 8px;
+					margin: 0;
 				}
 				.commentaire__meta {
 					font-size: 80%;

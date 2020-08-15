@@ -4,6 +4,7 @@ import { Dropdown } from 'semantic-ui-react';
 
 // import { push as Menu } from 'react-burger-menu';
 import store from '../../redux/stores';
+import { clearContentToGo } from '../../redux/actions';
 import { unsetToken } from '../../helpers/auth';
 
 const defaultLinks = [
@@ -32,7 +33,7 @@ const Nav = ({ isAuthenticated, username, userAvatar }) => (
 							<Link href={href}>
 								<a
 									onClick={() => {
-										store.dispatch(clear());
+										store.dispatch(clearContentToGo());
 									}}>
 									{label}
 								</a>
@@ -66,7 +67,7 @@ const Nav = ({ isAuthenticated, username, userAvatar }) => (
 								<Link href={href}>
 									<a
 										onClick={() => {
-											store.dispatch(clear());
+											store.dispatch(clearContentToGo());
 										}}>
 										{label}
 									</a>

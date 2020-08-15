@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'next/router';
 import { compose } from 'recompose';
+import { toast } from 'react-toastify';
 
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useForm } from 'react-hook-form';
@@ -8,6 +9,7 @@ import { withApollo } from '../../apollo/apollo';
 
 import store from '../../redux/stores';
 import Textarea from '../form/Textarea';
+import Toast from '../Toast';
 import Loader from '../Loader';
 
 import { GET_USER_DATA } from '../../apollo/query/profile';
@@ -70,6 +72,8 @@ function CreateComment(props) {
 			}
 			// clear the textarea once done
 			setValue('comment', '');
+
+			toast('Votre commentaire a été envoyé!');
 		});
 	};
 
@@ -156,6 +160,7 @@ function CreateComment(props) {
 					}
 				`}</style>
 			</form>
+			<Toast />
 		</div>
 	);
 }

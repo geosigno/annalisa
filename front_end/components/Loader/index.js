@@ -79,48 +79,6 @@ export const LoaderBounce = (props) => {
 	);
 };
 
-const CardSkeleton = (props) => (
-	<ContentLoader
-		speed={3}
-		width={357}
-		height={410}
-		viewBox='0 0 357 410'
-		backgroundColor='#f3f3f3'
-		foregroundColor='#ecebeb'
-		{...props}>
-		<rect width='356' height='233' rx='8' ry='8' />
-		<rect x='25' y='269' width='306' height='11' rx='4' ry='4' />
-		<rect x='25' y='296' width='210' height='11' rx='4' ry='4' />
-		<rect x='25' y='337' width='306' height='6' rx='2' ry='2' />
-		<rect x='25' y='356' width='306' height='6' rx='2' ry='2' />
-		<rect x='25' y='373' width='210' height='6' rx='2' ry='2' />
-	</ContentLoader>
-);
-
-export const CardListLoader = ({ n = 3 }) => {
-	const cartLoaders = [];
-	while (n > 0) {
-		cartLoaders.push(<CardSkeleton key={n}/>);
-		n--;
-	}
-	return (
-		<div>
-			<div className='grid'>
-				{cartLoaders}</div>
-			<style jsx>{`
-				.grid {
-					display: grid;
-					height: auto;
-					grid-auto-flow: row;
-					grid-auto-rows: minmax(20px, auto);
-					grid-template-columns: 1fr 1fr 1fr;
-					grid-gap: 64px;
-				}
-			`}</style>
-		</div>
-	);
-};
-
 export const LoaderArticle = (props) => (
 	<ContentLoader
 		speed={3}
@@ -131,13 +89,13 @@ export const LoaderArticle = (props) => (
 		foregroundColor='#ecebeb'
 		{...props}>
 		<rect x='32' y='252' width='738' height='492' rx='8' ry='8' />
-		<rect x='32' y='191' width='738' height='8' rx='4' ry='4' />
-		<rect x='32' y='822' width='738' height='8' rx='4' ry='4' />
-		<rect x='32' y='790' width='738' height='8' rx='4' ry='4' />
-		<rect x='32' y='223' width='522' height='8' rx='4' ry='4' />
-		<rect x='32' y='854' width='522' height='8' rx='4' ry='4' />
-		<rect x='32' y='64' width='407' height='16' rx='5.5' ry='5.5' />
-		<rect x='32' y='119' width='260' height='16' rx='5.5' ry='5.5' />
+		<rect x='32' y='191' width='738' height='8' rx='2' ry='2' />
+		<rect x='32' y='822' width='738' height='8' rx='2' ry='2' />
+		<rect x='32' y='790' width='738' height='8' rx='2' ry='2' />
+		<rect x='32' y='223' width='522' height='8' rx='2' ry='2' />
+		<rect x='32' y='854' width='522' height='8' rx='2' ry='2' />
+		<rect x='32' y='64' width='407' height='16' rx='2' ry='2' />
+		<rect x='32' y='119' width='260' height='16' rx='2' ry='2' />
 	</ContentLoader>
 );
 

@@ -4,6 +4,7 @@ import { withRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 import { withApollo } from '../apollo/apollo';
 import securePage from '../hoc/securePage';
+import Container from '../components/Container';
 
 import { GET_USER_DATA } from '../apollo/query/profile';
 
@@ -13,7 +14,11 @@ const Profile = () => {
 	const { loading, error, data } = useQuery(GET_USER_DATA);
 
 	if (data && data.self) {
-		return <ProfileForm data={data.self} />;
+		return (
+			<Container size='small'>
+				<ProfileForm data={data.self} />;
+			</Container>
+		);
 	}
 	return <h1>Profile</h1>;
 };

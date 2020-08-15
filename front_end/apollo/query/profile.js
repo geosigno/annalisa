@@ -4,9 +4,12 @@ export const GET_USER_DATA = gql`
 	query {
 		self {
 			id
+			created_at
 			username
 			email
 			Bio
+			country_of_origin
+			current_country
 			avatar {
 				url
 			}

@@ -7,7 +7,7 @@ import Link from 'next/link';
 import store from '../../redux/stores';
 import { addContentToGoTitle, addContentToGoURL } from '../../redux/actions';
 
-import getImage from '../Image';
+import getImage from '../../helpers/image';
 // import { dateToFormat } from '../../helpers/date';
 
 import AllCoursVisual from '../../assets/allcours.svg';

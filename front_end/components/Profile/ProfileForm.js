@@ -1,52 +1,62 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import Router from 'next/router';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { MdEmail, MdHome, MdFormatQuote, MdAirplanemodeActive } from 'react-icons/md';
 
-import { getBearer } from '../../helpers/auth';
-import Input from '../form/Input';
-import Textarea from '../form/Textarea';
+import { dateToFormat } from '../../helpers/date';
+import ProfileAvatar from './ProfileAvatar';
+import ProfileItem from './ProfileItem';
 
 const ProfileForm = (props) => {
-	const { register, handleSubmit, errors } = useForm();
 	const {
-		data: { id, username, email, Bio, avatar }
+		data: { id, created_at, username, email, Bio, country_of_origin, current_country, avatar }
 	} = props;
 
-	const onFormSubmit = (data) => {
-		const headers = getBearer();
-		axios.put('http://localhost:1337/users/me', data, { headers }).then((response) => {
-			response.data.username && Cookies.set('username', response.data.username);
-			Router.push('/profile');
-		});
-	};
-
 	return (
-		<div>
-			<form onSubmit={handleSubmit(onFormSubmit)}>
-				<div>
-					<Input id='email' label='Email' name='email' value={email} disabled />
-				</div>
-				<div>
-					<Input
-						id='username'
-						label='Username'
-						name='username'
-						value={username}
-						register={register({ required: true })}
-						errors={errors}
+		<div className='profileForm'>
+			<div className='profileForm__left'>
+				<ProfileAvatar avatar={avatar} />
+
+				{username && <ProfileItem id='username' label='Username' value={username} />}
+
+				{Bio && <ProfileItem id='Bio' label='Bio' value={Bio} icon={<MdFormatQuote size='16px' />} type='textarea' />}
+
+				{email && (
+					<ProfileItem id='email' label='Email' value={email} icon={<MdEmail size='16px' />} editable={false} />
+				)}
+
+				{country_of_origin && (
+					<ProfileItem
+						id='country_of_origin'
+						label="Pays d'origine"
+						value={country_of_origin}
+						icon={<MdHome size='16px' />}
+						type='country'
 					/>
-					{errors.username && errors.username.type === 'required' && (
-						<p className='input__error'>L&apos;identifiant est obligatoire</p>
-					)}
-				</div>
-				<div>
-					<Textarea id='bio' label='Bio' name='Bio' value={Bio && Bio} register={register} errors={errors} />
-				</div>
-				<button type='submit'>Mettre à jour</button>
-			</form>
+				)}
+
+				{current_country && (
+					<ProfileItem
+						id='current_country'
+						label='Pays actuel'
+						value={current_country}
+						icon={<MdAirplanemodeActive size='16px' />}
+						type='country'
+					/>
+				)}
+
+				{created_at && <p>Membre depuis le {dateToFormat(created_at)}</p>}
+			</div>
+
 			<style jsx>{`
+				.profileForm {
+					display: flex;
+					align-items: center;
+				}
+				.profileForm__left {
+					flex-basis: 50%;
+				}
+				.profileForm__right {
+					flex-basis: 50%;
+				}
 				form {
 					max-width: 500px;
 					margin: 0 auto;

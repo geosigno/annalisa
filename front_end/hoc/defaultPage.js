@@ -5,7 +5,7 @@ import Nav from '../components/Nav';
 
 import { getUserFromLocalCookie, getUserFromServerCookie } from '../helpers/auth';
 
-const defaultPage =(Page) =>
+const defaultPage = (Page) =>
 	class DefaultPage extends React.Component {
 		static async getInitialProps(ctx) {
 			const { username, userAvatar } = process.browser ? getUserFromLocalCookie() : getUserFromServerCookie(ctx);
@@ -51,4 +51,4 @@ const defaultPage =(Page) =>
 		}
 	};
 
-	export default defaultPage;
+export default defaultPage;

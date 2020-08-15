@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { useQuery } from '@apollo/react-hooks';
 
 import { withApollo } from '../../apollo/apollo';
-import Loader from '../Loader';
+import CommentLoader from '../Loader/CommentLoader';
 import CommentaireItem from './CommentaireItem';
 import CreateComment from './CreateComment';
 
@@ -44,7 +44,7 @@ const CommentaireList = ({ router }) => {
 
 	const [replyOn, setReplyOn] = useState(null);
 
-	if (loading) return <Loader />;
+	if (loading) return <CommentLoader />;
 
 	if (error) return false;
 

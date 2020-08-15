@@ -71,18 +71,19 @@ const CoursMain = (props) => {
 						display: block;
 						background: #fff;
 						border-radius: 8px;
-						padding: 64px 32px 32px;
+						padding: 48px 32px 32px;
 					}
 					.cours__header {
-						margin: 0 0 64px;
+						margin: 0 0 32px;
 					}
 					.cours__title {
 						display: inline-block;
-						margin: -32px 0 32px -64px;
+						margin: -32px 0 32px -48px;
 						width: 80%;
 					}
 					.cours__title span {
 						font-size: 48px;
+						line-height: 1.3;
 						background: #c3f0dc;
 						box-decoration-break: clone;
 						padding: 4px 16px;

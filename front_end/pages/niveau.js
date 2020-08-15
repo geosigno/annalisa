@@ -8,9 +8,8 @@ import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
 import Container from '../components/Container';
 import Breadcrumb from '../components/Breadcrumb';
-import { CardListLoader } from '../components/Loader';
+import CardLoader from '../components/Loader/CardLoader';
 import ProtectedContent from '../components/ProtectedContent';
-
 import CardList from '../components/Card/CardList';
 
 import { GET_ALL_COURS_BY_LEVEL_ID } from '../apollo/query/cours';
@@ -59,7 +58,7 @@ const Niveau = ({ router }) => {
 			<Container>
 				<Breadcrumb items={[{ href: '/niveau', label: 'Niveaux' }]} />
 				<h2>Niveau:</h2>
-				<CardListLoader n={3} />
+				<CardLoader n={3} />
 			</Container>
 		);
 

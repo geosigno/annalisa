@@ -8,7 +8,7 @@ import { withApollo } from '../apollo/apollo';
 import defaultPage from '../hoc/defaultPage';
 import Container from '../components/Container';
 import Breadcrumb from '../components/Breadcrumb';
-import { CardListLoader } from '../components/Loader';
+import CardLoader from '../components/Loader/CardLoader';
 import ProtectedContent from '../components/ProtectedContent';
 
 import CardList from '../components/Card/CardList';
@@ -59,7 +59,7 @@ const Category = ({ router }) => {
 			<Container>
 				<Breadcrumb items={[{ href: '/categorie', label: 'Categories' }]} />
 				<h2>Categorie:</h2>
-				<CardListLoader n={3} />
+				<CardLoader n={3} />
 			</Container>
 		);
 

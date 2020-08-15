@@ -4,7 +4,7 @@ import { Grid, Cell } from 'styled-css-grid';
 import { withApollo } from '../../apollo/apollo';
 
 import ProtectedContent from '../ProtectedContent';
-import { CardListLoader } from '../Loader';
+import CardLoader from '../Loader/CardLoader';
 import Card from './Card';
 
 const proceedData = (data, type, loadMore) => {
@@ -67,8 +67,11 @@ const CardList = (props) => {
 	}
 
 	// loading state
-	const nbSkeletonToDisplay = limit ? limit + 1 : 6;
-	if (loading) return <CardListLoader n={nbSkeletonToDisplay} />;
+	if (loading) {
+		const nbSkeletonToDisplay = limit ? limit + 1 : 6;
+		return <CardLoader n={nbSkeletonToDisplay} />;
+	}
+
 	const response = proceedData(data, type, limit);
 
 	if (response)
@@ -78,7 +81,7 @@ const CardList = (props) => {
 					<Cell key={item.slug}>
 						<Card data={item} type={type} />
 					</Cell>
-				))};
+				))}
 			</Grid>
 		);
 
