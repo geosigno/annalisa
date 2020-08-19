@@ -33,6 +33,10 @@
     "slug": {
       "type": "uid",
       "targetField": "Name"
+    },
+    "unites": {
+      "via": "level",
+      "collection": "unite"
     }
   }
 }

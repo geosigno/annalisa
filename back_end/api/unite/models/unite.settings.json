@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "unites",
+  "info": {
+    "name": "Unite"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "name": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "level": {
+      "model": "levels",
+      "via": "unites"
+    },
+    "cours": {
+      "collection": "cours",
+      "via": "unite"
+    }
+  }
+}

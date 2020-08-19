@@ -26,6 +26,14 @@ export const GET_COURS_BY_ID = gql`
 			Content
 			created_at
 			Duration
+			Sample {
+				Extract
+				Author
+				Oeuvre
+				Audio {
+					url
+				}
+			}
 			Image {
 				url
 			}
@@ -38,6 +46,27 @@ export const GET_COURS_BY_ID = gql`
 				id
 				slug
 				Name
+			}
+			Grammaire {
+				Title
+				Content
+				Image { 
+					url 
+				}
+			}
+			Vocabulaire {
+				Title
+				Content
+				Image { 
+					url 
+				}
+			}
+			Conjugaison {
+				Title
+				Content
+				Image { 
+					url 
+				}
 			}
 		}
 	}

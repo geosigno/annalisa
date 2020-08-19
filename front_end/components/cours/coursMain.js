@@ -6,10 +6,15 @@ import ReactMarkdown from 'react-markdown';
 // import { faCalendarAlt, faGraduationCap, faClock, faTag, faTags } from '@fortawesome/free-solid-svg-icons';
 import CommentaireList from '../Commentaires/CommentaireList';
 import { dateToFormat } from '../../helpers/date';
+import Extract from './Extract';
+import AddOn from './AddOn';
+import CompleteVisual from './complete.svg';
+import Container from '../Container';
+
 
 const CoursMain = (props) => {
 	const {
-		cours: { id, Name, Image, created_at, Duration, Content, level, categories }
+		cours: { id, Name, Image, created_at, Duration, Content, level, categories, Sample, Grammaire, Vocabulaire, Conjugaison }
 	} = props;
 
 	return (
@@ -62,16 +67,29 @@ const CoursMain = (props) => {
 						{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}
 					</div>
 				</header>
-				<section className='cours__contenu'>
+
+				{Sample && <Extract data={Sample} />}
+
+				{Grammaire && <AddOn data={Grammaire} theme='peachy'/>}
+
+				{Vocabulaire && <AddOn data={Vocabulaire} theme='mint'/>}
+
+				{Conjugaison && <AddOn data={Conjugaison} theme='lilac'/>}
+
+<Container size='small'>
+<CompleteVisual />
+</Container>
+		
+
+				{/* <section className='cours__contenu'>
 					<ReactMarkdown source={Content} />
-				</section>
+				</section> */}
 
 				<style global jsx>{`
 					.cours {
 						display: block;
 						background: #fff;
 						border-radius: 8px;
-						padding: 48px 32px 32px;
 					}
 					.cours__header {
 						margin: 0 0 32px;
@@ -92,8 +110,13 @@ const CoursMain = (props) => {
 						display: flex;
 						flex-wrap: wrap;
 					}
+					.cours__image {
+						max-height: 600px;
+						overflow: hidden;
+					}
 					.cours__image img {
-						max-width: 100%;
+						height: 100%;
+						width: 100%;
 					}
 					.meta {
 						display: flex;

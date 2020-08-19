@@ -8,7 +8,7 @@ const Input = ({ id, label, name, value, disabled, type, autoFocus, onChange, on
 	const handleBlur = (e) => {
 		const isFilled = !!e.target.value;
 		!isFilled && e.target.closest('div').classList.remove('active');
-		onBlur();
+		onBlur && onBlur();
 	};
 
 	const handleAutoFill = (e) => {

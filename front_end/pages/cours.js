@@ -69,10 +69,10 @@ const Cours = ({ router }) => {
 		coursID && store.dispatch(setCoursID(coursID));
 
 		return (
-			<Container size='small'>
+			<div>
 				<Breadcrumb items={previousPaths} />
 				<CoursMain cours={data.courBySlug} />
-			</Container>
+			</div>
 		);
 	}
 

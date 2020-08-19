@@ -18,7 +18,6 @@ const Connect = ({ router }) => {
 		if (contentToGoURL) {
 			search += `redirectURI=${contentToGoURL}`;
 		}
-
 		authProviderCallback('google', search);
 	}, []);
 
