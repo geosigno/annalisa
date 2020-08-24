@@ -7,7 +7,6 @@ const Container = ({ id, children, size }) => (
 			.container {
 				max-width: 1200px;
 				margin: 0 auto;
-				padding: 40px 0;
 			}
 			.container.small {
 				max-width: 800px;

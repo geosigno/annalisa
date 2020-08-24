@@ -23,8 +23,8 @@
       "via": "unites"
     },
     "cours": {
-      "collection": "cours",
-      "via": "unite"
+      "via": "unite",
+      "collection": "cours"
     }
   }
 }

@@ -1,50 +1,54 @@
 import React from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import { MdAccessTime } from 'react-icons/md';
+import { FaGraduationCap } from 'react-icons/fa';
+import { FcClock, FcCalendar, FcGraduationCap } from 'react-icons/fc';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCalendarAlt, faGraduationCap, faClock, faTag, faTags } from '@fortawesome/free-solid-svg-icons';
+import { Element as ScrollElement } from 'react-scroll';
 import CommentaireList from '../Commentaires/CommentaireList';
 import { dateToFormat } from '../../helpers/date';
 import Extract from './Extract';
 import AddOn from './AddOn';
+import CoursProgress from './CoursProgress';
 import CompleteVisual from './complete.svg';
 import Container from '../Container';
 
-
 const CoursMain = (props) => {
 	const {
-		cours: { id, Name, Image, created_at, Duration, Content, level, categories, Sample, Grammaire, Vocabulaire, Conjugaison }
+		cours: { id, Name, Image, created_at, Duration, Content, level, categories, sections }
 	} = props;
-
 	return (
 		<div>
+			{sections.length && 
+				<CoursProgress sections={sections} />
+			}
 			<article key={id} className='cours'>
+			
 				<header className='cours__header'>
+				<Container size='small'>
 					<h1 className='cours__title'>
 						<span>{Name}</span>
 					</h1>
-
 					<div className='cours__meta'>
 						<div className='meta'>
-							{/* <FontAwesomeIcon icon={faCalendarAlt} size='1x' color='#999' /> */}
+							<FcCalendar size='24px' />
 							<p> Posté le {dateToFormat(created_at)}</p>
 						</div>
-
 						<div className='meta'>
-							{/* <FontAwesomeIcon icon={faGraduationCap} size='1x' color='#999' /> */}
+							<FcGraduationCap size='24px' />
 							<Link as={`/niveau/${level.slug}`} href={`/niveau?id=${level.slug}`}>
 								<a>Niveau {level.Name}</a>
 							</Link>
 						</div>
-
 						{Duration && (
 							<div className='meta'>
-								{/* <FontAwesomeIcon icon={faClock} size='1x' color='#999' /> */}
+								<FcClock size='24px' />
 								<p>Durée approximative de {Duration} minutes</p>
 							</div>
 						)}
-
 						<div className='meta'>
 							{/* {categories.length > 1 ? (
 								<FontAwesomeIcon icon={faTags} size='1x' color='#999' />
@@ -62,24 +66,30 @@ const CoursMain = (props) => {
 							</ul>
 						</div>
 					</div>
-
+					</Container>
 					<div className='cours__image'>
 						{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}
 					</div>
 				</header>
+				
 
-				{Sample && <Extract data={Sample} />}
+				{sections &&
+					sections.map((section) => (
+						<ScrollElement name={section.type}>
+							<AddOn data={section} theme='peachy' />
+						</ScrollElement>
+					))}
+				{/* {Sample && <Extract data={Sample} />}
 
 				{Grammaire && <AddOn data={Grammaire} theme='peachy'/>}
 
 				{Vocabulaire && <AddOn data={Vocabulaire} theme='mint'/>}
 
-				{Conjugaison && <AddOn data={Conjugaison} theme='lilac'/>}
+				{Conjugaison && <AddOn data={Conjugaison} theme='lilac'/>} */}
 
-<Container size='small'>
-<CompleteVisual />
-</Container>
-		
+				<Container size='small'>
+					<CompleteVisual />
+				</Container>
 
 				{/* <section className='cours__contenu'>
 					<ReactMarkdown source={Content} />

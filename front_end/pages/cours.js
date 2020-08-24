@@ -70,7 +70,9 @@ const Cours = ({ router }) => {
 
 		return (
 			<div>
-				<Breadcrumb items={previousPaths} />
+				<Container size='small'>
+					<Breadcrumb items={previousPaths} />
+				</Container>
 				<CoursMain cours={data.courBySlug} />
 			</div>
 		);

@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import Container from '../Container';
 import hexToRgba from 'hex-to-rgba';
+import Container from '../Container';
 
-
-const AddOn = ({ data: { Title, Content}, theme }) => {
+const AddOn = ({ data: { title, content, type }, theme }) => {
 	let hexaColor;
-	switch(theme) {
+	switch (theme) {
 		case 'cloudy':
 			hexaColor = '#b5c9df';
 			break;
@@ -26,23 +25,24 @@ const AddOn = ({ data: { Title, Content}, theme }) => {
 			hexaColor = '#b5c9df';
 	}
 
-	const rgbaColor = hexToRgba(hexaColor, .1);
+	const rgbaColor = hexToRgba(hexaColor, 0.1);
 
-    return (
-		<section className={'addOn ' + Title}>
+	return (
+		<section className={`addOn ${title}`}>
 			<Container size='small'>
 				<h1>
-					<span>{Title}</span>
+					<span>{title}</span>
 				</h1>
 				<div className='addOn__content'>
-					<ReactMarkdown source={Content} />
+					<ReactMarkdown source={content} />
 				</div>
 			</Container>
 			<style jsx>{`
 				.addOn {
 					background: ${rgbaColor};
+					padding: 32px 0;
 				}
-                h1 {
+				h1 {
 					display: inline-block;
 					margin: 0 0 40px;
 				}
@@ -61,13 +61,13 @@ const AddOn = ({ data: { Title, Content}, theme }) => {
 					line-height: 1.6;
 					text-indent: 64px;
 				}
-				.${Title} *::selection {
+				.${title} *::selection {
 					color: #fff;
 					background: ${hexaColor};
 				}
 			`}</style>
 		</section>
 	);
-}
+};
 
 export default AddOn;

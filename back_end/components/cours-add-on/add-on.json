@@ -1,0 +1,53 @@
+{
+  "collectionName": "components_cours_add_on_add_ons",
+  "info": {
+    "name": "AddOn",
+    "icon": "graduation-cap"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "author": {
+      "type": "string"
+    },
+    "oeuvre": {
+      "type": "string"
+    },
+    "audio": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "extract",
+        "grammar",
+        "vocabulary",
+        "conjugation"
+      ]
+    },
+    "image": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

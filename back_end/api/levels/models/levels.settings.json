@@ -27,8 +27,8 @@
       "required": false
     },
     "cours": {
-      "collection": "cours",
-      "via": "level"
+      "via": "level",
+      "collection": "cours"
     },
     "slug": {
       "type": "uid",

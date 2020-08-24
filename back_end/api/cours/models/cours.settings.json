@@ -37,8 +37,8 @@
       "type": "string"
     },
     "level": {
-      "via": "cours",
-      "model": "levels"
+      "model": "levels",
+      "via": "cours"
     },
     "categories": {
       "collection": "categories",
@@ -49,29 +49,14 @@
       "type": "uid",
       "targetField": "Name"
     },
-    "Conjugaison": {
-      "type": "component",
-      "repeatable": false,
-      "component": "cours-add-on.conjugaison"
-    },
-    "Vocabulaire": {
-      "type": "component",
-      "repeatable": false,
-      "component": "cours-add-on.vocabulaire"
-    },
-    "Grammaire": {
-      "type": "component",
-      "repeatable": false,
-      "component": "cours-add-on.grammaire"
-    },
-    "Sample": {
-      "type": "component",
-      "repeatable": false,
-      "component": "cours-add-on.sample"
-    },
     "unite": {
-      "via": "cours",
-      "model": "unite"
+      "model": "unite",
+      "via": "cours"
+    },
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "cours-add-on.add-on"
     }
   }
 }
