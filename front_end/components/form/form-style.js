@@ -1,5 +1,6 @@
 // styles/global.js
 import css from 'styled-jsx/css';
+import { COLORS } from '../../constants';
 
 const formStyle = css.global`
 	.form {
@@ -56,7 +57,7 @@ const formStyle = css.global`
 		font-weight: 600;
 		text-transform: uppercase;
 		color: white;
-		background-image: linear-gradient(45deg, #f2709c 30%, #ff9472 90%);
+		background-image: linear-gradient(45deg, ${COLORS.primary} 30%, #ff9472 90%);
 		padding: 12px 40px;
 		border-radius: 32px;
 	}

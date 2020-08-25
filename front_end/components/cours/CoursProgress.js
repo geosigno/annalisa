@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { FcCheckmark } from 'react-icons/fc';
+import { MdDone } from 'react-icons/md';
 import useScrollDirection from '../../hooks/useScrollDirection';
+import { COLORS } from '../../constants';
 
 const CoursProgress = ({ sections }) => {
 	const [isActive, setIsActive] = useState([]);
 	const [isSeen, setIsSeen] = useState([]);
+	const [threeDots, setThreeDots] = useState('.');
 	const scrollDirection = useScrollDirection();
+
+	useEffect(() => {
+		const dotsInterval = setInterval(() => {
+			setThreeDots(threeDots.length < 3 ? threeDots+'.' : '');
+		}, 1000);
+		return () => clearInterval(dotsInterval);
+	})
 
 	const handleIsActive = (section) => {
 		setIsActive([...isActive, section]);
@@ -21,19 +31,17 @@ const CoursProgress = ({ sections }) => {
 	}
 
 	return (
-		<aside>
+		<aside className={isActive.length ? 'active' : ''}>
 			{sections && (
-				<ul className={isActive.length ? 'active' : ''}>
+				<ul>
 					{sections.map((section) => {
 						const classNames = [];
 						if (isActive.some(item => item === section.type)) classNames.push('active');
 						if (isSeen.some(item => item === section.type)) classNames.push('seen');
 						return (
 							<li key={section.title} className={classNames.join(' ')}>
-								<span style={{color: 'blue'}}>
-									{classNames.indexOf('seen') !== -1 &&
-										<FcCheckmark size='24px' />
-									}
+								<span>
+									<MdDone size='16px' />
 								</span>
 								<ScrollLink
 									to={section.type}
@@ -43,28 +51,51 @@ const CoursProgress = ({ sections }) => {
 									duration={500}
 									onSetActive={handleIsActive}
 									onSetInactive={handleIsInactive}>
-									{section.title}
+									{section.title+(classNames.includes('active') ? threeDots : '')}
 								</ScrollLink>
 							</li>
 						)
 					})}
-					<style jsx>{`
-						ul {
-							list-style-type: none;
+					
+				</ul>
+			)}
+			<style jsx>{`
+						aside {
 							position: fixed;
 							left: 200px;
 							top: 50%;
-							transform: translateX(-50%);
+							transform: translateY(-50%);
+							background: #fff;
+							min-width: 220px;
+							border-radius: 4px;
 							opacity: 0;
+							padding: 16px;
+							box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
 							transition: opacity 0.2s;
 							will-change: opacity;
 						}
-						ul.active {
+						aside.active {
 							opacity: 1;
+						}
+						ul {
+							list-style-type: none;
+							margin: 0;
+							padding: 0 0 0 32px;
 						}
 						li {
 							position: relative;
 							padding: 16px 8px;
+						}
+						li:before {
+							content: '';
+							border: 1px dashed #EEEEEE;
+							position: absolute;
+							height: 50%;
+							left: -13px;
+							top: 75%;
+						}
+						li:last-child:before {
+							display: none;
 						}
 						li span {
 							display: flex;
@@ -72,26 +103,37 @@ const CoursProgress = ({ sections }) => {
 							justify-content: center;
 							position: absolute;
 							top: 50%;
-							left: -32px;
+							left: -24px;
 							transform: translateY(-50%);
-							width: 32px;
-							height: 32px;
+							width: 24px;
+							height: 24px;
 							border-radius: 50%;
-							border: 1px solid #C0C0C0;
+							background: #fff;
+							border: 1px solid #EEEEEE;
+							transition: all .2s;
+						}
+						li.seen span {
+							background: ${COLORS.success};
+							border-color: ${COLORS.success};
 						}
 						li:hover {
 							cursor: pointer;
 						}
 					`}</style>
 					<style global jsx>{`
+						li a {
+							color: ${COLORS.text};
+						}
+						li svg {
+							color: #eee;
+						}
+						li.seen svg {
+							color: #fff;
+						}
 						li.active a {
-							color: red;
 							font-weight: bold;
 						}
 					`}</style>
-				</ul>
-			)}
-			;
 		</aside>
 	);
 };

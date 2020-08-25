@@ -1,20 +1,35 @@
 import gql from 'graphql-tag';
 
-export const GET_COMMENTS_BY_COURS_ID = gql`
+export const GET_ALL_COMMENTS_BY_COURS_ID = gql`
 	query($id: String!) {
-		courBySlug(slug: $id) {
+		comments(sort: "created_at:asc", where: {cour: { slug: $id }}) {
 			id
-			comments(sort: "created_at:asc") {
+			Content
+			created_at
+			parentID
+			user {
 				id
-				Content
-				created_at
-				parentID
-				user {
-					id
-					username
-					avatar {
-						url
-					}
+				username
+				avatar {
+					url
+				}
+			}
+		}
+	}
+`;
+
+export const GET_COMMENTS_BY_COURS_ID = gql`
+	query($id: String!, $userID: String!) {
+		comments(sort: "created_at:asc", where: {cour: { slug: $id }, user: {id: $userID}}) {
+			id
+			Content
+			created_at
+			parentID
+			user {
+				id
+				username
+				avatar {
+					url
 				}
 			}
 		}

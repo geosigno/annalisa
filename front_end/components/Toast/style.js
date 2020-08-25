@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css';
+import { COLORS } from '../../constants';
 
 const toastStyle = css.global`
 	.Toastify__toast-container {
@@ -89,7 +90,7 @@ const toastStyle = css.global`
 	.Toastify__toast--default {
 		display: flex;
 		align-items: center;
-		background: #f2709c;
+		background: ${COLORS.primary};
 		color: white;
 		font-family: 'Open Sans';
 		font-size: 14px;

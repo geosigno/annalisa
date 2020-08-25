@@ -5,6 +5,8 @@ import React from 'react';
 
 import { dateToFormat, dateToTime } from '../../helpers/date';
 
+import { COLORS } from '../../constants'
+
 function CommentaireItem(props) {
 	const {
 		data: {
@@ -20,7 +22,7 @@ function CommentaireItem(props) {
 	return (
 		<div className='commentaire'>
 			<div className='commentaire__container'>
-				{avatar && <img src={`http://localhost:1337${avatar[0].url}`} alt={username} className='commentaire__avatar' />}
+				{avatar[0]?.url && <img src={`http://localhost:1337${avatar[0].url}`} alt={username} className='commentaire__avatar' />}
 				<div>
 					<p className='commentaire__user'>{username}</p>
 					<p className='commentaire__meta'>
@@ -75,10 +77,10 @@ function CommentaireItem(props) {
 					line-height: 1.6;
 				}
 				.commentaire__reply {
-					color: #f2709c;
+					color: ${COLORS.primary};
 					font-weight: 600;
 					background: transparent;
-					border-bottom: 2px solid #f2709c;
+					border-bottom: 2px solid ${COLORS.primary};
 					padding: 4px 0;
 				}
 				.commentaire__reply span {

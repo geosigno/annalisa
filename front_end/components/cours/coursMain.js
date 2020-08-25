@@ -1,22 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import { MdAccessTime } from 'react-icons/md';
-import { FaGraduationCap } from 'react-icons/fa';
 import { FcClock, FcCalendar, FcGraduationCap } from 'react-icons/fc';
-
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCalendarAlt, faGraduationCap, faClock, faTag, faTags } from '@fortawesome/free-solid-svg-icons';
 import { Element as ScrollElement } from 'react-scroll';
 import CommentaireList from '../Commentaires/CommentaireList';
+
 import { dateToFormat } from '../../helpers/date';
-import Extract from './Extract';
 import AddOn from './AddOn';
 import CoursProgress from './CoursProgress';
 import CompleteVisual from './complete.svg';
 import Container from '../Container';
 
+import { COLORS } from '../../constants';
+
 const CoursMain = (props) => {
+	// get the previous path to build the breadcrumb
 	const {
 		cours: { id, Name, Image, created_at, Duration, Content, level, categories, sections }
 	} = props;
@@ -50,11 +47,6 @@ const CoursMain = (props) => {
 							</div>
 						)}
 						<div className='meta'>
-							{/* {categories.length > 1 ? (
-								<FontAwesomeIcon icon={faTags} size='1x' color='#999' />
-							) : (
-								<FontAwesomeIcon icon={faTag} size='1x' color='#999' />
-							)} */}
 							<ul>
 								{categories.map((category) => (
 									<li key={category.slug}>
@@ -98,27 +90,26 @@ const CoursMain = (props) => {
 				<style global jsx>{`
 					.cours {
 						display: block;
-						background: #fff;
-						border-radius: 8px;
+						padding: 40px 0;
 					}
 					.cours__header {
 						margin: 0 0 32px;
 					}
 					.cours__title {
 						display: inline-block;
-						margin: -32px 0 32px -48px;
-						width: 80%;
+						margin: 0 0 32px;
 					}
 					.cours__title span {
 						font-size: 48px;
 						line-height: 1.3;
-						background: #c3f0dc;
+						background: ${COLORS.secondary};
 						box-decoration-break: clone;
 						padding: 4px 16px;
 					}
 					.cours__meta {
 						display: flex;
 						flex-wrap: wrap;
+						margin: 0 0 16px;
 					}
 					.cours__image {
 						max-height: 600px;

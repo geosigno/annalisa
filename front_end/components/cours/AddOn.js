@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import hexToRgba from 'hex-to-rgba';
 import Container from '../Container';
+import { COLORS } from '../../constants';
 
 const AddOn = ({ data: { title, content, type }, theme }) => {
 	let hexaColor;
@@ -39,7 +40,6 @@ const AddOn = ({ data: { title, content, type }, theme }) => {
 			</Container>
 			<style jsx>{`
 				.addOn {
-					background: ${rgbaColor};
 					padding: 32px 0;
 				}
 				h1 {
@@ -49,8 +49,7 @@ const AddOn = ({ data: { title, content, type }, theme }) => {
 				h1 span {
 					font-family: 'Cantata One', serif;
 					font-size: 40px;
-					color: #fff;
-					background: ${hexaColor};
+					background: ${COLORS.secondary};
 					box-decoration-break: clone;
 					padding: 4px 16px;
 				}

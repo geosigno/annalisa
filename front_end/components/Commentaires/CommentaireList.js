@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { withRouter } from 'next/router';
 import { compose } from 'recompose';
 import { useQuery } from '@apollo/react-hooks';
+import Cookies from 'js-cookie';
 
 import { withApollo } from '../../apollo/apollo';
 import CommentLoader from '../Loader/CommentLoader';
 import CommentaireItem from './CommentaireItem';
 import CreateComment from './CreateComment';
 
-import { GET_COMMENTS_BY_COURS_ID } from '../../apollo/query/comment';
+import { GET_COMMENTS_BY_COURS_ID, GET_ALL_COMMENTS_BY_COURS_ID } from '../../apollo/query/comment';
 
 const processComments = (comments) => {
 	// get all parent comments - with no parentID set
@@ -36,9 +37,14 @@ const processComments = (comments) => {
 
 // const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 const CommentaireList = ({ router }) => {
-	const { loading, error, data } = useQuery(GET_COMMENTS_BY_COURS_ID, {
+
+	const userRole = Cookies.get('userRole') || null;
+	const query = (userRole === 'Admin' ? GET_ALL_COMMENTS_BY_COURS_ID : GET_COMMENTS_BY_COURS_ID);
+
+	const { loading, error, data } = useQuery(query, {
 		variables: {
-			id: router.query.id || '1'
+			id: router.query.id || '1',
+			userID: Cookies.get('userID') || null
 		}
 	});
 
@@ -52,9 +58,9 @@ const CommentaireList = ({ router }) => {
 		setReplyOn(commentID);
 	};
 
-	if (data.courBySlug.comments) {
+	if (data.comments) {
 		// get list of all parent comments with their respective child comments
-		const comments = processComments(data.courBySlug.comments);
+		const comments = processComments(data.comments);
 
 		return (
 			<section className='commentaires'>

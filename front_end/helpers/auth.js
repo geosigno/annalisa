@@ -5,9 +5,13 @@ import nextCookie from 'next-cookies';
 import store from '../redux/stores';
 import { clearContentToGo } from '../redux/actions';
 
+export const setCookieUserId = (userID) => userID && Cookies.set('userID', userID);
+
 export const setCookieUsername = (username) => username && Cookies.set('username', username);
 
 export const setCookieAvatar = (avatar) => avatar && Cookies.set('userAvatar', avatar);
+
+export const setCookieUserRole = (role) => role && Cookies.set('userRole', role);
 
 export const setCookieToken = (token) => token && Cookies.set('jwt', token);
 
@@ -29,12 +33,14 @@ const redirectProcess = () => {
 
 const authCallback = (response) => {
 	const {
-		user: { username },
+		user: { id, username, role: { name }},
 		jwt
 	} = response.data;
 	const userAvatar = response?.data?.user?.avatar[0]?.formats?.thumbnail?.url;
+	id && setCookieUserId(id);
 	username && setCookieUsername(username);
 	userAvatar && setCookieAvatar(userAvatar);
+	name && setCookieUserRole(name)
 	jwt && setCookieToken(jwt);
 
 	redirectProcess();
