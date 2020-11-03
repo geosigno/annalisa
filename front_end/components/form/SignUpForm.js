@@ -19,11 +19,11 @@ const SignUpForm = () => {
 	const { contentToGoTitle } = store.getState().rootReducer;
 
 	const onRegisterSubmit = (data) => signup(data);
-		// register(data).then((response) => {
-		// 	if (response.status === 400 && response.data.message[0].messages[0].id === 'Auth.form.error.email.taken') {
-		// 		// setError('Il semble que cet e-mail est déjà utilisé. Veuillez vous connectez ou utiliser un autre e-mail');
-		// 	}
-		// });
+	// register(data).then((response) => {
+	// 	if (response.status === 400 && response.data.message[0].messages[0].id === 'Auth.form.error.email.taken') {
+	// 		// setError('Il semble que cet e-mail est déjà utilisé. Veuillez vous connectez ou utiliser un autre e-mail');
+	// 	}
+	// });
 	// };
 
 	const hook = !contentToGoTitle

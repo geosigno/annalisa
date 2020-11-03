@@ -2,19 +2,17 @@ import React from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { MdArrowBack, MdHome, MdPlayArrow } from 'react-icons/md';
-import useScrollDirection from  '../../hooks/useScrollDirection';
+import useScrollDirection from '../../hooks/useScrollDirection';
 import store from '../../redux/stores';
 import { CLEAR_PAGE_FROM } from '../../redux/actions';
-import { COLORS } from '../../constants/';
+import { COLORS } from '../../constants';
 import Container from '../Container';
-
 
 const Breadcrumb = ({ items, size }) => {
 	const scrollDirection = useScrollDirection();
 	return (
-		<div className={'breadcrumb '+scrollDirection}>
-			
-				<Container size={size} >
+		<div className={`breadcrumb ${scrollDirection}`}>
+			<Container size={size}>
 				<div className='breadcrumb__container'>
 					<Link href='/'>
 						<a
@@ -50,21 +48,19 @@ const Breadcrumb = ({ items, size }) => {
 								) : (
 									label
 								)}
-								{index < (items.length - 1) &&
-									<MdPlayArrow />
-								}
+								{index < items.length - 1 && <MdPlayArrow />}
 							</li>
 						))}
 					</ul>
-					</div>
-				</Container>
-			
+				</div>
+			</Container>
+
 			<style jsx>{`
 				.breadcrumb {
-                    background: ${COLORS.primary};
-                    color: #fff;
+					background: ${COLORS.primary};
+					color: #fff;
 					position: fixed;
-                    height: 51px;
+					height: 51px;
 					top: 64px;
 					left: 0;
 					z-index: 0;
@@ -73,8 +69,8 @@ const Breadcrumb = ({ items, size }) => {
 					transition: top 0.3s;
 				}
 				.breadcrumb.down {
-                    top: 0;
-                    z-index: 2;
+					top: 0;
+					z-index: 2;
 				}
 				.breadcrumb__container {
 					display: flex;

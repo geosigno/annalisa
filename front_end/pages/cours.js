@@ -14,7 +14,7 @@ import Breadcrumb from '../components/Breadcrumb';
 import CoursLoader from '../components/Loader/CoursLoader';
 import ProtectedContent from '../components/ProtectedContent';
 
-import CoursMain from '../components/Cours/coursMain';
+import CoursMain from '../components/cours/coursMain';
 import CardList from '../components/Card/CardList';
 
 import { GET_COURS_BY_ID, GET_ALL_COURS } from '../apollo/query/cours';

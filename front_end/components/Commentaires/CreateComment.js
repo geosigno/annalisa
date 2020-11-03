@@ -160,7 +160,7 @@ function CreateComment(props) {
 					}
 				`}</style>
 			</form>
-			<Toast />
+			{/* <Toast /> */}
 		</div>
 	);
 }

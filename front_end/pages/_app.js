@@ -1,12 +1,18 @@
 // // import App from 'next/app';
 import React, { useEffect } from 'react';
 import Normalize from 'react-normalize';
+import { from, useQuery } from '@apollo/react-hooks';
+import { GET_USER_DATA } from '../apollo/query/profile';
+
 // import {withApollo} from 'next-apollo';
 import { COLORS } from '../constants';
+
+import Toast from '../components/Toast';
 
 import Fonts from '../helpers/font';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import 'semantic-ui-css/semantic.min.css';
+import gql from 'graphql-tag';
 
 // // class MyApp extends App {
 // // 	componentDidMount() {
@@ -42,7 +48,23 @@ import 'semantic-ui-css/semantic.min.css';
 
 import { withApollo } from '../apollo/apollo';
 
+const GET_USERNAME = gql`
+	query getUsername {
+		username @client
+	}
+`;
+function IsLoggedIn() {
+	const { data } = useQuery(GET_USER_DATA);
+	return data.isLoggedIn ? <Pages /> : <Login />;
+}
+
 const MyApp = ({ Component, pageProps, isAuthenticated }) => {
+	const { loading, error, data } = useQuery(GET_USER_DATA);
+
+	console.log('data', data);
+
+	// data?.self?.username && client.writeData({ data: { username: data.self.username } });
+	// console.log('data', data);
 	useEffect(() => {
 		Fonts();
 	});
@@ -52,6 +74,7 @@ const MyApp = ({ Component, pageProps, isAuthenticated }) => {
 			<Normalize />
 			{/* <Layout isAuthenticated={isAuthenticated} {...pageProps}> */}
 			<Component isAuthenticated={isAuthenticated} {...pageProps} />
+			<Toast />
 			{/* </Layout> */}
 			<style global jsx>{`
 				html {
@@ -74,18 +97,12 @@ const MyApp = ({ Component, pageProps, isAuthenticated }) => {
 					max-width: 100%;
 					height: auto;
 				}
-				h1,
-				h2,
-				h3 {
-					font-family: 'Raleway';
-					letter-spacing: 1px;
-					font-weight: 700;
-				}
 
 				a {
 					font-weight: 500;
 					color: ${COLORS.primary};
 				}
+
 				a:hover {
 					color: ${COLORS.primary};
 					text-decoration: underline;

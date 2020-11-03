@@ -68,7 +68,6 @@ const Input = ({ id, label, name, value, disabled, type, autoFocus, onChange, on
 					border: 1px solid #dedede;
 					border-radius: 4px;
 					background: #fbfbfb;
-					margin: 0 0 8px;
 				}
 				input:-webkit-autofill,
 				input:-webkit-autofill:hover,
@@ -76,7 +75,6 @@ const Input = ({ id, label, name, value, disabled, type, autoFocus, onChange, on
 					animation-name: onAutoFillStart;
 					transition: background-color 5000s ease-in-out 0s;
 				}
-
 				.input:not(:-webkit-autofill) {
 					animation-name: onAutoFillCancel;
 				}

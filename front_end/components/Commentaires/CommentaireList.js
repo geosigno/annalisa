@@ -37,9 +37,8 @@ const processComments = (comments) => {
 
 // const CommentaireList = ({ data: { loading, error, cour, refetch } }) => {
 const CommentaireList = ({ router }) => {
-
 	const userRole = Cookies.get('userRole') || null;
-	const query = (userRole === 'Admin' ? GET_ALL_COMMENTS_BY_COURS_ID : GET_COMMENTS_BY_COURS_ID);
+	const query = userRole === 'Admin' ? GET_ALL_COMMENTS_BY_COURS_ID : GET_COMMENTS_BY_COURS_ID;
 
 	const { loading, error, data } = useQuery(query, {
 		variables: {

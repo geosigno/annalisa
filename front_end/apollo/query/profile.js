@@ -13,6 +13,35 @@ export const GET_USER_DATA = gql`
 			avatar {
 				url
 			}
+			cours_finished {
+				id
+				slug
+				Name
+				level {
+					id
+					slug
+					Name
+				}
+				categories {
+					id
+					slug
+					Name
+				}
+				Image {
+					url
+					formats
+				}
+			}
+		}
+	}
+`;
+
+export const GET_USER_COURS_FINISHED = gql`
+	query {
+		self {
+			cours_finished {
+				id
+			}
 		}
 	}
 `;

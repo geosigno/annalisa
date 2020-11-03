@@ -60,7 +60,7 @@ const Nav = ({ isAuthenticated, username, userAvatar }) => {
 						{userAvatar ? (
 							<img src={`http://localhost:1337${userAvatar}`} alt={username} />
 						) : (
-							<img src='https://via.placeholder.com/64' alt={username} />
+							<img src='/profile-face.png' alt={username} />
 						)}
 					</div>
 				) : (

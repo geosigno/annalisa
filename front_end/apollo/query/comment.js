@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_ALL_COMMENTS_BY_COURS_ID = gql`
 	query($id: String!) {
-		comments(sort: "created_at:asc", where: {cour: { slug: $id }}) {
+		comments(sort: "created_at:asc", where: { cour: { slug: $id } }) {
 			id
 			Content
 			created_at
@@ -20,7 +20,7 @@ export const GET_ALL_COMMENTS_BY_COURS_ID = gql`
 
 export const GET_COMMENTS_BY_COURS_ID = gql`
 	query($id: String!, $userID: String!) {
-		comments(sort: "created_at:asc", where: {cour: { slug: $id }, user: {id: $userID}}) {
+		comments(sort: "created_at:asc", where: { cour: { slug: $id }, user: { id: $userID } }) {
 			id
 			Content
 			created_at

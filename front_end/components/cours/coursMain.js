@@ -19,51 +19,50 @@ const CoursMain = (props) => {
 	} = props;
 	return (
 		<div>
-			{sections.length && 
-				<CoursProgress sections={sections} />
-			}
+			{sections.length && <CoursProgress sections={sections} coursID={id} />}
 			<article key={id} className='cours'>
-			
 				<header className='cours__header'>
-				<Container size='small'>
-					<h1 className='cours__title'>
-						<span>{Name}</span>
-					</h1>
-					<div className='cours__meta'>
-						<div className='meta'>
-							<FcCalendar size='24px' />
-							<p> Posté le {dateToFormat(created_at)}</p>
-						</div>
-						<div className='meta'>
-							<FcGraduationCap size='24px' />
-							<Link as={`/niveau/${level.slug}`} href={`/niveau?id=${level.slug}`}>
-								<a>Niveau {level.Name}</a>
-							</Link>
-						</div>
-						{Duration && (
+					<Container size='small'>
+						<h1 className='cours__title'>
+							<span>{Name}</span>
+						</h1>
+						<div className='cours__meta'>
 							<div className='meta'>
-								<FcClock size='24px' />
-								<p>Durée approximative de {Duration} minutes</p>
+								<FcCalendar size='24px' />
+								<p> Posté le {dateToFormat(created_at)}</p>
 							</div>
-						)}
-						<div className='meta'>
-							<ul>
-								{categories.map((category) => (
-									<li key={category.slug}>
-										<Link as={`/categorie/${category.slug}`} href={`/categorie?id=${category.slug}`}>
-											<a>{category.Name}</a>
-										</Link>
-									</li>
-								))}
-							</ul>
+							<div className='meta'>
+								<FcGraduationCap size='24px' />
+								{level && (
+									<Link as={`/niveau/${level.slug}`} href={`/niveau?id=${level.slug}`}>
+										<a>Niveau {level.Name}</a>
+									</Link>
+								)}
+							</div>
+							{Duration && (
+								<div className='meta'>
+									<FcClock size='24px' />
+									<p>Durée approximative de {Duration} minutes</p>
+								</div>
+							)}
+							<div className='meta'>
+								<ul>
+									{categories &&
+										categories.map((category) => (
+											<li key={category.slug}>
+												<Link as={`/categorie/${category.slug}`} href={`/categorie?id=${category.slug}`}>
+													<a>{category.Name}</a>
+												</Link>
+											</li>
+										))}
+								</ul>
+							</div>
 						</div>
-					</div>
 					</Container>
 					<div className='cours__image'>
-						{Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}
+						{Image[0] && Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}
 					</div>
 				</header>
-				
 
 				{sections &&
 					sections.map((section) => (

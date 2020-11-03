@@ -76,6 +76,10 @@
     },
     "current_country": {
       "type": "string"
+    },
+    "cours_finished": {
+      "collection": "cours",
+      "via": "user"
     }
   }
 }

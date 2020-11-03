@@ -37,6 +37,9 @@ const formStyle = css.global`
 		text-align: center;
 		margin-top: 8px;
 	}
+	input {
+		margin: 0 0 8px;
+	}
 	.input__error {
 		font-style: italic;
 		font-size: 12px;

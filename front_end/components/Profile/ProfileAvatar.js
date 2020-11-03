@@ -46,7 +46,9 @@ const ProfileAvatar = ({avatar, username}) => {
 
 	const handleChange = (e) => {
 		e.target?.files[0] && updateProfile(e.target.files[0]);
-    };
+	};
+	
+	const avatarURL = currentAvatar && currentAvatar[0] ? `http://localhost:1337${getImage(currentAvatar, 'medium')}` : '/profile-face.png';
     
     return (
         <div className='avatar'>
@@ -54,12 +56,7 @@ const ProfileAvatar = ({avatar, username}) => {
             <MdEdit size='32px' />
             <p className='sr-only'>Changez ma photo de profil</p>
         </button>
-        {currentAvatar && currentAvatar[0] && (
-            <img
-                src={`http://localhost:1337${getImage(currentAvatar, 'medium')}`}
-                alt={`Avatar de ${username}`}
-            />
-        )}
+		<img src={avatarURL} alt={`Avatar de ${username}`} />
         <div>
             <input
                 type='file'
@@ -71,7 +68,6 @@ const ProfileAvatar = ({avatar, username}) => {
                 name='avatar'
             />
         </div>
-        <Toast />
         <style jsx>{`
 				.avatar {
 					position: relative;
@@ -79,6 +75,7 @@ const ProfileAvatar = ({avatar, username}) => {
 					overflow: hidden;
 					width: 160px;
 					height: 160px;
+					margin: 0 auto;
 				}
 				.avatar:hover .avatar__upload {
 					cursor: pointer;

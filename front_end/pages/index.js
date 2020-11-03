@@ -3,6 +3,7 @@ import Head from 'next/head';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faBookOpen, faGraduationCap, faTags } from '@fortawesome/free-solid-svg-icons';
 import defaultPage from '../hoc/defaultPage';
+import Heading from '../components/Heading';
 import Container from '../components/Container';
 import CardList from '../components/Card/CardList';
 
@@ -26,11 +27,11 @@ const Home = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<Container>
-				<h2>Accédez aux derniers cours</h2>
+				<Heading text='Accédez aux derniers cours' size='2' />
 				<CardList type='cours' query={GET_ALL_COURS} variables={queryVariables} limit={queryLimit} />
-				<h2>Choisissez une catégorie</h2>
+				<Heading text='Choisissez une catégorie' size='2' />
 				<CardList type='category' query={GET_ALL_CATEGORIES} variables={queryVariables} limit={queryLimit} />
-				<h2>Cherchez un niveau particulier</h2>
+				<Heading text='Cherchez un niveau particulier' size='2' />
 				<CardList type='level' query={GET_ALL_LEVELS} variables={queryVariables} limit={queryLimit} />
 			</Container>
 		</div>
