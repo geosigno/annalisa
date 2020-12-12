@@ -947,35 +947,46 @@
   version "0.2.5"
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
 
-"@formatjs/intl-displaynames@^2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-displaynames/-/intl-displaynames-2.2.6.tgz#de1b456b6bae99cce884b28784a05663ebf0c6f0"
+"@formatjs/ecma402-abstract@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.4.0.tgz#ac6c17a8fffac43c6d68c849a7b732626d32654c"
   dependencies:
-    "@formatjs/intl-utils" "^3.3.1"
+    tslib "^2.0.1"
 
-"@formatjs/intl-listformat@^2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-listformat/-/intl-listformat-2.2.6.tgz#4817ae8a6983694ce4bd3673eb200edef342bb50"
+"@formatjs/intl-displaynames@^1.2.5":
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-displaynames/-/intl-displaynames-1.2.10.tgz#bb9625cca90b099978cd967c6a98aaf4e23fc878"
   dependencies:
-    "@formatjs/intl-utils" "^3.3.1"
+    "@formatjs/intl-utils" "^2.3.0"
 
-"@formatjs/intl-numberformat@^4.2.6":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-4.2.6.tgz#a1ae188919ce54fc2eda8ff3e2b83c1bbaa0704d"
+"@formatjs/intl-listformat@^1.4.4":
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-listformat/-/intl-listformat-1.4.8.tgz#70b81005e7dcf74329cb5b314a940ce5fce36cd0"
   dependencies:
-    "@formatjs/intl-utils" "^3.3.1"
+    "@formatjs/intl-utils" "^2.3.0"
 
-"@formatjs/intl-relativetimeformat@^5.2.6":
-  version "5.2.6"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-relativetimeformat/-/intl-relativetimeformat-5.2.6.tgz#3d67b75a900e7b5416615beeb2d0eeff33a1e01a"
+"@formatjs/intl-numberformat@^5.5.2":
+  version "5.7.6"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-numberformat/-/intl-numberformat-5.7.6.tgz#630206bb0acefd2d508ccf4f82367c6875cad611"
   dependencies:
-    "@formatjs/intl-utils" "^3.3.1"
+    "@formatjs/ecma402-abstract" "1.4.0"
+    tslib "^2.0.1"
 
-"@formatjs/intl-utils@^3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-3.3.1.tgz#7ceadbb7e251318729d9bf693731e1a5dcdfa15a"
+"@formatjs/intl-relativetimeformat@^4.5.12":
+  version "4.5.16"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-relativetimeformat/-/intl-relativetimeformat-4.5.16.tgz#7449cef3213dd66d25924ca41f125f87b58df95a"
   dependencies:
-    emojis-list "^3.0.0"
+    "@formatjs/intl-utils" "^2.3.0"
+
+"@formatjs/intl-unified-numberformat@^3.3.3":
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-unified-numberformat/-/intl-unified-numberformat-3.3.7.tgz#9995a24568908188e716d81a1de5b702b2ee00e2"
+  dependencies:
+    "@formatjs/intl-utils" "^2.3.0"
+
+"@formatjs/intl-utils@^2.2.2", "@formatjs/intl-utils@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-utils/-/intl-utils-2.3.0.tgz#2dc8c57044de0340eb53a7ba602e59abf80dc799"
 
 "@fortawesome/fontawesome-common-types@^0.2.28":
   version "0.2.28"
@@ -2076,6 +2087,10 @@ base64-js@^1.0.2:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.1.tgz#58ece8cb75dd07e71ed08c736abc5fac4dbf8df1"
 
+base64-js@^1.3.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
+
 base@^0.11.1:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/base/-/base-0.11.2.tgz#7bde5ced145b6d551a90db87f83c558b4eb48a8f"
@@ -2338,6 +2353,13 @@ buffer@^5.1.0, buffer@^5.5.0:
   dependencies:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
+
+buffer@^5.6.0:
+  version "5.7.1"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.7.1.tgz#ba62e7c13133053582197160851a8f648e99eed0"
+  dependencies:
+    base64-js "^1.3.1"
+    ieee754 "^1.1.13"
 
 buildmail@3.10.0:
   version "3.10.0"
@@ -4464,6 +4486,10 @@ icss-utils@^4.1.0:
   dependencies:
     postcss "^7.0.14"
 
+ieee754@^1.1.13:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
+
 ieee754@^1.1.4:
   version "1.1.13"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84"
@@ -4580,22 +4606,22 @@ interpret@^1.0.0, interpret@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.4.0.tgz#665ab8bc4da27a774a40584e812e3e0fa45b1a1e"
 
-intl-format-cache@^4.2.38:
-  version "4.2.38"
-  resolved "https://registry.yarnpkg.com/intl-format-cache/-/intl-format-cache-4.2.38.tgz#36de38f45d6881d6566e7a1c45f971ad39ab1c56"
+intl-format-cache@^4.2.24, intl-format-cache@^4.2.43:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/intl-format-cache/-/intl-format-cache-4.3.1.tgz#484d31a9872161e6c02139349b259a6229ade377"
 
-intl-messageformat-parser@^5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/intl-messageformat-parser/-/intl-messageformat-parser-5.1.3.tgz#bd57fffebdf832a425edd330107bbf832cdbbbb8"
+intl-messageformat-parser@^5.0.0, intl-messageformat-parser@^5.2.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/intl-messageformat-parser/-/intl-messageformat-parser-5.5.1.tgz#f09a692755813e6220081e3374df3fb1698bd0c6"
   dependencies:
-    "@formatjs/intl-numberformat" "^4.2.6"
+    "@formatjs/intl-numberformat" "^5.5.2"
 
-intl-messageformat@^8.3.23:
-  version "8.3.23"
-  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-8.3.23.tgz#139c79db5e58dd5bd28c963eae1d05ad23fe940b"
+intl-messageformat@^8.3.7:
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/intl-messageformat/-/intl-messageformat-8.4.1.tgz#f31c811efc561700b61ab4ee4716b870787c0fe5"
   dependencies:
-    intl-format-cache "^4.2.38"
-    intl-messageformat-parser "^5.1.3"
+    intl-format-cache "^4.2.43"
+    intl-messageformat-parser "^5.2.1"
 
 invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
@@ -5846,7 +5872,7 @@ node-abi@^2.7.0:
   dependencies:
     semver "^5.4.1"
 
-node-fetch@2.6.0, node-fetch@^2.1.2, node-fetch@^2.2.0:
+node-fetch@2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
 
@@ -5856,6 +5882,10 @@ node-fetch@^1.0.1, node-fetch@^1.7.3:
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
+
+node-fetch@^2.1.2, node-fetch@^2.2.0, node-fetch@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
 
 node-forge@0.9.0:
   version "0.9.0"
@@ -6044,6 +6074,12 @@ object-keys@^1.0.11, object-keys@^1.0.12, object-keys@^1.1.1:
 object-path@^0.11.4:
   version "0.11.4"
   resolved "https://registry.yarnpkg.com/object-path/-/object-path-0.11.4.tgz#370ae752fbf37de3ea70a861c23bba8915691949"
+
+object-sizeof@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/object-sizeof/-/object-sizeof-1.6.1.tgz#35971f3fd2102bd8b51c67b0a53ed773ff77ab56"
+  dependencies:
+    buffer "^5.6.0"
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -6820,21 +6856,21 @@ react-input-autosize@^2.2.2:
   dependencies:
     prop-types "^15.5.8"
 
-react-intl@^4.5.0:
-  version "4.6.9"
-  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-4.6.9.tgz#1a8bd689f9610b5bef41d24b9cd4e3997767e2a9"
+react-intl@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-4.5.0.tgz#f1ea00eb393b1a0e33850819b5ce8947abed187e"
   dependencies:
-    "@formatjs/intl-displaynames" "^2.2.6"
-    "@formatjs/intl-listformat" "^2.2.6"
-    "@formatjs/intl-numberformat" "^4.2.6"
-    "@formatjs/intl-relativetimeformat" "^5.2.6"
-    "@formatjs/intl-utils" "^3.3.1"
+    "@formatjs/intl-displaynames" "^1.2.5"
+    "@formatjs/intl-listformat" "^1.4.4"
+    "@formatjs/intl-relativetimeformat" "^4.5.12"
+    "@formatjs/intl-unified-numberformat" "^3.3.3"
+    "@formatjs/intl-utils" "^2.2.2"
     "@types/hoist-non-react-statics" "^3.3.1"
     "@types/invariant" "^2.2.31"
     hoist-non-react-statics "^3.3.2"
-    intl-format-cache "^4.2.38"
-    intl-messageformat "^8.3.23"
-    intl-messageformat-parser "^5.1.3"
+    intl-format-cache "^4.2.24"
+    intl-messageformat "^8.3.7"
+    intl-messageformat-parser "^5.0.0"
     shallow-equal "^1.2.1"
 
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.9.0:
@@ -7852,9 +7888,9 @@ std-env@^2.2.1:
   dependencies:
     ci-info "^1.6.0"
 
-strapi-admin@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-admin/-/strapi-admin-3.0.1.tgz#df3a3f40e66a7b8badaf0d88e7d715bac0d48f87"
+strapi-admin@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-admin/-/strapi-admin-3.0.5.tgz#0cc751b69ead09cf33ece379a7ea519f17052824"
   dependencies:
     "@babel/core" "^7.9.0"
     "@babel/plugin-proposal-async-generator-functions" "^7.2.0"
@@ -7911,7 +7947,7 @@ strapi-admin@3.0.1:
     react-dnd-html5-backend "^10.0.2"
     react-dom "^16.9.0"
     react-helmet "^6.0.0"
-    react-intl "^4.5.0"
+    react-intl "4.5.0"
     react-is "^16.12.0"
     react-loadable "^5.5.0"
     react-redux "7.2.0"
@@ -7928,8 +7964,8 @@ strapi-admin@3.0.1:
     reselect "^4.0.0"
     sanitize.css "^4.1.0"
     shelljs "^0.7.8"
-    strapi-helper-plugin "3.0.0"
-    strapi-utils "3.0.1"
+    strapi-helper-plugin "3.0.5"
+    strapi-utils "3.0.5"
     style-loader "^0.23.1"
     styled-components "^5.0.0"
     terser-webpack-plugin "^1.2.3"
@@ -7941,9 +7977,9 @@ strapi-admin@3.0.1:
     webpackbar "^3.2.0"
     yup "^0.27.0"
 
-strapi-connector-bookshelf@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-connector-bookshelf/-/strapi-connector-bookshelf-3.0.1.tgz#4babd68004e3cebad764f9a69e48f890e5ec4160"
+strapi-connector-bookshelf@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-connector-bookshelf/-/strapi-connector-bookshelf-3.0.5.tgz#571e5acd4f2994c55b72522c542eff21e25e076c"
   dependencies:
     bookshelf "^1.0.1"
     date-fns "^2.8.1"
@@ -7951,41 +7987,41 @@ strapi-connector-bookshelf@3.0.1:
     lodash "^4.17.11"
     pluralize "^7.0.0"
     rimraf "3.0.0"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-database@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/strapi-database/-/strapi-database-3.0.0.tgz#11e6ac684237921eca523125eea9b37a1a11d044"
+strapi-database@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-database/-/strapi-database-3.0.5.tgz#9c2e1234d15e4b75bff7a516a7627db94b2f14c0"
   dependencies:
     lodash "^4.17.11"
     verror "^1.10.0"
 
-strapi-generate-api@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate-api/-/strapi-generate-api-3.0.1.tgz#38708f69724094a192a1005d40e55bc056db3b28"
+strapi-generate-api@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate-api/-/strapi-generate-api-3.0.5.tgz#2a3a23cc574219b852379b43c330783701757b55"
   dependencies:
     lodash "^4.17.11"
     pluralize "^7.0.0"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-generate-controller@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate-controller/-/strapi-generate-controller-3.0.1.tgz#8ad7286ff04afb0987e50d4b6ddb5fd64a587a02"
+strapi-generate-controller@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate-controller/-/strapi-generate-controller-3.0.5.tgz#e862eb60ee1dfed3c9155a592395ee8c5c576afa"
   dependencies:
     lodash "^4.17.11"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-generate-model@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate-model/-/strapi-generate-model-3.0.1.tgz#009136b76c374175caaefb54e4d87e0314e723ce"
+strapi-generate-model@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate-model/-/strapi-generate-model-3.0.5.tgz#6847721642d750045cd4ad92fc474e0d498fe966"
   dependencies:
     lodash "^4.17.11"
     pluralize "^7.0.0"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-generate-new@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate-new/-/strapi-generate-new-3.0.1.tgz#1e29a963f33e0a776cacd85513820d153ace21cc"
+strapi-generate-new@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate-new/-/strapi-generate-new-3.0.5.tgz#34b6af9bb61c0d5eb3be8cdcb026dc99d1899a0c"
   dependencies:
     "@sentry/node" "^5.7.1"
     chalk "^2.4.2"
@@ -7998,41 +8034,41 @@ strapi-generate-new@3.0.1:
     ora "^3.4.0"
     uuid "^3.3.2"
 
-strapi-generate-plugin@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate-plugin/-/strapi-generate-plugin-3.0.1.tgz#ae9ceff3b258eb762d3ddbf3dd5d116bcae061e7"
+strapi-generate-plugin@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate-plugin/-/strapi-generate-plugin-3.0.5.tgz#8060483509b537950573bfb84d6763c7d967a721"
   dependencies:
     fs-extra "^8.0.1"
     lodash "^4.17.11"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-generate-policy@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate-policy/-/strapi-generate-policy-3.0.1.tgz#2cddfb7a58d658b21e9abb5f81fee459453ded1e"
+strapi-generate-policy@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate-policy/-/strapi-generate-policy-3.0.5.tgz#b297d0e06d0d24ccca6325db5e6b40b3a8703bb6"
   dependencies:
     lodash "^4.17.11"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-generate-service@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate-service/-/strapi-generate-service-3.0.1.tgz#cefea6040938503ecb773cd04046645bb2aefd00"
+strapi-generate-service@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate-service/-/strapi-generate-service-3.0.5.tgz#3cd151f7f2ef63cbbd5eb54842e37ba3fb5aa535"
   dependencies:
     lodash "^4.17.11"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-generate@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-generate/-/strapi-generate-3.0.1.tgz#41e85fd0712ae8359ce8d9f0bda97e2f3e0f385b"
+strapi-generate@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-generate/-/strapi-generate-3.0.5.tgz#549970b0888438fb2c93b03313e12dd37d1bf567"
   dependencies:
     async "^2.6.2"
     fs-extra "^8.0.1"
     lodash "^4.17.11"
     reportback "^2.0.2"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-helper-plugin@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/strapi-helper-plugin/-/strapi-helper-plugin-3.0.0.tgz#7a8608f1f6c0ea2a669d0efc1aca5fde4492ef1b"
+strapi-helper-plugin@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-helper-plugin/-/strapi-helper-plugin-3.0.5.tgz#72668f6525616601367ef30897d4cb58cee96128"
   dependencies:
     bootstrap "^4.3.1"
     classnames "^2.2.5"
@@ -8042,16 +8078,16 @@ strapi-helper-plugin@3.0.0:
     moment "^2.16.0"
     react "^16.9.0"
     react-dom "^16.9.0"
-    react-intl "^4.5.0"
+    react-intl "4.5.0"
     react-router "^5.0.0"
     react-router-dom "^5.0.0"
     reactstrap "8.4.1"
     styled-components "^5.0.0"
     whatwg-fetch "^2.0.3"
 
-strapi-plugin-content-manager@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.0.1.tgz#8494533dde8a1bf929b4e00e670a7aeddcad777e"
+strapi-plugin-content-manager@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.0.5.tgz#f0de5dbf1eb3976a68add8cef2048152dae662c9"
   dependencies:
     "@sindresorhus/slugify" "0.9.1"
     classnames "^2.2.6"
@@ -8062,7 +8098,7 @@ strapi-plugin-content-manager@3.0.1:
     pluralize "^7.0.0"
     react "^16.9.0"
     react-dom "^16.9.0"
-    react-intl "^4.5.0"
+    react-intl "4.5.0"
     react-redux "^7.0.2"
     react-router "^5.0.0"
     react-router-dom "^5.0.0"
@@ -8071,13 +8107,13 @@ strapi-plugin-content-manager@3.0.1:
     redux-immutable "^4.0.0"
     reselect "^4.0.0"
     showdown "^1.9.0"
-    strapi-helper-plugin "3.0.0"
-    strapi-utils "3.0.1"
+    strapi-helper-plugin "3.0.5"
+    strapi-utils "3.0.5"
     yup "^0.27.0"
 
-strapi-plugin-content-type-builder@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-content-type-builder/-/strapi-plugin-content-type-builder-3.0.1.tgz#cca256fbfd13e242bee0cf7f2d37d2c6820ad50c"
+strapi-plugin-content-type-builder@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-content-type-builder/-/strapi-plugin-content-type-builder-3.0.5.tgz#5bb5d0129436b05e0cd2b6e4e1aa60d123d8c3a1"
   dependencies:
     "@sindresorhus/slugify" "0.9.1"
     fs-extra "^7.0.0"
@@ -8086,7 +8122,7 @@ strapi-plugin-content-type-builder@3.0.1:
     pluralize "^7.0.0"
     react "^16.9.0"
     react-dom "^16.9.0"
-    react-intl "^4.5.0"
+    react-intl "4.5.0"
     react-redux "7.2.0"
     react-router "^5.0.0"
     react-router-dom "^5.0.0"
@@ -8094,23 +8130,23 @@ strapi-plugin-content-type-builder@3.0.1:
     redux "^4.0.1"
     redux-immutable "^4.0.0"
     reselect "^4.0.0"
-    strapi-generate "3.0.1"
-    strapi-generate-api "3.0.1"
-    strapi-helper-plugin "3.0.0"
-    strapi-utils "3.0.1"
+    strapi-generate "3.0.5"
+    strapi-generate-api "3.0.5"
+    strapi-helper-plugin "3.0.5"
+    strapi-utils "3.0.5"
     yup "^0.27.0"
 
-strapi-plugin-email@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-email/-/strapi-plugin-email-3.0.1.tgz#46c437948265dd8c450c08836bf9b63ecc023e45"
+strapi-plugin-email@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-email/-/strapi-plugin-email-3.0.5.tgz#4a3b1f055fda080d9fd78c09e7a19ab38e3646b6"
   dependencies:
     lodash "^4.17.11"
-    strapi-provider-email-sendmail "3.0.1"
-    strapi-utils "3.0.1"
+    strapi-provider-email-sendmail "3.0.5"
+    strapi-utils "3.0.5"
 
-strapi-plugin-graphql@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-graphql/-/strapi-plugin-graphql-3.0.1.tgz#8238d3fd3b29d08055140d418d3561a8641e14fa"
+strapi-plugin-graphql@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-graphql/-/strapi-plugin-graphql-3.0.5.tgz#85fc142dc365b99e65ff326797489151695b91a0"
   dependencies:
     apollo-server-koa "2.9.12"
     dataloader "^1.4.0"
@@ -8125,11 +8161,11 @@ strapi-plugin-graphql@3.0.1:
     koa-compose "^4.1.0"
     lodash "4.17.12"
     pluralize "^7.0.0"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-plugin-upload@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-upload/-/strapi-plugin-upload-3.0.1.tgz#e9a42d372211f18c3fa769eadf40e7bd1a1267d2"
+strapi-plugin-upload@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-upload/-/strapi-plugin-upload-3.0.5.tgz#43867f249d451c300bce408ec433803c5468a733"
   dependencies:
     byte-size "^6.2.0"
     cropperjs "^1.5.6"
@@ -8144,21 +8180,21 @@ strapi-plugin-upload@3.0.1:
     react "^16.9.0"
     react-copy-to-clipboard "^5.0.1"
     react-dom "^16.9.0"
-    react-intl "^4.5.0"
+    react-intl "4.5.0"
     react-redux "^7.0.2"
     react-router "^5.0.0"
     react-router-dom "^5.0.0"
     reactstrap "8.4.1"
     sharp "0.24.1"
-    strapi-helper-plugin "3.0.0"
-    strapi-provider-upload-local "3.0.1"
-    strapi-utils "3.0.1"
+    strapi-helper-plugin "3.0.5"
+    strapi-provider-upload-local "3.0.5"
+    strapi-utils "3.0.5"
     stream-to-array "^2.3.0"
     uuid "^3.2.1"
 
-strapi-plugin-users-permissions@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-plugin-users-permissions/-/strapi-plugin-users-permissions-3.0.1.tgz#49432dd7a48abb04fd40932220d02b8eb875b808"
+strapi-plugin-users-permissions@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-plugin-users-permissions/-/strapi-plugin-users-permissions-3.0.5.tgz#5e37daf9c81f32d5c39c81902ddaecc8bd7a0971"
   dependencies:
     "@purest/providers" "^1.0.1"
     bcryptjs "^2.4.3"
@@ -8170,31 +8206,31 @@ strapi-plugin-users-permissions@3.0.1:
     purest "3.1.0"
     react "^16.9.0"
     react-dom "^16.9.0"
-    react-intl "^4.5.0"
+    react-intl "4.5.0"
     react-redux "^7.0.2"
     react-router "^5.0.0"
     react-router-dom "^5.0.0"
     reactstrap "8.4.1"
     redux-saga "^0.16.0"
     request "^2.83.0"
-    strapi-helper-plugin "3.0.0"
-    strapi-utils "3.0.1"
+    strapi-helper-plugin "3.0.5"
+    strapi-utils "3.0.5"
     uuid "^3.1.0"
 
-strapi-provider-email-sendmail@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-provider-email-sendmail/-/strapi-provider-email-sendmail-3.0.1.tgz#9fa4f06a7dfe321801e220f9520f18aba5454124"
+strapi-provider-email-sendmail@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-provider-email-sendmail/-/strapi-provider-email-sendmail-3.0.5.tgz#983e19f98fdd3099bd67e69b12e27ba612907cb7"
   dependencies:
     sendmail "^1.6.1"
-    strapi-utils "3.0.1"
+    strapi-utils "3.0.5"
 
-strapi-provider-upload-local@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-provider-upload-local/-/strapi-provider-upload-local-3.0.1.tgz#07c2a9c440bcdd6914b001e29bd364a6062f9d7b"
+strapi-provider-upload-local@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-provider-upload-local/-/strapi-provider-upload-local-3.0.5.tgz#f11a844f6a07a980e417d93b230ce062bf38550d"
 
-strapi-utils@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi-utils/-/strapi-utils-3.0.1.tgz#d214588eab1aef00ac139dae4f60c2fe66a7ea8f"
+strapi-utils@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi-utils/-/strapi-utils-3.0.5.tgz#67c0fa7be6f5e31c1a675c1211d2242b9fafa67d"
   dependencies:
     "@sindresorhus/slugify" "^0.11.0"
     date-fns "^2.8.1"
@@ -8204,9 +8240,9 @@ strapi-utils@3.0.1:
     shelljs "^0.8.3"
     yup "0.28.1"
 
-strapi@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strapi/-/strapi-3.0.1.tgz#7d3c727dbf9f792fc476a7eabf8f9593451672da"
+strapi@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/strapi/-/strapi-3.0.5.tgz#c94f1a3ce9725dce6dc4bde2f4e30f950326f59a"
   dependencies:
     "@koa/cors" "^3.0.0"
     async "^2.1.2"
@@ -8248,16 +8284,16 @@ strapi@3.0.1:
     resolve-cwd "^3.0.0"
     rimraf "^2.6.2"
     shelljs "^0.8.3"
-    strapi-database "3.0.0"
-    strapi-generate "3.0.1"
-    strapi-generate-api "3.0.1"
-    strapi-generate-controller "3.0.1"
-    strapi-generate-model "3.0.1"
-    strapi-generate-new "3.0.1"
-    strapi-generate-plugin "3.0.1"
-    strapi-generate-policy "3.0.1"
-    strapi-generate-service "3.0.1"
-    strapi-utils "3.0.1"
+    strapi-database "3.0.5"
+    strapi-generate "3.0.5"
+    strapi-generate-api "3.0.5"
+    strapi-generate-controller "3.0.5"
+    strapi-generate-model "3.0.5"
+    strapi-generate-new "3.0.5"
+    strapi-generate-plugin "3.0.5"
+    strapi-generate-policy "3.0.5"
+    strapi-generate-service "3.0.5"
+    strapi-utils "3.0.5"
 
 stream-browserify@^2.0.1:
   version "2.0.2"
@@ -8657,6 +8693,10 @@ ts-invariant@^0.4.0:
 tslib@^1.10.0, tslib@^1.9.0, tslib@^1.9.3:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
+
+tslib@^2.0.1:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
 
 tsscmp@1.0.6:
   version "1.0.6"
