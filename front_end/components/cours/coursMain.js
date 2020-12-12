@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image'
 import { FcClock, FcCalendar, FcGraduationCap } from 'react-icons/fc';
 import { Element as ScrollElement } from 'react-scroll';
 import CommentaireList from '../Commentaires/CommentaireList';
@@ -15,7 +16,7 @@ import { COLORS } from '../../constants';
 const CoursMain = (props) => {
 	// get the previous path to build the breadcrumb
 	const {
-		cours: { id, Name, Image, created_at, Duration, Content, level, categories, sections }
+		cours: { id, name, image, created_at, duration, content, level, categories, sections }
 	} = props;
 	return (
 		<div>
@@ -24,7 +25,7 @@ const CoursMain = (props) => {
 				<header className='cours__header'>
 					<Container size='small'>
 						<h1 className='cours__title'>
-							<span>{Name}</span>
+							<span>{name}</span>
 						</h1>
 						<div className='cours__meta'>
 							<div className='meta'>
@@ -35,14 +36,14 @@ const CoursMain = (props) => {
 								<FcGraduationCap size='24px' />
 								{level && (
 									<Link as={`/niveau/${level.slug}`} href={`/niveau?id=${level.slug}`}>
-										<a>Niveau {level.Name}</a>
+										<a>Niveau {level.name}</a>
 									</Link>
 								)}
 							</div>
-							{Duration && (
+							{duration && (
 								<div className='meta'>
 									<FcClock size='24px' />
-									<p>Durée approximative de {Duration} minutes</p>
+									<p>Durée approximative de {duration} minutes</p>
 								</div>
 							)}
 							<div className='meta'>
@@ -60,13 +61,21 @@ const CoursMain = (props) => {
 						</div>
 					</Container>
 					<div className='cours__image'>
-						{Image[0] && Image[0].url && <img src={`http://localhost:1337${Image[0].url}`} alt={Name} />}
+						{image[0]?.url &&
+							<Image
+								src={`http://localhost:1337${image[0].url}`} 
+								alt={name}
+								width='1920'
+								height='1080'
+								layout='responsive'
+							/>
+						}
 					</div>
 				</header>
 
 				{sections &&
 					sections.map((section) => (
-						<ScrollElement name={section.type}>
+						<ScrollElement key={`section-${section.id}`} name={section.type}>
 							<AddOn data={section} theme='peachy' />
 						</ScrollElement>
 					))}
@@ -78,9 +87,9 @@ const CoursMain = (props) => {
 
 				{Conjugaison && <AddOn data={Conjugaison} theme='lilac'/>} */}
 
-				<Container size='small'>
+				{/* <Container size='small'>
 					<CompleteVisual />
-				</Container>
+				</Container> */}
 
 				{/* <section className='cours__contenu'>
 					<ReactMarkdown source={Content} />
@@ -113,10 +122,6 @@ const CoursMain = (props) => {
 					.cours__image {
 						max-height: 600px;
 						overflow: hidden;
-					}
-					.cours__image img {
-						height: 100%;
-						width: 100%;
 					}
 					.meta {
 						display: flex;

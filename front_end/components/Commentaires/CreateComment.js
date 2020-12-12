@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'next/router';
 import { compose } from 'recompose';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useForm } from 'react-hook-form';
@@ -9,7 +10,6 @@ import { withApollo } from '../../apollo/apollo';
 
 import store from '../../redux/stores';
 import Textarea from '../form/Textarea';
-import Toast from '../Toast';
 import Loader from '../Loader';
 
 import { GET_USER_DATA } from '../../apollo/query/profile';
@@ -34,7 +34,8 @@ function CreateComment(props) {
 			const { courBySlug } = cache.readQuery({
 				query: GET_COMMENTS_BY_COURS_ID,
 				variables: {
-					id: coursSlug
+					id: coursSlug,
+					userID: Cookies.get('userID')
 				}
 			});
 			cache.writeQuery({
@@ -46,7 +47,8 @@ function CreateComment(props) {
 			{
 				query: GET_COMMENTS_BY_COURS_ID,
 				variables: {
-					id: coursSlug
+					id: coursSlug,
+					userID: Cookies.get('userID')
 				}
 			}
 		]
@@ -58,14 +60,18 @@ function CreateComment(props) {
 
 	if (error) return <p> Il y a eu un problème </p>;
 
-	const userId = data ? data.self.id : null;
 	const userAvatar = data.self.avatar[0] ? data.self.avatar[0].url : null;
 
 	// handle the comment form submit
 	const onSubmit = (payload) => {
 		// create a new comment entry
 		createComment({
-			variables: { content: payload.comment, cour: coursID, user: userId, parentID: commentParentID }
+			variables: { 
+				content: payload.comment, 
+				cour: coursID, 
+				user: Cookies.get('userID') || null,
+				parentID: commentParentID 
+			}
 		}).then(() => {
 			if (handleReplyCallback) {
 				handleReplyCallback('');
@@ -81,11 +87,11 @@ function CreateComment(props) {
 		<div>
 			<form className='createComment' onSubmit={handleSubmit(onSubmit)}>
 				<div className='createComment__container'>
-					{data ? (
+					{userAvatar ? (
 						<img className='createComment__avatar' src={`http://localhost:1337${userAvatar}`} alt='user avatar' />
 					) : (
-						<div className='createComment__avatar' />
-					)}
+						<img className='createComment__avatar' src='/profile-face.png' alt='user avatar' />
+						)}
 
 					<label htmlFor='comment'>
 						<Textarea
@@ -160,7 +166,6 @@ function CreateComment(props) {
 					}
 				`}</style>
 			</form>
-			{/* <Toast /> */}
 		</div>
 	);
 }

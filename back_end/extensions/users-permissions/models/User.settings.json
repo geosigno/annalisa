@@ -61,14 +61,12 @@
       "collection": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "plugin": "upload",
       "required": false
     },
-    "Bio": {
+    "bio": {
       "type": "string"
     },
     "country_of_origin": {
@@ -78,8 +76,8 @@
       "type": "string"
     },
     "cours_finished": {
-      "collection": "cours",
-      "via": "user"
+      "via": "user",
+      "collection": "cours"
     }
   }
 }

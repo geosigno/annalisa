@@ -63,7 +63,7 @@ const Breadcrumb = ({ items, size }) => {
 					height: 51px;
 					top: 64px;
 					left: 0;
-					z-index: 0;
+					z-index: 1;
 					width: 100%;
 					box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
 					transition: top 0.3s;

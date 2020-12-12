@@ -64,22 +64,22 @@ const Category = ({ router }) => {
 		);
 
 	if (data && data.categoryBySlug) {
-		setCurrentPath('categorie', data.categoryBySlug.Name, router.query.id);
+		setCurrentPath('categorie', data.categoryBySlug.name, router.query.id);
 
 		return (
 			<div>
 				<Head>
-					<title>Categorie: {data.categoryBySlug.Name}</title>
+					<title>Categorie: {data.categoryBySlug.name}</title>
 				</Head>
 
 				<Container>
 					<Breadcrumb
 						items={[
 							{ href: '/categorie', label: 'Categories' },
-							{ href: '', label: data.categoryBySlug.Name }
+							{ href: '', label: data.categoryBySlug.name }
 						]}
 					/>
-					<h2>Categorie: {data.categoryBySlug.Name}</h2>
+					<h2>Categorie: {data.categoryBySlug.name}</h2>
 					<CardList type='cours' query={GET_ALL_COURS_BY_CAGTEGORY_ID} variables={variables} />
 				</Container>
 			</div>

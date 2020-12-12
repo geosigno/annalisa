@@ -25,12 +25,12 @@ const UserHistory = (props) => {
 									</span>
 									<div>
 										<div className='title'>
-											<Heading text={item.Name} size='3' />
+											<Heading text={item.name} size='3' />
 											<span>-</span>
 											{item.level && (
 												<div className='level'>
 													<FcGraduationCap size='16px' />
-													<p>niveau {item.level.Name}</p>
+													<p>niveau {item.level.name}</p>
 												</div>
 											)}
 										</div>

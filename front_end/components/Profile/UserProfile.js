@@ -8,7 +8,7 @@ import ProfileItem from './ProfileItem';
 
 const UserProfile = (props) => {
 	const {
-		data: { id, created_at, username, email, Bio, country_of_origin, current_country, avatar }
+		data: { id, created_at, username, email, bio, country_of_origin, current_country, avatar }
 	} = props;
 
 	return (
@@ -18,7 +18,7 @@ const UserProfile = (props) => {
 
 			{username && <ProfileItem id='username' label='Username' value={username} />}
 
-			{Bio && <ProfileItem id='Bio' label='Bio' value={Bio} icon={<MdFormatQuote size='16px' />} type='textarea' />}
+			{bio && <ProfileItem id='Bio' label='Bio' value={bio} icon={<MdFormatQuote size='16px' />} type='textarea' />}
 
 			{email && <ProfileItem id='email' label='Email' value={email} icon={<MdEmail size='16px' />} editable={false} />}
 

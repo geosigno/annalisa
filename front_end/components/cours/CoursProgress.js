@@ -73,7 +73,7 @@ const CoursProgress = ({ sections, coursID }) => {
 	};
 
 	return (
-		<aside className={isActive.length || isSeen.length ? 'active' : ''}>
+		<aside className={isActive.length ? 'active' : ''}>
 			{sections && (
 				<ul>
 					{sections.map((section) => {
@@ -103,9 +103,10 @@ const CoursProgress = ({ sections, coursID }) => {
 			<style jsx>{`
 				aside {
 					position: fixed;
-					left: 200px;
+					left: 50px;
 					top: 50%;
 					transform: translateY(-50%);
+					z-index: 1;
 					background: #fff;
 					min-width: 220px;
 					border-radius: 4px;
@@ -153,7 +154,11 @@ const CoursProgress = ({ sections, coursID }) => {
 					border: 1px solid #eeeeee;
 					transition: all 0.2s;
 				}
+				li a {
+					color: inherit;
+				}
 				li.seen span {
+					color white;
 					background: ${COLORS.success};
 					border-color: ${COLORS.success};
 				}

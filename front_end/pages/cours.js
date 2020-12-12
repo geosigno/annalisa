@@ -62,7 +62,7 @@ const Cours = ({ router }) => {
 		store.dispatch(clearContentToGo());
 
 		// get the previous path to build the breadcrumb
-		const previousPaths = buildPreviousPath(data.courBySlug.Name);
+		const previousPaths = buildPreviousPath(data.courBySlug.name);
 
 		// sto the current cours ID
 		const coursID = data.courBySlug.id;

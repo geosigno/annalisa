@@ -7,7 +7,7 @@ export const GET_USER_DATA = gql`
 			created_at
 			username
 			email
-			Bio
+			bio
 			country_of_origin
 			current_country
 			avatar {
@@ -16,18 +16,18 @@ export const GET_USER_DATA = gql`
 			cours_finished {
 				id
 				slug
-				Name
+				name
 				level {
 					id
 					slug
-					Name
+					name
 				}
 				categories {
 					id
 					slug
-					Name
+					name
 				}
-				Image {
+				image {
 					url
 					formats
 				}

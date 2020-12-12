@@ -9,13 +9,13 @@
     "timestamps": true
   },
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string"
     },
-    "Description": {
+    "description": {
       "type": "string"
     },
-    "Image": {
+    "image": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
@@ -31,8 +31,7 @@
       "collection": "cours"
     },
     "slug": {
-      "type": "uid",
-      "targetField": "Name"
+      "type": "uid"
     }
   }
 }

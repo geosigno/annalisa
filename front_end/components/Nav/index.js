@@ -87,7 +87,7 @@ const Nav = ({ isAuthenticated, username, userAvatar }) => {
 					position: fixed;
 					top: 0;
 					left: 0;
-					z-index: 1;
+					z-index: 2;
 					width: 100%;
 					background-color: white;
 					box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);

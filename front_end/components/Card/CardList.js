@@ -74,7 +74,7 @@ const CardList = (props) => {
 
 	const response = proceedData(data, type, limit);
 
-	if (response)
+	if (response) {
 		return (
 			<Grid gap='64px' columns='1fr 1fr 1fr'>
 				{response.map((item) => (
@@ -84,6 +84,7 @@ const CardList = (props) => {
 				))}
 			</Grid>
 		);
+	}
 
 	return false;
 };

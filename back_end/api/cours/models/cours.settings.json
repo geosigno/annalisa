@@ -13,16 +13,17 @@
       "collection": "comments",
       "via": "cour"
     },
-    "Description": {
-      "type": "string"
+    "description": {
+      "type": "string",
+      "default": "Description du cours"
     },
-    "Content": {
+    "content": {
       "type": "richtext"
     },
-    "Duration": {
+    "duration": {
       "type": "biginteger"
     },
-    "Image": {
+    "image": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
@@ -33,7 +34,7 @@
       "plugin": "upload",
       "required": false
     },
-    "Name": {
+    "name": {
       "type": "string"
     },
     "level": {
@@ -46,8 +47,7 @@
       "dominant": true
     },
     "slug": {
-      "type": "uid",
-      "targetField": "Name"
+      "type": "uid"
     },
     "unite": {
       "model": "unite",
@@ -59,9 +59,9 @@
       "component": "cours-add-on.add-on"
     },
     "user": {
-      "via": "cours_finished",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "cours_finished"
     }
   }
 }

@@ -28,7 +28,7 @@ const CommentLoader = ({ n = 3 }) => {
 				{Array(n)
 					.fill()
 					.map((item, i) => (
-						<li className='comment'>
+						<li key={'CommentLoader'+i} className='comment'>
 							<CommentSkeleton key={i} />
 						</li>
 					))}

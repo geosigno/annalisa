@@ -5,9 +5,9 @@ const GET_ALL_CATEGORIES = gql`
 		categories(limit: $limit) {
 			id
 			slug
-			Name
-			Description
-			Image {
+			name
+			description
+			image {
 				url
 			}
 		}

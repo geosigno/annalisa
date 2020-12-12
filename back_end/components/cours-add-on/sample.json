@@ -6,16 +6,16 @@
   },
   "options": {},
   "attributes": {
-    "Extract": {
+    "extract": {
       "type": "richtext"
     },
-    "Author": {
+    "author": {
       "type": "string"
     },
-    "Oeuvre": {
+    "oeuvre": {
       "type": "string"
     },
-    "Audio": {
+    "audio": {
       "model": "file",
       "via": "related",
       "allowedTypes": [

@@ -11,7 +11,7 @@ function CommentaireItem(props) {
 	const {
 		data: {
 			id,
-			Content,
+			content,
 			created_at,
 			user: { username, avatar }
 		},
@@ -31,7 +31,7 @@ function CommentaireItem(props) {
 				</div>
 			</div>
 			<div className='commentaire__content'>
-				<p>{Content}</p>
+				<p>{content}</p>
 				{!child && (
 					<button
 						type='button'

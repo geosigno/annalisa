@@ -1,25 +1,26 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Link from 'next/link';
+import Image from 'next/image'
+
 // import slugify from 'slugify';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import store from '../../redux/stores';
 import { addContentToGoTitle, addContentToGoURL } from '../../redux/actions';
 
-import getImage from '../../helpers/image';
+// import getImage from '../../helpers/image';
 // import { dateToFormat } from '../../helpers/date';
 
 import AllCoursVisual from '../../assets/allcours.svg';
 import AllCategoriesVisual from '../../assets/allcategories.svg';
 
-const PlaceholderImage = () => (
-	<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" />
-);
+// const PlaceholderImage = () => (
+// 	<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E" />
+// );
 
 const Card = (props) => {
 	const {
-		data: { id, slug, Name, Image, Description, linkHref, linkAs, loadMore },
+		data: { id, slug, name, image, description, linkHref, linkAs, loadMore },
 		type
 	} = props;
 
@@ -32,19 +33,18 @@ const Card = (props) => {
 				onClick={() => {
 					if (loadMore) return;
 					// REDUX - store content URL
-					store.dispatch(addContentToGoTitle(Name));
+					store.dispatch(addContentToGoTitle(name));
 					// REDUX - store content Title
 					store.dispatch(addContentToGoURL(linkAs));
 				}}>
 				<div className='card__container'>
-					{Image && Image[0] && (
+					{image && image[0] && (
 						<div className='card__image'>
-							<LazyLoadImage
-								alt={Name}
-								src={`http://localhost:1337${getImage(Image, 'medium')}`} // use normal <img> attributes as props
-								placeholderSrc={`http://localhost:1337${getImage(Image, 'thumbnail')}`}
-								effect='blur'
-								placeholder={<PlaceholderImage />}
+							<Image
+								src={`http://localhost:1337${image[0].url}`} 
+								alt={name}
+								width={355}
+								height={236}
 							/>
 						</div>
 					)}
@@ -53,9 +53,9 @@ const Card = (props) => {
 					<div className='card__content'>
 						<div className='card__text'>
 							{/* {loadMore && <FontAwesomeIcon icon={faArrowRight} size='2x' color='#555' />} */}
-							{Name && <h2 className='card__title'>{Name}</h2>}
+							{name && <h2 className='card__title'>{name}</h2>}
 							{/* {created_at && <p className='card__meta'>{dateToFormat(created_at)}</p>} */}
-							{Description && <p className='card__description'>{Description}</p>}
+							{description && <p className='card__description'>{description}</p>}
 						</div>
 					</div>
 				</div>

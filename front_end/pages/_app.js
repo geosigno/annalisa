@@ -132,6 +132,10 @@ const MyApp = ({ Component, pageProps, isAuthenticated }) => {
 
 // export default withApollo(MyApp);
 export default withApollo({ ssr: false })(MyApp);
+
+export function reportWebVitals(metric) {
+	console.log(metric)
+  }
 // export default MyApp;
 
 // import { ApolloProvider } from '@apollo/react-hooks'

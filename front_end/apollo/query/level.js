@@ -5,9 +5,9 @@ export const GET_ALL_LEVELS = gql`
 		levels(limit: $limit) {
 			id
 			slug
-			Name
-			Description
-			Image {
+			name
+			description
+			image {
 				url
 			}
 		}

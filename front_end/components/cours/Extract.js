@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import hexToRgba from 'hex-to-rgba';
 import Container from '../Container';
 
-const Extract = ({ data: { Extract, Author, Oeuvre }, theme = 'cloudy' }) => {
+const Extract = ({ data: { extract, author, oeuvre }, theme = 'cloudy' }) => {
 	let hexaColor;
 
 	switch (theme) {
@@ -31,11 +31,11 @@ const Extract = ({ data: { Extract, Author, Oeuvre }, theme = 'cloudy' }) => {
 				</h1>
 				<blockquote>
 					<div className='blockquote__content'>
-						<ReactMarkdown source={Extract} />
+						<ReactMarkdown source={extract} />
 					</div>
 					{(Author || Oeuvre) && (
 						<footer>
-							<cite>{`${Oeuvre} - ${Author}`}</cite>
+							<cite>{`${oeuvre} - ${author}`}</cite>
 						</footer>
 					)}
 				</blockquote>

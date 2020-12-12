@@ -2,12 +2,27 @@ module.exports = {
   query: `
       self: UsersPermissionsUser
   `,
+  mutation: `
+    addFinishedCours(cours_finished: ID): UsersPermissionsUser!
+  `,
   resolver: {
       Query: {
           self: {
               resolver: 'plugins::users-permissions.user.me'
           },
       },
+      Mutation: {
+        addFinishedCours: {
+            description: 'Add a cours finished to User Profile',
+            resolverOf: 'plugins::users-permissions.user.updateme',
+            resolver: async (obj, options, { context }) => {
+                const { id } = context.state.user;
+                const data = context.request.body;
+                console.log(data)
+                return await strapi.plugins['users-permissions'].services.user.edit({id}, data);
+              }
+            }
+      }
   }
 }
 

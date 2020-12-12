@@ -63,22 +63,22 @@ const Niveau = ({ router }) => {
 		);
 
 	if (data && data.levelBySlug) {
-		setCurrentPath('niveau', data.levelBySlug.Name, router.query.id);
+		setCurrentPath('niveau', data.levelBySlug.name, router.query.id);
 
 		return (
 			<div>
 				<Head>
-					<title>Niveau: {data.levelBySlug.Name}</title>
+					<title>Niveau: {data.levelBySlug.name}</title>
 				</Head>
 
 				<Container>
 					<Breadcrumb
 						items={[
 							{ href: '/niveau', label: 'Niveaux' },
-							{ href: '', label: data.levelBySlug.Name }
+							{ href: '', label: data.levelBySlug.name }
 						]}
 					/>
-					<h2>Niveau: {data.levelBySlug.Name}</h2>
+					<h2>Niveau: {data.levelBySlug.name}</h2>
 					<CardList type='cours' query={GET_ALL_COURS_BY_LEVEL_ID} variables={variables} />
 				</Container>
 			</div>
